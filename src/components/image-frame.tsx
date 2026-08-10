@@ -23,7 +23,7 @@ export function ImageFrame({
         alt={image.alt}
         width={image.width}
         height={image.height}
-        priority={priority}
+        preload={priority}
         loading={priority ? "eager" : "lazy"}
         sizes={sizes}
         className={`h-full w-full object-cover ${imageClassName}`}

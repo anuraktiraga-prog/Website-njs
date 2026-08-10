@@ -5,17 +5,17 @@ export function ViewingSection() {
         <div>
           <p className="eyebrow">Private viewing</p>
           <h2 className="section-title max-w-3xl">
-            Build the next step around the way the brand actually sells.
+            Some pieces are worn. Others become part of your story.
           </h2>
         </div>
         <div className="max-w-xl lg:ml-auto">
           <p className="text-base leading-7 text-stone-700">
-            This first version is ready for a real inquiry flow once you decide
-            whether customers should buy online, request pricing, message on
-            WhatsApp, or book appointments.
+            The inquiry experience is prepared for the next decision: private
+            appointments, WhatsApp conversations, request pricing, or a
+            considered bag flow when the house is ready to sell online.
           </p>
           <p className="mt-7 inline-flex border border-stone-950/15 px-5 py-4 text-xs font-bold uppercase tracking-[0.16em] text-stone-700">
-            Contact method pending
+            Enquiry method pending
           </p>
         </div>
       </div>

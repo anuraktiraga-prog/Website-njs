@@ -1,50 +1,60 @@
+import Image from "next/image";
 import { ImageFrame } from "@/components/image-frame";
 import { collectionImages } from "@/lib/collection";
 
 export function HeroSection() {
-  const [heroImage, secondaryImage] = collectionImages;
+  const [heroImage, secondaryImage, thirdImage] = collectionImages;
 
   return (
     <section
       id="top"
-      className="relative min-h-screen overflow-hidden border-b border-stone-950/10 pt-16"
+      className="relative min-h-screen overflow-hidden bg-stone-950 text-stone-50"
     >
-      <div className="mx-auto grid max-w-7xl gap-8 px-5 py-8 sm:px-8 lg:min-h-[calc(100vh-4rem)] lg:grid-cols-[0.82fr_1.18fr] lg:items-end lg:py-10">
-        <div className="relative z-10 flex max-w-xl flex-col justify-end pb-2 lg:min-h-[76vh]">
-          <p className="mb-5 text-xs uppercase tracking-[0.3em] text-stone-600">
-            Textile-led occasion wear
+      <Image
+        src={heroImage.src}
+        alt={heroImage.alt}
+        width={heroImage.width}
+        height={heroImage.height}
+        preload
+        loading="eager"
+        sizes="100vw"
+        className="absolute inset-0 h-full w-full object-cover object-[50%_22%]"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-stone-950/50 via-stone-950/15 to-stone-950/80" />
+
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-end px-5 pb-8 pt-28 sm:px-8 lg:pb-10">
+        <div className="max-w-3xl">
+          <p className="mb-5 text-xs uppercase tracking-[0.3em] text-stone-200">
+            From the House of ANURRAKTI
           </p>
-          <h1 className="font-serif text-6xl leading-[0.92] text-stone-950 sm:text-7xl lg:text-8xl">
-            A Jendra
+          <h1 className="font-serif text-6xl leading-[0.9] text-[#fff5df] sm:text-8xl lg:text-9xl">
+            ANURRAKTI
           </h1>
-          <p className="mt-6 max-w-md text-base leading-7 text-stone-700 sm:text-lg">
-            Sculptural drapes, intricate borders and richly composed Indian
-            textiles for intimate celebrations and statement dressing.
+          <p className="mt-6 max-w-xl text-base leading-7 text-stone-100 sm:text-lg">
+            Heritage, reimagined.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a className="btn-primary" href="#collection">
-              View collection
+        </div>
+
+        <div className="mt-10 grid gap-6 border-t border-stone-50/25 pt-6 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div className="flex flex-wrap gap-3">
+            <a className="btn-light" href="#collection">
+              Discover EHSAAS
             </a>
-            <a className="btn-secondary" href="#viewing">
+            <a className="btn-ghost" href="#viewing">
               Book private viewing
             </a>
           </div>
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-[0.72fr_1fr] lg:items-end">
-          <ImageFrame
-            image={secondaryImage}
-            className="hidden aspect-[3/4] sm:block"
-            sizes="(max-width: 1024px) 38vw, 27vw"
-            imageClassName="object-[52%_48%]"
-          />
-          <ImageFrame
-            image={heroImage}
-            className="aspect-[4/5] min-h-[520px] lg:min-h-[76vh]"
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 62vw, 48vw"
-            priority
-            imageClassName="object-[50%_45%]"
-          />
+          <div className="hidden gap-3 sm:grid sm:grid-cols-2">
+            {[secondaryImage, thirdImage].map((image) => (
+              <ImageFrame
+                key={image.src}
+                image={image}
+                className="h-40 w-28 border border-stone-50/20"
+                sizes="112px"
+                imageClassName="object-[50%_22%]"
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

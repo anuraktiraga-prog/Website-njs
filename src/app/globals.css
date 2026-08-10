@@ -64,7 +64,9 @@ img {
   }
 
   .btn-primary,
-  .btn-secondary {
+  .btn-secondary,
+  .btn-light,
+  .btn-ghost {
     align-items: center;
     display: inline-flex;
     font-size: 0.75rem;
@@ -102,8 +104,31 @@ img {
     transform: translateY(-1px);
   }
 
+  .btn-light {
+    background: #fff5df;
+    color: var(--foreground);
+  }
+
+  .btn-light:hover {
+    background: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    border: 1px solid rgba(255, 245, 223, 0.42);
+    color: #fff5df;
+  }
+
+  .btn-ghost:hover {
+    border-color: #fff5df;
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
   .btn-primary:focus-visible,
-  .btn-secondary:focus-visible {
+  .btn-secondary:focus-visible,
+  .btn-light:focus-visible,
+  .btn-ghost:focus-visible {
     outline: 2px solid var(--foreground);
     outline-offset: 4px;
   }

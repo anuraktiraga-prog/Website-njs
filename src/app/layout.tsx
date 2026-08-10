@@ -3,11 +3,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "A Jendra",
-    template: "%s | A Jendra",
+    default: "ANURRAKTI",
+    template: "%s | ANURRAKTI",
   },
   description:
-    "A fashion brand website for textile-led occasion wear and sculptural drapes.",
+    "ANURRAKTI is a contemporary Indian fashion house rooted in textile, emotion and enduring drape.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

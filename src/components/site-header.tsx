@@ -1,27 +1,38 @@
+import Image from "next/image";
+
 const navItems = [
-  { label: "Collection", href: "#collection" },
-  { label: "Craft", href: "#craft" },
+  { label: "EHSAAS", href: "#collection" },
+  { label: "The House", href: "#craft" },
   { label: "Viewing", href: "#viewing" },
 ];
 
 export function SiteHeader() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-stone-950/10 bg-[rgba(246,240,231,0.78)] backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-stone-100/15 bg-[rgba(29,25,21,0.72)] text-stone-50 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
         <a
           href="#top"
-          className="font-serif text-lg uppercase tracking-[0.28em] text-stone-950"
-          aria-label="A Jendra home"
+          className="flex items-center gap-3 font-serif text-lg uppercase tracking-[0.24em]"
+          aria-label="Anurrakti home"
         >
-          A Jendra
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f6f0e7]">
+            <Image
+              src="/logos/anurrakti-stamp.png"
+              alt=""
+              width={1206}
+              height={890}
+              className="h-7 w-7 object-contain"
+            />
+          </span>
+          <span>ANURRAKTI</span>
         </a>
         <nav aria-label="Primary navigation">
-          <ul className="flex items-center gap-4 text-xs uppercase tracking-[0.18em] text-stone-700 sm:gap-7">
+          <ul className="flex items-center gap-4 text-xs uppercase tracking-[0.18em] text-stone-200 sm:gap-7">
             {navItems.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="transition-colors hover:text-stone-950 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-stone-950"
+                  className="transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-stone-50"
                 >
                   {item.label}
                 </a>

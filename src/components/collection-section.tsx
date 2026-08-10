@@ -5,8 +5,14 @@ export function CollectionSection() {
   return (
     <section id="collection" className="section-shell">
       <div className="section-heading">
-        <p className="eyebrow">Current selection</p>
-        <h2 className="section-title">Drapes with presence, made to be seen slowly.</h2>
+        <p className="eyebrow">01 EHSAAS</p>
+        <div>
+          <h2 className="section-title">An Ode to Timeless Elegance.</h2>
+          <p className="mt-6 max-w-2xl text-base leading-7 text-stone-700">
+            An exploration of emotion, artistry and the enduring beauty of the
+            saree.
+          </p>
+        </div>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
