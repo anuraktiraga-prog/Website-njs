@@ -3,9 +3,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "Website",
-    template: "%s | Website",
+    default: "A Jendra",
+    template: "%s | A Jendra",
   },
+  description:
+    "A fashion brand website for textile-led occasion wear and sculptural drapes.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
