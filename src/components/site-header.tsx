@@ -3,7 +3,7 @@ import Image from "next/image";
 const navItems = [
   { label: "EHSAAS", href: "#collection" },
   { label: "The House", href: "#craft" },
-  { label: "Viewing", href: "#viewing" },
+  { label: "Enquire", href: "#viewing" },
 ];
 
 export function SiteHeader() {
@@ -15,13 +15,13 @@ export function SiteHeader() {
           className="flex items-center gap-3 font-serif text-lg uppercase tracking-[0.24em]"
           aria-label="Anurrakti home"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f6f0e7]">
+          <span className="flex h-9 w-9 items-center justify-center">
             <Image
-              src="/logos/anurrakti-stamp.png"
+              src="/images/brand/anurrakti-knot-red.png"
               alt=""
-              width={1206}
-              height={890}
-              className="h-7 w-7 object-contain"
+              width={661}
+              height={609}
+              className="h-9 w-9 object-contain"
             />
           </span>
           <span>ANURRAKTI</span>

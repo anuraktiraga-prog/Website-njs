@@ -1,5 +1,5 @@
 import { ImageFrame } from "@/components/image-frame";
-import { studioImages } from "@/lib/collection";
+import { houseImages } from "@/lib/collection";
 
 const craftNotes = [
   "Rooted in Indian textile traditions and interpreted through a contemporary lens.",
@@ -38,7 +38,7 @@ export function CraftSection() {
         </div>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:pt-14">
-          {studioImages.map((image) => (
+          {houseImages.map((image) => (
             <article key={image.src}>
               <ImageFrame
                 image={image}

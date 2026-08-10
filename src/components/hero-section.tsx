@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { ImageFrame } from "@/components/image-frame";
-import { collectionImages } from "@/lib/collection";
+import { campaignImages, contactLinks } from "@/lib/collection";
 
 export function HeroSection() {
-  const [heroImage, secondaryImage, thirdImage] = collectionImages;
+  const [heroImage, secondaryImage, thirdImage] = campaignImages;
 
   return (
     <section
@@ -40,8 +40,13 @@ export function HeroSection() {
             <a className="btn-light" href="#collection">
               Discover EHSAAS
             </a>
-            <a className="btn-ghost" href="#viewing">
-              Book private viewing
+            <a
+              className="btn-ghost"
+              href={contactLinks.whatsappPrimary}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Enquire on WhatsApp
             </a>
           </div>
           <div className="hidden gap-3 sm:grid sm:grid-cols-2">

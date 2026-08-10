@@ -1,8 +1,8 @@
 import Image from "next/image";
-import type { CollectionImage } from "@/lib/collection";
+import type { BrandImage } from "@/lib/collection";
 
 type ImageFrameProps = {
-  image: CollectionImage;
+  image: BrandImage;
   className?: string;
   imageClassName?: string;
   priority?: boolean;

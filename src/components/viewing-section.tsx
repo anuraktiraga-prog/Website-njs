@@ -1,3 +1,5 @@
+import { contactLinks } from "@/lib/collection";
+
 export function ViewingSection() {
   return (
     <section id="viewing" className="section-shell">
@@ -10,13 +12,36 @@ export function ViewingSection() {
         </div>
         <div className="max-w-xl lg:ml-auto">
           <p className="text-base leading-7 text-stone-700">
-            The inquiry experience is prepared for the next decision: private
-            appointments, WhatsApp conversations, request pricing, or a
-            considered bag flow when the house is ready to sell online.
+            For prices, availability and private viewings, begin a conversation
+            with the House on WhatsApp. You can also send us a direct message on
+            Instagram.
           </p>
-          <p className="mt-7 inline-flex border border-stone-950/15 px-5 py-4 text-xs font-bold uppercase tracking-[0.16em] text-stone-700">
-            Enquiry method pending
-          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <a
+              className="btn-primary"
+              href={contactLinks.whatsappPrimary}
+              target="_blank"
+              rel="noreferrer"
+            >
+              WhatsApp: 88002 19663
+            </a>
+            <a
+              className="btn-secondary"
+              href={contactLinks.whatsappSecondary}
+              target="_blank"
+              rel="noreferrer"
+            >
+              WhatsApp: 99587 04890
+            </a>
+            <a
+              className="btn-secondary"
+              href={contactLinks.instagram}
+              target="_blank"
+              rel="noreferrer"
+            >
+              DM on Instagram
+            </a>
+          </div>
         </div>
       </div>
     </section>
