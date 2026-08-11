@@ -25,13 +25,13 @@ export function HeroSection() {
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-end px-5 pb-8 pt-28 sm:px-8 lg:pb-10">
         <div className="max-w-3xl">
           <p className="mb-5 text-xs uppercase tracking-[0.3em] text-stone-200">
-            From the House of ANURRAKTI
+            A new expression of the drape
           </p>
           <h1 className="font-serif text-6xl leading-[0.9] text-[#fff5df] sm:text-8xl lg:text-9xl">
             ANURRAKTI
           </h1>
           <p className="mt-6 max-w-xl text-base leading-7 text-stone-100 sm:text-lg">
-            Heritage, reimagined.
+            Sarees made to be remembered.
           </p>
         </div>
 

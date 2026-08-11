@@ -63,7 +63,7 @@ export const collectionImages: CollectionPiece[] = [
   {
     src: "/images/collection/noir-drape.jpg",
     alt: "Black and red saree draped over a sculptural chair",
-    title: "01 RAATRI",
+    title: "EHSAAS",
     note: "The depth of midnight meets the brilliance of vermilion.",
     description: [
       "A dark expression framed with red and antique gold.",
@@ -76,7 +76,7 @@ export const collectionImages: CollectionPiece[] = [
   {
     src: "/images/collection/blue-check-drape.jpg",
     alt: "Blue checked saree with embroidered floral border",
-    title: "02 NAAZ",
+    title: "NAAZ",
     note: "A study in blue, softened by embroidery.",
     description: [
       "Checks meet delicate floral artistry across a translucent canvas.",
@@ -89,7 +89,7 @@ export const collectionImages: CollectionPiece[] = [
   {
     src: "/images/collection/ivory-red-drape.jpg",
     alt: "Ivory and red saree with animal motif draped over a chair",
-    title: "03 KATHA",
+    title: "KATHA",
     note: "A canvas of stories, framed in vermilion.",
     description: [
       "Illustrated forms unfold across ivory, each carrying its own character.",
@@ -102,7 +102,7 @@ export const collectionImages: CollectionPiece[] = [
   {
     src: "/images/collection/grey-border-drape.jpg",
     alt: "Grey saree with a gold and red border draped over a chair",
-    title: "04 RAAG",
+    title: "RAAG",
     note: "A quiet drape held by gold and shadow.",
     description: [
       "A graphite body lets the border carry the visual rhythm.",
@@ -115,7 +115,7 @@ export const collectionImages: CollectionPiece[] = [
   {
     src: "/images/collection/sunehri.jpg",
     alt: "Saree-only product image from the ANURRAKTI collection",
-    title: "05 SUNEHRI",
+    title: "SUNEHRI",
     note: "A golden expression with a softened festive pulse.",
     description: [
       "Warm colour gathers around the drape with an archival sensibility.",
@@ -128,7 +128,7 @@ export const collectionImages: CollectionPiece[] = [
   {
     src: "/images/collection/chaand.jpg",
     alt: "Saree-only product image from the ANURRAKTI collection",
-    title: "06 CHAAND",
+    title: "CHAAND",
     note: "A pale canvas touched by quiet ornament.",
     description: [
       "Soft tones allow the border and fall to speak with restraint.",
@@ -256,6 +256,8 @@ export const collectionImages: CollectionPiece[] = [
     height: 2200,
   },
 ];
+
+export const ehsaasCollection = collectionImages.slice(0, 6);
 
 export const houseImages: BrandImage[] = [
   campaignImages[1],

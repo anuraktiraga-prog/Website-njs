@@ -1,5 +1,5 @@
 import { ImageFrame } from "@/components/image-frame";
-import { collectionImages } from "@/lib/collection";
+import { ehsaasCollection } from "@/lib/collection";
 
 export function CollectionSection() {
   return (
@@ -7,17 +7,16 @@ export function CollectionSection() {
       <div className="section-heading">
         <p className="eyebrow">01 EHSAAS</p>
         <div>
-          <h2 className="section-title">An Ode to Timeless Elegance.</h2>
+          <h2 className="section-title">The EHSAAS collection.</h2>
           <p className="mt-6 max-w-2xl text-base leading-7 text-stone-700">
-            Explore the House edit of distinctive drapes. Each saree is shown
-            without a model, allowing textile, colour and craft to take centre
-            stage.
+            Six distinct drapes, each held in its own language of colour,
+            texture and memory. The collection will continue to evolve.
           </p>
         </div>
       </div>
 
       <div className="grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-        {collectionImages.map((image) => (
+        {ehsaasCollection.map((image) => (
           <article key={image.src} className="group">
             <ImageFrame
               image={image}

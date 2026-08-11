@@ -2,6 +2,7 @@ import Image from "next/image";
 
 const navItems = [
   { label: "EHSAAS", href: "#collection" },
+  { label: "Ready to wear", href: "#ready-to-wear" },
   { label: "The House", href: "#craft" },
   { label: "Enquire", href: "#viewing" },
 ];
@@ -27,17 +28,22 @@ export function SiteHeader() {
           <span>ANURRAKTI</span>
         </a>
         <nav aria-label="Primary navigation">
-          <ul className="flex items-center gap-4 text-xs uppercase tracking-[0.18em] text-stone-200 sm:gap-7">
+          <ul className="flex items-center gap-3 text-[0.6rem] uppercase tracking-[0.15em] text-stone-200 sm:gap-5 sm:text-xs sm:tracking-[0.18em] lg:gap-7">
             {navItems.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-stone-50"
+                  className="hidden transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-stone-50 sm:inline"
                 >
                   {item.label}
                 </a>
               </li>
             ))}
+            <li>
+              <a href="#collection" className="sm:hidden">
+                Menu
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
