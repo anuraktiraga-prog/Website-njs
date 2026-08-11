@@ -1,4 +1,5 @@
 import { contactLinks } from "@/lib/collection";
+import { InstagramIcon, WhatsAppIcon } from "@/components/social-icons";
 
 export function ViewingSection() {
   return (
@@ -17,30 +18,9 @@ export function ViewingSection() {
             Instagram.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <a
-              className="btn-primary"
-              href={contactLinks.whatsappPrimary}
-              target="_blank"
-              rel="noreferrer"
-            >
-              WhatsApp: 88002 19663
-            </a>
-            <a
-              className="btn-secondary"
-              href={contactLinks.whatsappSecondary}
-              target="_blank"
-              rel="noreferrer"
-            >
-              WhatsApp: 99587 04890
-            </a>
-            <a
-              className="btn-secondary"
-              href={contactLinks.instagram}
-              target="_blank"
-              rel="noreferrer"
-            >
-              DM on Instagram
-            </a>
+            <a className="btn-primary gap-2" href={contactLinks.whatsappPrimary} target="_blank" rel="noreferrer"><WhatsAppIcon className="h-4 w-4" />Connect with us</a>
+            <a className="btn-secondary" href={contactLinks.call}>Call us</a>
+            <a className="btn-secondary gap-2" href={contactLinks.instagram} target="_blank" rel="noreferrer"><InstagramIcon className="h-4 w-4" />DM on Instagram</a>
           </div>
         </div>
       </div>

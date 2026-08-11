@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { campaignImages } from "@/lib/collection";
 
 export function ReadyToWearSection() {
@@ -14,9 +15,7 @@ export function ReadyToWearSection() {
             A new expression of ANURRAKTI is taking shape: everyday pieces
             with the same attention to colour, craft and feeling.
           </p>
-          <p className="mt-8 inline-flex border border-stone-950/20 px-5 py-4 text-xs font-bold uppercase tracking-[0.18em] text-stone-700">
-            Coming soon
-          </p>
+          <Link className="btn-secondary mt-8" href="/ready-to-wear">Stay tuned</Link>
         </div>
         <figure className="relative aspect-[4/3] overflow-hidden bg-stone-900 sm:aspect-[16/10]">
           <Image

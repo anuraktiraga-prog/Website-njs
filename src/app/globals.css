@@ -34,6 +34,28 @@ img {
   color: #fffaf2;
 }
 
+@keyframes message-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-0.55rem) rotateX(-20deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+@keyframes collection-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @layer components {
   .section-shell {
     width: 100%;

@@ -12,11 +12,20 @@ export type CollectionPiece = BrandImage & {
   description: [string, string];
 };
 
+export function collectionSlug(piece: CollectionPiece) {
+  return piece.title
+    .toLowerCase()
+    .replace(/^\d+\s+/, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
 export const contactLinks = {
   whatsappPrimary:
     "https://wa.me/918800219663?text=Hello%20ANURRAKTI%2C%20I%20would%20like%20to%20enquire%20about%20the%20collection.",
   whatsappSecondary:
     "https://wa.me/919958704890?text=Hello%20ANURRAKTI%2C%20I%20would%20like%20to%20enquire%20about%20the%20collection.",
+  call: "tel:+919958704890",
   instagram: "https://www.instagram.com/anurrakti/",
 };
 
@@ -31,7 +40,7 @@ export const campaignImages: BrandImage[] = [
     height: 2200,
   },
   {
-    src: "/images/campaign/anurrakti-raga-staircase.jpg",
+    src: "/images/campaign/anurrakti-staircase.png",
     alt: "Model wearing a black and grey saree against a red velvet staircase",
     title: "The First Expression",
     note: "A world of velvet, movement and remembered ceremony.",
@@ -40,7 +49,7 @@ export const campaignImages: BrandImage[] = [
     height: 2200,
   },
   {
-    src: "/images/campaign/anurrakti-raga-garden.jpg",
+    src: "/images/campaign/anurrakti-garden.png",
     alt: "Model wearing a white saree in a night garden campaign frame",
     title: "Nocturne In Ivory",
     note: "An ivory drape held between stillness and gesture.",
@@ -49,7 +58,7 @@ export const campaignImages: BrandImage[] = [
     height: 2200,
   },
   {
-    src: "/images/campaign/blue-check-profile.jpg",
+    src: "/images/campaign/blue-check-profile-anurrakti.png",
     alt: "Model wearing a blue checked saree with floral embroidery",
     title: "NAAZ",
     note: "Blue softened by embroidery and evening light.",
@@ -259,25 +268,10 @@ export const collectionImages: CollectionPiece[] = [
 
 export const ehsaasCollection = collectionImages.slice(0, 6);
 
-export const houseImages: BrandImage[] = [
-  campaignImages[1],
-  campaignImages[2],
-  {
-    src: "/images/collection/orange-green-textile.jpg",
-    alt: "Orange and green textile photographed in a studio setting",
-    title: "Archive Study",
-    note: "Colour, edge and fall observed before they become silhouette.",
-    palette: "Saffron / Green",
-    width: 1800,
-    height: 1200,
-  },
-  {
-    src: "/images/collection/black-red-textile.jpg",
-    alt: "Black and red textile photographed in a studio setting",
-    title: "Border Study",
-    note: "The line where craft becomes character.",
-    palette: "Black / Red / Gold",
-    width: 1800,
-    height: 1200,
-  },
-];
+export function getCollectionPiece(slug: string) {
+  return collectionImages.find((piece) => collectionSlug(piece) === slug);
+}
+
+// The House section intentionally features only polished campaign photography.
+// Source study photographs remain preserved in /public but are not displayed.
+export const houseImages: BrandImage[] = [campaignImages[1], campaignImages[2]];
