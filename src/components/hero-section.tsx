@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ImageFrame } from "@/components/image-frame";
 import { campaignImages, contactLinks } from "@/lib/collection";
 
@@ -37,9 +38,9 @@ export function HeroSection() {
 
         <div className="mt-10 grid gap-6 border-t border-stone-50/25 pt-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div className="flex flex-wrap gap-3">
-            <a className="btn-light" href="#collection">
+            <Link className="btn-light" href="/collection">
               Discover EHSAAS
-            </a>
+            </Link>
             <a
               className="btn-ghost"
               href={contactLinks.whatsappPrimary}

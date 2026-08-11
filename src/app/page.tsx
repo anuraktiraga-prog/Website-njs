@@ -1,4 +1,3 @@
-import { CollectionSection } from "@/components/collection-section";
 import { CraftSection } from "@/components/craft-section";
 import { HeroSection } from "@/components/hero-section";
 import { ReadyToWearSection } from "@/components/ready-to-wear-section";
@@ -11,7 +10,6 @@ export default function Home() {
       <SiteHeader />
       <main className="flex-1">
         <HeroSection />
-        <CollectionSection />
         <ReadyToWearSection />
         <CraftSection />
         <ViewingSection />
