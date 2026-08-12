@@ -154,6 +154,35 @@ img {
     outline: 2px solid var(--foreground);
     outline-offset: 4px;
   }
+
+  .enquiry-field {
+    width: 100%;
+    border: 1px solid var(--border-soft);
+    border-radius: 0;
+    color: var(--foreground);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: normal;
+    min-height: 3rem;
+    padding: 0.75rem 0.9rem;
+    text-transform: none;
+    transition: border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .enquiry-field:focus {
+    border-color: var(--accent-deep);
+    box-shadow: 0 0 0 3px rgba(126, 39, 30, 0.1);
+    outline: none;
+  }
+
+  textarea.enquiry-field {
+    min-height: 7.5rem;
+  }
+
+  button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+  }
 }
 
 @media (width >= 40rem) {
