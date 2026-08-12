@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { campaignImages } from "@/lib/collection";
+import { ImageFrame } from "@/components/image-frame";
 
 export function ReadyToWearSection() {
   const [image] = campaignImages.slice(-1);
@@ -17,19 +17,13 @@ export function ReadyToWearSection() {
           </p>
           <Link className="btn-secondary mt-8" href="/ready-to-wear">Stay tuned</Link>
         </div>
-        <figure className="relative aspect-[4/3] overflow-hidden bg-stone-900 sm:aspect-[16/10]">
-          <Image
-            src={image.src}
-            alt={image.alt}
-            width={image.width}
-            height={image.height}
-            sizes="(max-width: 1024px) 100vw, 55vw"
-            className="h-full w-full object-cover object-[50%_26%]"
-          />
-          <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-stone-950/70 to-transparent px-6 pb-6 pt-16 text-xs uppercase tracking-[0.2em] text-stone-100">
-            The next chapter
-          </figcaption>
-        </figure>
+        <ImageFrame
+          image={image}
+          className="aspect-[4/3] bg-stone-900 sm:aspect-[16/10]"
+          imageClassName="object-[50%_26%]"
+          sizes="(max-width: 1024px) 100vw, 55vw"
+          caption="The next chapter"
+        />
       </div>
     </section>
   );

@@ -8,7 +8,7 @@ export function CollectionSection() {
         <p className="eyebrow animate-[collection-rise_600ms_ease-out_both] lg:pt-4">01 EHSAAS</p>
         <div className="min-w-0 animate-[collection-rise_700ms_ease-out_100ms_both]">
           <h2 className="font-serif text-[clamp(2.45rem,9vw,6.25rem)] leading-[0.88] tracking-[-0.04em] text-stone-950">
-            <span className="block whitespace-nowrap">The EHSAAS</span>
+            <span className="block">The EHSAAS</span>
             <span className="block">collection.</span>
           </h2>
           <p className="mt-6 max-w-[40rem] text-base leading-7 text-stone-700 sm:mt-8 sm:text-lg sm:leading-8">
