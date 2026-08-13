@@ -29,7 +29,7 @@ export function CollectionMarquee() {
       <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(29,25,21,0.9),transparent_32%,transparent_68%,rgba(29,25,21,0.9)),linear-gradient(0deg,rgba(29,25,21,0.92),transparent_35%,transparent_65%,rgba(29,25,21,0.6))]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 mx-auto max-w-[90rem] px-5 pb-9 sm:px-8 sm:pb-12">
         <p className="eyebrow text-[#f4dfc7]">The first expression</p>
-        <h1 className="mt-3 max-w-2xl font-serif text-[clamp(3.1rem,8vw,7.4rem)] leading-[0.82] tracking-[-0.05em] text-[#fff7ec]">
+        <h1 className="type-display mt-3 max-w-2xl font-serif text-[#fff7ec]">
           EHSAAS
         </h1>
         <p className="mt-5 max-w-md text-sm leading-6 text-[#f4dfc7]/85 sm:text-base">

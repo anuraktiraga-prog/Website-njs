@@ -42,8 +42,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
   );
   const galleryViews: ProductGalleryView[] = [
     { src: piece.src, alt: piece.alt, position: "center", label: "Full drape" },
-    { src: piece.src, alt: `${piece.title} border detail`, position: "right bottom", label: "Border detail" },
-    { src: piece.src, alt: `${piece.title} textile detail`, position: "center top", label: "Textile study" },
+    ...(piece.detailImages ?? [piece.src, piece.src, piece.src]).map((src, index) => ({
+      src,
+      alt: `${piece.title} textile detail ${index + 1}`,
+      position: ["center 35%", "left 62%", "right 60%"][index] ?? "center",
+      zoom: [1.8, 2.15, 2.35][index] ?? 1,
+      label: ["Textile detail", "Border detail", "Texture study"][index] ?? `Detail ${index + 1}`,
+    })),
   ];
 
   return (
@@ -57,12 +62,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <span aria-hidden="true" className="mr-2">←</span> The EHSAAS collection
         </Link>
 
-        <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1.45fr)_minmax(20rem,0.75fr)] lg:gap-20">
+        <div className="mt-10 grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(20rem,0.8fr)] lg:gap-16">
           <ProductGallery views={galleryViews} />
 
-          <section className="lg:sticky lg:top-28 lg:self-start">
+          <section className="min-w-0 self-start">
             <p className="eyebrow">EHSAAS / Private viewing</p>
-            <h1 className="mt-5 font-serif text-[clamp(3.25rem,7vw,6.25rem)] leading-[0.86] tracking-[-0.045em] text-stone-950">
+            <h1 className="type-display mt-5 max-w-xl font-serif text-stone-950">
               {piece.title}
             </h1>
             <p className="mt-6 text-lg italic leading-8 text-stone-700">{piece.note}</p>

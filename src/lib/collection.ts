@@ -6,6 +6,7 @@ export type BrandImage = {
   palette: string;
   width: number;
   height: number;
+  detailImages?: string[];
 };
 
 export type CollectionPiece = BrandImage & {
@@ -70,9 +71,9 @@ export const campaignImages: BrandImage[] = [
 
 export const collectionImages: CollectionPiece[] = [
   {
-    src: "/images/collection/noir-drape.jpg",
-    alt: "Black and red saree draped over a sculptural chair",
-    title: "EHSAAS",
+    src: "/images/collection/final/product-1.png",
+    alt: "Olive and rust saree arranged on a sculptural chair",
+    title: "01",
     note: "The depth of midnight meets the brilliance of vermilion.",
     description: [
       "A dark expression framed with red and antique gold.",
@@ -83,9 +84,9 @@ export const collectionImages: CollectionPiece[] = [
     height: 2200,
   },
   {
-    src: "/images/collection/blue-check-drape.jpg",
-    alt: "Blue checked saree with embroidered floral border",
-    title: "NAAZ",
+    src: "/images/collection/final/product-2.png",
+    alt: "Blue checked saree with an embroidered floral border on a sculptural chair",
+    title: "02",
     note: "A study in blue, softened by embroidery.",
     description: [
       "Checks meet delicate floral artistry across a translucent canvas.",
@@ -96,9 +97,9 @@ export const collectionImages: CollectionPiece[] = [
     height: 2200,
   },
   {
-    src: "/images/collection/ivory-red-drape.jpg",
-    alt: "Ivory and red saree with animal motif draped over a chair",
-    title: "KATHA",
+    src: "/images/collection/final/product-3.png",
+    alt: "Ivory saree with illustrated writing and a rust ruffle border",
+    title: "03",
     note: "A canvas of stories, framed in vermilion.",
     description: [
       "Illustrated forms unfold across ivory, each carrying its own character.",
@@ -109,9 +110,9 @@ export const collectionImages: CollectionPiece[] = [
     height: 2200,
   },
   {
-    src: "/images/collection/grey-border-drape.jpg",
-    alt: "Grey saree with a gold and red border draped over a chair",
-    title: "RAAG",
+    src: "/images/collection/final/product-4.png",
+    alt: "Ivory saree with a multicolour checked border on a sculptural chair",
+    title: "04",
     note: "A quiet drape held by gold and shadow.",
     description: [
       "A graphite body lets the border carry the visual rhythm.",
@@ -122,9 +123,9 @@ export const collectionImages: CollectionPiece[] = [
     height: 2200,
   },
   {
-    src: "/images/collection/sunehri.jpg",
-    alt: "Saree-only product image from the ANURRAKTI collection",
-    title: "SUNEHRI",
+    src: "/images/collection/final/product-5.png",
+    alt: "Black saree with a rust illustrated panel on a sculptural chair",
+    title: "05",
     note: "A golden expression with a softened festive pulse.",
     description: [
       "Warm colour gathers around the drape with an archival sensibility.",
@@ -135,9 +136,9 @@ export const collectionImages: CollectionPiece[] = [
     height: 2200,
   },
   {
-    src: "/images/collection/chaand.jpg",
-    alt: "Saree-only product image from the ANURRAKTI collection",
-    title: "CHAAND",
+    src: "/images/collection/final/product-6.png",
+    alt: "Charcoal and white saree with illustrated writing and tassels",
+    title: "06",
     note: "A pale canvas touched by quiet ornament.",
     description: [
       "Soft tones allow the border and fall to speak with restraint.",
@@ -148,8 +149,8 @@ export const collectionImages: CollectionPiece[] = [
     height: 2200,
   },
   {
-    src: "/images/collection/mehr.jpg",
-    alt: "Saree-only product image from the ANURRAKTI collection",
+    src: "/images/collection/final/product-7.png",
+    alt: "Red saree with a hand-drawn animal panel and ruffled border",
     title: "07 MEHR",
     note: "Colour gathered with affection and ease.",
     description: [
@@ -161,8 +162,8 @@ export const collectionImages: CollectionPiece[] = [
     height: 2200,
   },
   {
-    src: "/images/collection/raatri.jpg",
-    alt: "Saree-only product image from the ANURRAKTI collection",
+    src: "/images/collection/final/product-8.png",
+    alt: "Ivory saree with red and navy animal motifs and a striped border",
     title: "08 RASA",
     note: "A darker note, composed for evening.",
     description: [
@@ -174,8 +175,8 @@ export const collectionImages: CollectionPiece[] = [
     height: 2200,
   },
   {
-    src: "/images/collection/noor.jpg",
-    alt: "Saree-only product image from the ANURRAKTI collection",
+    src: "/images/collection/final/product-9.png",
+    alt: "Black saree with gold motifs and a red brocade border",
     title: "09 NOOR",
     note: "Light held gently across the textile.",
     description: [
@@ -187,8 +188,8 @@ export const collectionImages: CollectionPiece[] = [
     height: 2200,
   },
   {
-    src: "/images/collection/rekha.jpg",
-    alt: "Saree-only product image from the ANURRAKTI collection",
+    src: "/images/collection/final/product-10.png",
+    alt: "Grey saree with a checked fall and black and gold border",
     title: "10 REKHA",
     note: "Line, rhythm and border in conversation.",
     description: [
@@ -200,8 +201,8 @@ export const collectionImages: CollectionPiece[] = [
     height: 2200,
   },
   {
-    src: "/images/collection/mehfil.jpg",
-    alt: "Saree-only product image from the ANURRAKTI collection",
+    src: "/images/collection/final/product-11.png",
+    alt: "Ivory saree with fine linear woven stripes",
     title: "11 MEHFIL",
     note: "Made for rooms filled with memory.",
     description: [
@@ -213,8 +214,8 @@ export const collectionImages: CollectionPiece[] = [
     height: 2200,
   },
   {
-    src: "/images/collection/angana.jpg",
-    alt: "Saree-only product image from the ANURRAKTI collection",
+    src: "/images/collection/final/product-12.png",
+    alt: "Bright red saree with a gold embellished border",
     title: "12 ANGANA",
     note: "An intimate expression of home and occasion.",
     description: [
@@ -226,8 +227,8 @@ export const collectionImages: CollectionPiece[] = [
     height: 2200,
   },
   {
-    src: "/images/collection/sona.jpg",
-    alt: "Saree-only product image from the ANURRAKTI collection",
+    src: "/images/collection/final/product-13.png",
+    alt: "Coral and grey saree with a patterned gold border",
     title: "13 SONA",
     note: "A gold-lit study in textile and gesture.",
     description: [
@@ -235,32 +236,6 @@ export const collectionImages: CollectionPiece[] = [
       "Created to feel enduring, luminous and collected.",
     ],
     palette: "Gold / Ochre",
-    width: 2200,
-    height: 2200,
-  },
-  {
-    src: "/images/collection/aabha.jpg",
-    alt: "Saree-only product image from the ANURRAKTI collection",
-    title: "14 AABHA",
-    note: "Radiance, softened into drape.",
-    description: [
-      "A composed piece with a gentle surface glow.",
-      "Its presence is felt through proportion, colour and quiet detail.",
-    ],
-    palette: "Ivory / Gold",
-    width: 2200,
-    height: 2200,
-  },
-  {
-    src: "/images/collection/lahar.jpg",
-    alt: "Saree-only product image from the ANURRAKTI collection",
-    title: "15 LAHAR",
-    note: "A sense of movement held in cloth.",
-    description: [
-      "The textile falls with ease, creating a soft visual rhythm.",
-      "An expression designed to move with the stories it enters.",
-    ],
-    palette: "Blue / Ivory",
     width: 2200,
     height: 2200,
   },

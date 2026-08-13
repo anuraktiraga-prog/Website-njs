@@ -8,6 +8,7 @@ export type ProductGalleryView = {
   alt: string;
   label: string;
   position: string;
+  zoom?: number;
 };
 
 export function ProductGallery({ views }: { views: ProductGalleryView[] }) {
@@ -59,7 +60,7 @@ export function ProductGallery({ views }: { views: ProductGalleryView[] }) {
             className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden bg-stone-200 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
             aria-label={`Open ${view.label} in full screen`}
           >
-            <Image src={view.src} alt={view.alt} fill sizes="100vw" preload={index === 0} className="object-cover" style={{ objectPosition: view.position }} />
+            <Image src={view.src} alt={view.alt} fill sizes="100vw" preload={index === 0} className="object-cover" style={{ objectPosition: view.position, transform: `scale(${view.zoom ?? 1})` }} />
             <span className="absolute bottom-4 left-4 bg-[#f7f1e8]/90 px-3 py-2 text-[0.62rem] uppercase tracking-[0.18em] text-stone-800">{view.label}</span>
           </button>
         ))}
@@ -71,16 +72,16 @@ export function ProductGallery({ views }: { views: ProductGalleryView[] }) {
         ))}
       </div>
 
-      <div className="hidden gap-4 sm:grid sm:grid-cols-2">
-        {views.map((view, index) => (
+      <div className="hidden gap-4 sm:grid sm:grid-cols-[minmax(0,1.9fr)_minmax(11rem,1fr)] sm:grid-rows-3 sm:aspect-[4/5]">
+        {views.slice(0, 4).map((view, index) => (
           <button
             key={view.label}
             type="button"
             onClick={() => setLightboxIndex(index)}
-            className={`group relative aspect-[4/5] overflow-hidden bg-stone-200 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e] ${index === 0 ? "sm:row-span-2" : ""}`}
+            className={`group relative min-h-0 overflow-hidden bg-stone-200 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e] ${index === 0 ? "sm:row-span-3" : ""}`}
             aria-label={`Open ${view.label} in full screen`}
           >
-            <Image src={view.src} alt={view.alt} fill sizes="(max-width: 1023px) 50vw, 40vw" preload={index === 0} className="object-cover transition-transform duration-700 group-hover:scale-[1.02]" style={{ objectPosition: view.position }} />
+            <Image src={view.src} alt={view.alt} fill sizes="(max-width: 1023px) 50vw, 40vw" preload={index === 0} className="object-cover transition-transform duration-700 group-hover:scale-[1.02]" style={{ objectPosition: view.position, transform: `scale(${view.zoom ?? 1})` }} />
             <span className="absolute bottom-4 left-4 bg-[#f7f1e8]/90 px-3 py-2 text-[0.62rem] uppercase tracking-[0.18em] text-stone-800">{view.label}</span>
           </button>
         ))}

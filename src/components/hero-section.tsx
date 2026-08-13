@@ -65,6 +65,18 @@ export function HeroSection() {
               className="h-full w-full object-cover object-[52%_28%]"
             />
           </motion.div>
+          <video
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.28] mix-blend-screen"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={heroImage.src}
+            aria-hidden="true"
+          >
+            <source src="/videos/house-drape-study.mp4" type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-b from-stone-950/30 via-stone-950/5 to-stone-950/85" />
           <div className="absolute inset-0 bg-gradient-to-r from-stone-950/42 via-transparent to-transparent" />
         </div>
@@ -83,7 +95,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 32, letterSpacing: "0.08em" }}
               animate={isContentVisible ? { opacity: 1, y: 0, letterSpacing: "-0.035em" } : { opacity: 0, y: 32, letterSpacing: "0.08em" }}
               transition={{ duration: 1.35, delay: isContentVisible ? 0.12 : 0, ease: [0.22, 1, 0.36, 1] }}
-              className="font-serif text-6xl leading-[0.9] text-[#fff5df] sm:text-8xl lg:text-9xl"
+              className="type-display font-serif text-[#fff5df]"
             >
               ANURRAKTI
             </motion.h1>

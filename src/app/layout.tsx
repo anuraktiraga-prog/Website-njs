@@ -17,6 +17,10 @@ export const metadata: Metadata = {
   },
   description:
     "ANURRAKTI is a contemporary Indian fashion house rooted in textile, emotion and enduring drape.",
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    apple: [{ url: "/apple-icon.png", type: "image/png" }],
+  },
   openGraph: {
     type: "website",
     locale: "en_IN",

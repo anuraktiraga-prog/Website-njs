@@ -19,11 +19,11 @@ export function ReadyToWearReveal() {
         <p className="eyebrow mb-8">ANURRAKTI / Ready to wear</p>
         <TextFlippingBoard
           key={cycle}
-          text="READY TO WEAR STAY TUNED"
+          text="COMING SOON"
           duration={2.4}
           className="mx-auto max-w-2xl"
         />
-        <p className="mt-8 text-xs uppercase tracking-[0.2em] text-stone-600">Coming soon</p>
+        <p className="mt-8 text-xs uppercase tracking-[0.2em] text-stone-600">Stay tuned</p>
       </div>
     </section>
   );
