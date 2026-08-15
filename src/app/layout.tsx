@@ -11,12 +11,13 @@ const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.anurrakti.com"),
+  alternates: { canonical: "/" },
   title: {
     default: "ANURRAKTI",
     template: "%s | ANURRAKTI",
   },
   description:
-    "ANURRAKTI is a contemporary Indian fashion house rooted in textile, emotion and enduring drape.",
+    "ANURRAKTI is an Indian fashion house creating singular clothing through textile, emotion and considered design.",
   icons: {
     icon: [{ url: "/icon.png", type: "image/png" }],
     apple: [{ url: "/apple-icon.png", type: "image/png" }],
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "ANURRAKTI",
     title: "ANURRAKTI",
     description:
-      "Contemporary Indian sarees rooted in textile, emotion and enduring drape.",
+      "An Indian fashion house creating singular clothing through textile, emotion and considered design.",
     images: [
       {
         url: "/opengraph-image.png",
@@ -42,14 +43,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ANURRAKTI",
     description:
-      "Contemporary Indian sarees rooted in textile, emotion and enduring drape.",
+      "An Indian fashion house creating singular clothing through textile, emotion and considered design.",
     images: ["/opengraph-image.png"],
   },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={cn("h-full antialiased", "font-sans", geist.variable)}>
+    <html lang="en" data-scroll-behavior="smooth" className={cn("h-full antialiased", "font-sans", geist.variable)}>
       <body className="min-h-full flex flex-col">
         {children}
         <SiteFooter />

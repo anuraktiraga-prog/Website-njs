@@ -7,10 +7,38 @@ export type BrandImage = {
   width: number;
   height: number;
   detailImages?: string[];
+  /** The role this image plays in search, accessibility, and editorial layout. */
+  imageViewType?: "product" | "detail" | "campaign" | "material";
+  detailImageMetadata?: ProductImage[];
+};
+
+export type ProductImage = {
+  src: string;
+  alt: string;
+  imageViewType: "product" | "detail" | "material";
+};
+
+export type ProductDetails = {
+  oneOfOne?: boolean;
+  price?: string;
+  material?: string;
+  construction?: string;
+  designWork?: string;
+  border?: string;
+  motif?: string;
+  weave?: string;
+  embroideryOrPrint?: string;
+  pallu?: string;
+  care?: string;
+  availability?: string;
 };
 
 export type CollectionPiece = BrandImage & {
+  collection?: string;
+  garmentType?: string;
+  status?: "available" | "reserved" | "collected";
   description: [string, string];
+  productDetails?: ProductDetails;
 };
 
 export function collectionSlug(piece: CollectionPiece) {
@@ -39,6 +67,7 @@ export const campaignImages: BrandImage[] = [
     palette: "Red / Grey / Gold",
     width: 1760,
     height: 2200,
+    imageViewType: "campaign",
   },
   {
     src: "/images/campaign/anurrakti-staircase.png",
@@ -48,6 +77,7 @@ export const campaignImages: BrandImage[] = [
     palette: "Black / Red / Gold",
     width: 1760,
     height: 2200,
+    imageViewType: "campaign",
   },
   {
     src: "/images/campaign/anurrakti-garden.png",
@@ -57,6 +87,7 @@ export const campaignImages: BrandImage[] = [
     palette: "Ivory / Pink / Black",
     width: 1760,
     height: 2200,
+    imageViewType: "campaign",
   },
   {
     src: "/images/campaign/blue-check-profile-anurrakti.png",
@@ -66,13 +97,14 @@ export const campaignImages: BrandImage[] = [
     palette: "Blue / Silver / Ivory",
     width: 1760,
     height: 2200,
+    imageViewType: "campaign",
   },
 ];
 
 export const collectionImages: CollectionPiece[] = [
   {
-    src: "/images/collection/final/product-1.png",
-    alt: "Olive and rust saree arranged on a sculptural chair",
+    src: "/images/collection/final/product-01-full.png",
+    alt: "Black saree with gold motifs and a red brocade border arranged on a sculptural chair",
     title: "01",
     note: "The depth of midnight meets the brilliance of vermilion.",
     description: [
@@ -82,19 +114,29 @@ export const collectionImages: CollectionPiece[] = [
     palette: "Black / Red / Gold",
     width: 1465,
     height: 2200,
+    detailImages: [
+      "/images/collection/ehsaas-details/01-detail-6943.png",
+      "/images/collection/ehsaas-details/01-detail-6939.png",
+      "/images/collection/ehsaas-details/01-artboard12.png",
+    ],
   },
   {
-    src: "/images/collection/final/product-2.png",
-    alt: "Blue checked saree with an embroidered floral border on a sculptural chair",
+    src: "/images/collection/final/product-02-full.png",
+    alt: "Red saree with an illustrated animal panel arranged on a sculptural chair",
     title: "02",
-    note: "A study in blue, softened by embroidery.",
+    note: "A vivid story of colour, movement and memory.",
     description: [
-      "Checks meet delicate floral artistry across a translucent canvas.",
-      "A considered drape for light, movement and quiet celebration.",
+      "Illustrated figures unfold across a warm red ground with a playful, hand-drawn spirit.",
+      "A joyful drape composed for movement, conversation and celebration.",
     ],
-    palette: "Blue / Silver / Ivory",
+    palette: "Red / Ivory / Teal",
     width: 1465,
     height: 2200,
+    detailImages: [
+      "/images/collection/ehsaas-details/02-detail-6924.png",
+      "/images/collection/ehsaas-details/02-detail-6926-clean.png",
+      "/images/collection/ehsaas-details/02-detail-6939.png",
+    ],
   },
   {
     src: "/images/collection/final/product-3.png",

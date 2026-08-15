@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -35,14 +35,17 @@ const FlapCell = memo(function FlapCell({
   delay: number;
   stepMs: number;
 }) {
+  const reduceMotion = useReducedMotion();
+  const normalized = FLAP_CHARS.includes(target) ? target : " ";
   const [current, setCurrent] = useState(" ");
   const [previous, setPrevious] = useState(" ");
   const [flipId, setFlipId] = useState(0);
   const currentRef = useRef(" ");
 
   useEffect(() => {
-    const normalized = FLAP_CHARS.includes(target) ? target : " ";
     if (normalized === " ") return;
+
+    if (reduceMotion) return;
 
     let stepTimer: number | undefined;
     const startTimer = window.setTimeout(() => {
@@ -68,9 +71,10 @@ const FlapCell = memo(function FlapCell({
       window.clearTimeout(startTimer);
       if (stepTimer) window.clearTimeout(stepTimer);
     };
-  }, [delay, stepMs, target]);
+  }, [delay, normalized, reduceMotion, stepMs]);
 
-  const display = current === " " ? "\u00A0" : current;
+  const shown = reduceMotion ? normalized : current;
+  const display = shown === " " ? "\u00A0" : shown;
   const previousDisplay = previous === " " ? "\u00A0" : previous;
   const characterStyle = { fontSize: "clamp(0.38rem, 1.65vw, 1.2rem)" };
 

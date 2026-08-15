@@ -38,7 +38,7 @@ export default function PrivacyPage() {
             </section>
             <section>
               <h2 className="font-serif text-3xl leading-none text-stone-900">Contact</h2>
-              <p className="mt-4">For a privacy request or question, please contact us through the <Link href="/#viewing" className="underline decoration-[#7e271e] underline-offset-4">Private Viewing form</Link> and include “Privacy” in your message, or send us a direct message on Instagram.</p>
+              <p className="mt-4">For a privacy request or question, please contact us through the <Link href="/#viewing" className="underline decoration-[#7e271e] underline-offset-4">Private enquiry form</Link> and include “Privacy” in your message, or send us a direct message on Instagram.</p>
             </section>
           </div>
         </article>

@@ -2,25 +2,30 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 export type ProductGalleryView = {
   src: string;
   alt: string;
   label: string;
   position: string;
-  zoom?: number;
+  fit?: "cover" | "contain";
+  imageViewType?: "product" | "detail";
 };
 
 export function ProductGallery({ views }: { views: ProductGalleryView[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [isZoomed, setIsZoomed] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (lightboxIndex === null) return;
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") setLightboxIndex(null);
     };
@@ -30,6 +35,12 @@ export function ProductGallery({ views }: { views: ProductGalleryView[] }) {
       window.removeEventListener("keydown", closeOnEscape);
     };
   }, [lightboxIndex]);
+
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+    setIsZoomed(false);
+    trackEvent("product_image_fullscreen_open", { image_view: views[index].imageViewType ?? "product" });
+  };
 
   const updateActiveSlide = () => {
     const carousel = carouselRef.current;
@@ -56,12 +67,12 @@ export function ProductGallery({ views }: { views: ProductGalleryView[] }) {
           <button
             key={view.label}
             type="button"
-            onClick={() => setLightboxIndex(index)}
-            className="relative aspect-[4/5] w-full shrink-0 snap-center overflow-hidden bg-stone-200 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+            onClick={() => openLightbox(index)}
+            className="group relative aspect-[4/5] w-full shrink-0 snap-center cursor-zoom-in overflow-hidden bg-stone-200 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
             aria-label={`Open ${view.label} in full screen`}
           >
-            <Image src={view.src} alt={view.alt} fill sizes="100vw" preload={index === 0} className="object-cover" style={{ objectPosition: view.position, transform: `scale(${view.zoom ?? 1})` }} />
-            <span className="absolute bottom-4 left-4 bg-[#f7f1e8]/90 px-3 py-2 text-[0.62rem] uppercase tracking-[0.18em] text-stone-800">{view.label}</span>
+            <Image src={view.src} alt={view.alt} fill sizes="100vw" preload={index === 0} className={`${view.fit === "contain" ? "object-contain" : "object-cover"} transition-transform duration-700 ease-out motion-reduce:transition-none group-hover:scale-[1.025]`} style={{ objectPosition: view.position }} />
+            <span className="pointer-events-none absolute inset-x-3 bottom-3 translate-y-2 bg-stone-950/75 px-3 py-2 text-center text-[0.65rem] uppercase tracking-[0.18em] text-[#fff5df] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none">Open full image</span>
           </button>
         ))}
       </div>
@@ -77,25 +88,26 @@ export function ProductGallery({ views }: { views: ProductGalleryView[] }) {
           <button
             key={view.label}
             type="button"
-            onClick={() => setLightboxIndex(index)}
-            className={`group relative min-h-0 overflow-hidden bg-stone-200 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e] ${index === 0 ? "sm:row-span-3" : ""}`}
+            onClick={() => openLightbox(index)}
+            className={`group relative min-h-0 cursor-zoom-in overflow-hidden bg-stone-200 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e] ${index === 0 ? "sm:row-span-3" : ""}`}
             aria-label={`Open ${view.label} in full screen`}
           >
-            <Image src={view.src} alt={view.alt} fill sizes="(max-width: 1023px) 50vw, 40vw" preload={index === 0} className="object-cover transition-transform duration-700 group-hover:scale-[1.02]" style={{ objectPosition: view.position, transform: `scale(${view.zoom ?? 1})` }} />
-            <span className="absolute bottom-4 left-4 bg-[#f7f1e8]/90 px-3 py-2 text-[0.62rem] uppercase tracking-[0.18em] text-stone-800">{view.label}</span>
+            <Image src={view.src} alt={view.alt} fill sizes="(max-width: 1023px) 50vw, 40vw" preload={index === 0} className={`${view.fit === "contain" ? "object-contain" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.035] motion-reduce:transition-none`} style={{ objectPosition: view.position }} />
+            <span className="pointer-events-none absolute inset-x-4 bottom-4 translate-y-2 bg-stone-950/75 px-3 py-2 text-center text-[0.65rem] uppercase tracking-[0.18em] text-[#fff5df] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none">Open full image</span>
           </button>
         ))}
       </div>
 
       {lightboxIndex !== null ? (
         <div className="fixed inset-0 z-[100] flex min-h-[100svh] items-center justify-center bg-stone-950/95 p-4 sm:p-8" role="dialog" aria-modal="true" aria-label="Full screen product image">
-          <button type="button" onClick={() => setLightboxIndex(null)} className="absolute right-5 top-5 z-10 px-3 py-2 text-xs uppercase tracking-[0.18em] text-[#fff5df] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#fff5df] sm:right-8 sm:top-8" aria-label="Close full screen image">
+          <button ref={closeButtonRef} type="button" onClick={() => setLightboxIndex(null)} className="absolute right-5 top-5 z-10 min-h-11 px-3 py-2 text-xs uppercase tracking-[0.18em] text-[#fff5df] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#fff5df] sm:right-8 sm:top-8" aria-label="Close full screen image">
             Close <span aria-hidden="true" className="ml-1 text-lg leading-none">×</span>
           </button>
           <button type="button" onClick={previous} className="absolute left-3 top-1/2 z-10 -translate-y-1/2 px-3 py-4 text-3xl text-[#fff5df] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#fff5df] sm:left-8" aria-label="Previous image">‹</button>
-          <figure className="relative h-[82svh] w-full max-w-5xl">
-            <Image src={views[lightboxIndex].src} alt={views[lightboxIndex].alt} fill sizes="100vw" className="object-contain" style={{ objectPosition: views[lightboxIndex].position }} />
-            <figcaption className="absolute bottom-0 left-1/2 -translate-x-1/2 whitespace-nowrap bg-stone-950/70 px-3 py-2 text-[0.62rem] uppercase tracking-[0.18em] text-[#fff5df]">{views[lightboxIndex].label} · {lightboxIndex + 1} / {views.length}</figcaption>
+          <figure className="relative h-[88svh] w-[90vw] max-w-6xl overflow-auto [touch-action:pinch-zoom]">
+            <button type="button" onClick={() => setIsZoomed((current) => !current)} className="absolute inset-0 block cursor-zoom-in focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#fff5df]" aria-label={isZoomed ? "Return to full image" : "Zoom image"}>
+              <Image src={views[lightboxIndex].src} alt={views[lightboxIndex].alt} fill sizes="90vw" className={`object-contain transition-transform duration-300 motion-reduce:transition-none ${isZoomed ? "scale-150 cursor-zoom-out" : ""}`} />
+            </button>
           </figure>
           <button type="button" onClick={next} className="absolute right-3 top-1/2 z-10 -translate-y-1/2 px-3 py-4 text-3xl text-[#fff5df] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#fff5df] sm:right-8" aria-label="Next image">›</button>
         </div>

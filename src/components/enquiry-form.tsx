@@ -1,15 +1,17 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/analytics";
 
-const GOOGLE_SHEETS_ENDPOINT =
+export const GOOGLE_SHEETS_ENDPOINT =
   "https://script.google.com/macros/s/AKfycbzxlncpCkQhIwLSlZkIgS1ZI-siqMtWeSjtDvQ9xgqa-I8JTZp-oomh6atD-rgJcO08/exec";
 
 export function EnquiryForm() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const hasStarted = useRef(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -29,13 +31,24 @@ export function EnquiryForm() {
     }).then(() => {
       form.reset();
       setStatus("sent");
-    }).catch(() => {
-      setStatus("idle");
-    });
+      trackEvent("enquiry_completion");
+      if (String(formData.get("product") || "") !== "Private enquiry") {
+        trackEvent("product_enquiry_completion");
+      }
+    }).catch(() => setStatus("error"));
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-8" aria-label="Enquiry form">
+    <form
+      onSubmit={handleSubmit}
+      onFocus={() => {
+        if (hasStarted.current) return;
+        hasStarted.current = true;
+        trackEvent("enquiry_form_start");
+      }}
+      className="mt-8"
+      aria-label="Enquiry form"
+    >
       <div className="grid gap-4 sm:grid-cols-2">
         <Field>
           <Label htmlFor="enquiry-name">Name</Label>
@@ -52,9 +65,9 @@ export function EnquiryForm() {
           <Input id="enquiry-email" name="email" type="email" autoComplete="email" placeholder="Your email address" />
         </Field>
         <Field>
-          <Label htmlFor="enquiry-product">I am interested in</Label>
-          <select id="enquiry-product" name="product" defaultValue="Private viewing" className="enquiry-field bg-[#f9f5ef] text-[#1d1915]">
-            <option>Private viewing</option>
+          <Label htmlFor="enquiry-product">I am considering</Label>
+          <select id="enquiry-product" name="product" defaultValue="Private enquiry" className="enquiry-field bg-[#f9f5ef] text-[#1d1915]">
+            <option>Private enquiry</option>
             <option>EHSAAS collection</option>
             <option>Custom enquiry</option>
             <option>Other</option>
@@ -67,11 +80,12 @@ export function EnquiryForm() {
       </div>
       <div className="flex flex-wrap items-center gap-4 pt-1">
         <button className="group/btn relative mt-6 min-h-12 w-full overflow-hidden bg-[#1d1915] px-5 text-xs font-bold uppercase tracking-[0.16em] text-[#fffaf2] transition-colors hover:bg-[#7e271e] disabled:cursor-wait disabled:opacity-65 sm:w-auto" type="submit" disabled={status === "sending"}>
-          {status === "sending" ? "Sending…" : "Send enquiry"}
+          {status === "sending" ? "Sending…" : "Begin the conversation"}
           <BottomLine />
         </button>
-        <p className="text-sm text-stone-600" aria-live="polite">
-          {status === "sent" ? "Thank you. Your enquiry has been received." : ""}
+        <p className="text-sm text-stone-600" aria-live="polite" role={status === "error" || status === "sent" ? "status" : undefined}>
+          {status === "sent" ? "Thank you. The House will be in touch." : null}
+          {status === "error" ? "We couldn’t send that just now. Please try again or speak with ANURRAKTI directly." : null}
         </p>
       </div>
     </form>
@@ -83,5 +97,5 @@ function Field({ children, className }: { children: React.ReactNode; className?:
 }
 
 function BottomLine() {
-  return <span className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#d6ad86] to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />;
+  return <span className="absolute inset-x-0 bottom-0 h-px bg-[#d6ad86] opacity-0 transition duration-500 group-hover/btn:opacity-100" />;
 }

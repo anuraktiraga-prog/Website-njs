@@ -12,7 +12,10 @@ export function SiteFooter() {
             Privacy policy
           </Link>
           <Link href="/#viewing" className="transition-colors hover:text-[#7e271e]">
-            Private viewing
+            Private enquiry
+          </Link>
+          <Link href="/gift-concierge" className="transition-colors hover:text-[#7e271e]">
+            Gift Concierge
           </Link>
           <a href="https://www.instagram.com/anurrakti/" target="_blank" rel="noreferrer" className="transition-colors hover:text-[#7e271e]">
             Instagram

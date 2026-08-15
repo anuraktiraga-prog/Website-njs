@@ -1,40 +1,78 @@
 "use client";
 
 import Image from "next/image";
-import { campaignImages, ehsaasCollection } from "@/lib/collection";
+import { useEffect, useState } from "react";
+import { useReducedMotion } from "motion/react";
+import { campaignImages } from "@/lib/collection";
 
-const images = [...campaignImages, ...ehsaasCollection];
+const editorialImages = campaignImages.slice(0, 4);
+const focalPoints = ["50% 24%", "50% 18%", "50% 20%", "50% 22%"];
 
 export function CollectionMarquee() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const reduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    if (reduceMotion) return;
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % editorialImages.length);
+    }, 7200);
+
+    return () => window.clearInterval(interval);
+  }, [reduceMotion]);
+
   return (
-    <section className="relative isolate h-[29rem] overflow-hidden border-b border-stone-900/10 bg-[#1d1915] sm:h-[34rem] lg:h-[38rem]">
-      <div className="collection-marquee">
-        {[0, 1, 2].map((row) => (
-          <div className="collection-marquee-row" key={row}>
-            {[...images, ...images].map((image, index) => (
-              <div className="collection-marquee-card" key={`${row}-${image.src}-${index}`}>
-                <Image
-                  src={image.src}
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 30vw, 20vw"
-                  className="object-cover"
-                  style={{ objectPosition: "center" }}
-                />
-              </div>
-            ))}
+    <section className="relative isolate min-h-[clamp(34rem,68svh,48rem)] overflow-hidden border-b border-stone-900/10 bg-[#1d1915]">
+      <div className="absolute inset-0" aria-live="polite">
+        {editorialImages.map((image, index) => (
+          <div
+            key={image.src}
+            className={`absolute inset-0 transition-opacity duration-[1800ms] ease-in-out motion-reduce:transition-none ${index === activeIndex ? "opacity-100" : "opacity-0"}`}
+            aria-hidden={index !== activeIndex}
+          >
+            <Image
+              src={image.src}
+              alt={index === activeIndex ? image.alt : ""}
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className="object-cover"
+              style={{ objectPosition: focalPoints[index] }}
+            />
           </div>
         ))}
       </div>
-      <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(90deg,rgba(29,25,21,0.9),transparent_32%,transparent_68%,rgba(29,25,21,0.9)),linear-gradient(0deg,rgba(29,25,21,0.92),transparent_35%,transparent_65%,rgba(29,25,21,0.6))]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 mx-auto max-w-[90rem] px-5 pb-9 sm:px-8 sm:pb-12">
-        <p className="eyebrow text-[#f4dfc7]">The first expression</p>
-        <h1 className="type-display mt-3 max-w-2xl font-serif text-[#fff7ec]">
-          EHSAAS
-        </h1>
-        <p className="mt-5 max-w-md text-sm leading-6 text-[#f4dfc7]/85 sm:text-base">
-          A study of colour, texture and memory. Discover each image in the world of EHSAAS.
-        </p>
+
+      <div className="pointer-events-none absolute inset-0 bg-stone-950/32" />
+
+      <div className="relative z-10 mx-auto flex min-h-[clamp(34rem,68svh,48rem)] max-w-[90rem] flex-col justify-end px-5 pb-10 sm:px-8 sm:pb-14 lg:px-12 lg:pb-16">
+        <div className="flex items-end justify-between gap-8">
+          <div className="max-w-xl">
+            <div className="archive-index text-[#f4dfc7]">
+              <span>01</span>
+              <span className="geometry-line" aria-hidden="true" />
+              <span>Archive</span>
+            </div>
+            <h1 className="type-page-title mt-3 max-w-2xl font-serif text-[#fff7ec]">EHSAAS</h1>
+            <p className="type-body mt-5 max-w-md text-[#f4dfc7]/90">
+              A study of colour, texture and memory.
+            </p>
+          </div>
+
+          <p className="hidden shrink-0 pb-1 text-[0.68rem] uppercase tracking-[0.24em] text-[#f4dfc7]/80 sm:block">
+            {String(activeIndex + 1).padStart(2, "0")} / {String(editorialImages.length).padStart(2, "0")}
+          </p>
+        </div>
+
+        <Image
+          src="/logos/anurrakti-knot-red.png"
+          alt=""
+          width={661}
+          height={609}
+          aria-hidden="true"
+          className="pointer-events-none absolute right-5 top-8 h-14 w-14 object-contain opacity-55 [clip-path:inset(0_0_42%_0)] sm:right-10 sm:top-12 sm:h-20 sm:w-20"
+        />
       </div>
     </section>
   );

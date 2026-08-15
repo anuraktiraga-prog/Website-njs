@@ -1,7 +1,8 @@
-import { CraftSection } from "@/components/craft-section";
+import { BrandPropositionSection } from "@/components/brand-proposition-section";
+import { CollectionSection } from "@/components/collection-section";
 import { HeroSection } from "@/components/hero-section";
-import { ReadyToWearSection } from "@/components/ready-to-wear-section";
 import { SiteHeader } from "@/components/site-header";
+import { SingularSection } from "@/components/singular-section";
 import { ViewingSection } from "@/components/viewing-section";
 
 export default function Home() {
@@ -10,8 +11,9 @@ export default function Home() {
       <SiteHeader />
       <main className="flex-1">
         <HeroSection />
-        <ReadyToWearSection />
-        <CraftSection />
+        <BrandPropositionSection />
+        <CollectionSection featuredOnly />
+        <SingularSection />
         <ViewingSection />
       </main>
     </>

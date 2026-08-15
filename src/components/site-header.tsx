@@ -3,18 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { WhatsAppIcon } from "@/components/social-icons";
+import { trackEvent } from "@/lib/analytics";
 
 const navItems = [
   { label: "Home", href: "/" },
-  { label: "Ready to wear", href: "/ready-to-wear" },
-  { label: "The House", href: "/#craft" },
+  { label: "The House", href: "/house" },
+  { label: "Gift Concierge", href: "/gift-concierge" },
   { label: "Enquire", href: "/#viewing" },
 ];
 
 const collectionItems = [
   { label: "EHSAAS", description: "The inaugural saree collection", href: "/collection" },
-  { label: "Ready to wear", description: "Coming soon", href: "/ready-to-wear" },
 ];
 
 export function SiteHeader() {
@@ -23,47 +22,31 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-stone-900/10 bg-[#f6f0e7] text-[#1d1915]">
-      <div className="bg-[#7e271e] px-4 py-2 text-center text-[10px] font-semibold uppercase tracking-[0.18em] text-[#fff7ec] sm:text-[11px]">
+      <div className="bg-[#7e271e] px-4 py-1.5 text-center text-[10px] font-semibold uppercase tracking-[0.16em] text-[#fff7ec] sm:text-[11px]">
         Discover the first ANURRAKTI expression — EHSAAS
         <Link className="ml-3 underline underline-offset-4" href="/collection">
           Explore
         </Link>
       </div>
 
-      <div className="relative mx-auto flex h-18 max-w-[90rem] items-center justify-between px-5 sm:px-8 lg:h-20">
+      <div className="relative mx-auto flex h-16 max-w-[90rem] items-center justify-between px-4 sm:px-8 lg:h-[4.5rem]">
         <p className="hidden text-[10px] uppercase tracking-[0.2em] text-stone-500 lg:block">
           Crafted in India
         </p>
 
         <Link
           href="/"
-          className="absolute left-1/2 flex -translate-x-1/2 items-center gap-2 font-serif text-[0.92rem] uppercase tracking-[0.22em] sm:text-base"
+          className="absolute left-1/2 flex -translate-x-1/2 items-center"
           aria-label="Anurrakti home"
         >
           <Image
-            src="/logos/anurrakti-knot-red.png"
-            alt=""
-            width={661}
-            height={609}
-            className="h-7 w-7 object-contain sm:h-8 sm:w-8"
+            src="/logos/anurrakti-stamp.png"
+            alt="ANURRAKTI"
+            width={1206}
+            height={890}
+            className="h-8 w-auto object-contain sm:h-9"
           />
-          <span>ANURRAKTI</span>
         </Link>
-
-        <div className="ml-auto hidden items-center gap-5 lg:flex">
-          <Link className="text-[10px] uppercase tracking-[0.18em] transition-colors hover:text-[#7e271e]" href="/#viewing">
-            Private viewing
-          </Link>
-          <a
-            href="https://wa.me/918800219663?text=Hello%20ANURRAKTI%2C%20I%20would%20like%20to%20enquire%20about%20the%20collection."
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Enquire on WhatsApp"
-            className="grid h-8 w-8 place-items-center rounded-full border border-stone-900/20 transition-colors hover:border-[#7e271e] hover:text-[#7e271e]"
-          >
-            <WhatsAppIcon className="h-3.5 w-3.5" />
-          </a>
-        </div>
 
         <button
           type="button"
@@ -83,7 +66,7 @@ export function SiteHeader() {
       </div>
 
       <nav className="hidden border-t border-stone-900/10 lg:block" aria-label="Primary navigation">
-        <ul className="mx-auto flex h-12 max-w-4xl items-center justify-center gap-9 text-[11px] font-medium uppercase tracking-[0.14em]">
+        <ul className="mx-auto flex h-11 max-w-4xl items-center justify-center gap-8 type-nav font-medium">
           {navItems.slice(0, 1).map((item) => (
             <li key={item.href}><Link className="transition-colors hover:text-[#7e271e]" href={item.href}>{item.label}</Link></li>
           ))}
@@ -99,7 +82,7 @@ export function SiteHeader() {
               aria-expanded={isCollectionOpen}
               onFocus={() => setIsCollectionOpen(true)}
             >
-              Collection
+              Collections
               <svg aria-hidden="true" viewBox="0 0 16 16" className={`h-3 w-3 transition-transform ${isCollectionOpen ? "rotate-180" : ""}`}><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.3" /></svg>
             </Link>
             {isCollectionOpen ? (
@@ -114,18 +97,25 @@ export function SiteHeader() {
             ) : null}
           </li>
           {navItems.slice(1).map((item) => (
-            <li key={item.href}><Link className="transition-colors hover:text-[#7e271e]" href={item.href}>{item.label}</Link></li>
+            <li key={item.href}><Link className="transition-colors hover:text-[#7e271e]" href={item.href} onClick={() => {
+              if (item.label === "The House") trackEvent("the_house_click", { placement: "header" });
+              if (item.label === "Gift Concierge") trackEvent("gift_concierge_start", { placement: "header" });
+            }}>{item.label}</Link></li>
           ))}
         </ul>
       </nav>
 
       {isMenuOpen ? (
         <nav id="mobile-navigation" className="border-t border-stone-900/10 bg-[#fffaf2] px-5 py-5 lg:hidden" aria-label="Mobile navigation">
-          <ul className="mx-auto grid max-w-7xl gap-1">
-            <li><Link href="/collection" className="block border-b border-stone-900/10 py-4 font-serif text-2xl" onClick={() => setIsMenuOpen(false)}>Collection — EHSAAS</Link></li>
+          <ul className="mx-auto grid max-w-7xl gap-0.5">
+            <li><Link href="/collection" className="block border-b border-stone-900/10 py-3.5 font-serif text-[clamp(1.2rem,5vw,1.5rem)] leading-tight" onClick={() => setIsMenuOpen(false)}>Collections — EHSAAS</Link></li>
             {navItems.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="block border-b border-stone-900/10 py-4 font-serif text-2xl" onClick={() => setIsMenuOpen(false)}>{item.label}</Link>
+                <Link href={item.href} className="block border-b border-stone-900/10 py-3.5 font-serif text-[clamp(1.2rem,5vw,1.5rem)] leading-tight" onClick={() => {
+                  setIsMenuOpen(false);
+                  if (item.label === "The House") trackEvent("the_house_click", { placement: "mobile_header" });
+                  if (item.label === "Gift Concierge") trackEvent("gift_concierge_start", { placement: "mobile_header" });
+                }}>{item.label}</Link>
               </li>
             ))}
           </ul>

@@ -1,13 +1,12 @@
 "use client";
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { useMotionTemplate, useMotionValue, motion } from "motion/react";
+import { useMotionValue, motion } from "motion/react";
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
-    const radius = 100; // change this to increase the rdaius of the hover effect
     const [visible, setVisible] = React.useState(false);
 
     const mouseX = useMotionValue(0);
@@ -21,19 +20,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     }
     return (
       <motion.div
-        style={{
-          background: useMotionTemplate`
-        radial-gradient(
-          ${visible ? radius + "px" : "0px"} circle at ${mouseX}px ${mouseY}px,
-          #7e271e,
-          transparent 80%
-        )
-      `,
-        }}
+        style={{ borderColor: visible ? "#7e271e" : "transparent" }}
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setVisible(true)}
         onMouseLeave={() => setVisible(false)}
-        className="group/input rounded-none p-px transition duration-300"
+        className="group/input rounded-none border border-transparent p-px transition duration-300"
       >
         <input
           type={type}
