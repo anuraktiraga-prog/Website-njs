@@ -95,7 +95,7 @@ export function HeroSection() {
           <div className="absolute inset-0 bg-gradient-to-r from-stone-950/45 via-stone-950/25 to-transparent" />
         </div>
 
-        <motion.div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-5 pb-[calc(2.5rem+env(safe-area-inset-bottom))] pt-28 sm:px-8 lg:pb-14" style={{ opacity: contentOpacity, x: contentX, y: contentY }}>
+        <motion.div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-5 pb-[calc(7.5rem+env(safe-area-inset-bottom))] pt-28 sm:px-8 sm:pb-[calc(2.5rem+env(safe-area-inset-bottom))] lg:pb-14" style={{ opacity: contentOpacity, x: contentX, y: contentY }}>
           <div className="max-w-2xl">
             <motion.p
               initial={{ opacity: 0, y: 16 }}
@@ -127,7 +127,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 14 }}
             animate={isContentVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
             transition={{ duration: 0.85, delay: isContentVisible ? 0.8 : 0, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-8 border-t border-stone-50/25 pt-5"
+            className="mt-6 border-t border-stone-50/25 pt-4 sm:mt-8 sm:pt-5"
           >
             <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:gap-3">
               <Link className="btn-light min-w-0 px-2 text-center sm:px-5" href="/collection" onClick={() => trackEvent("hero_discover_click")}>Discover</Link>

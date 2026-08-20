@@ -61,7 +61,7 @@ export function CollectionCard({
     <article
       ref={cardRef}
       className={`group animate-[collection-rise_700ms_ease-out_both] [perspective:1100px] ${
-        isArchiveCard ? "max-sm:min-h-full max-sm:snap-start max-sm:snap-always" : ""
+        isArchiveCard ? "max-sm:h-full max-sm:min-h-full max-sm:flex-none max-sm:snap-start max-sm:snap-always" : ""
       }`}
       style={{ animationDelay: `${180 + index * 90}ms` }}
       onPointerMove={updateTilt}
