@@ -88,7 +88,7 @@ export function CollectionMarquee({
           width={661}
           height={609}
           aria-hidden="true"
-          className="pointer-events-none absolute right-5 top-8 h-14 w-14 object-contain opacity-55 sm:right-10 sm:top-12 sm:h-20 sm:w-20"
+          className="pointer-events-none absolute right-5 top-8 h-14 w-14 object-contain opacity-75 brightness-0 invert sm:right-10 sm:top-12 sm:h-20 sm:w-20"
         />
       </div>
     </section>

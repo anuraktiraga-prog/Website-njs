@@ -31,13 +31,7 @@ export function CollectionSection({
         </div>
       </div>
 
-      <div
-        className={`grid gap-x-5 gap-y-12 ${
-          featuredOnly
-            ? "sm:grid-cols-3 lg:gap-x-8"
-            : "max-sm:-mx-5 max-sm:flex max-sm:h-[calc(100svh-5.5rem)] max-sm:flex-col max-sm:gap-0 max-sm:snap-y max-sm:snap-mandatory max-sm:overflow-y-auto max-sm:bg-stone-950 max-sm:overscroll-contain sm:grid-cols-2 lg:grid-cols-3"
-        }`}
-      >
+      <div className={`grid gap-x-5 gap-y-12 ${featuredOnly ? "sm:grid-cols-3 lg:gap-x-8" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
         {pieces.map((image, index) => (
           <CollectionCard key={image.src} image={image} index={index} variant={featuredOnly ? "featured" : "archive"} />
         ))}

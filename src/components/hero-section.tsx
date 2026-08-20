@@ -62,8 +62,8 @@ export function HeroSection() {
   }
 
   return (
-    <section ref={sectionRef} id="top" className="relative -mt-px min-h-[100svh] overflow-hidden bg-stone-950 text-stone-50" onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
-      <GyroDepth className="sticky top-0 min-h-[100svh] overflow-hidden">
+    <section ref={sectionRef} id="top" className="relative -mt-px min-h-[calc(100svh-6.35rem)] overflow-hidden bg-stone-950 text-stone-50 lg:min-h-[calc(100svh-10.1rem)]" onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
+      <GyroDepth className="sticky top-0 min-h-[calc(100svh-6.35rem)] overflow-hidden lg:min-h-[calc(100svh-10.1rem)]">
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
           <motion.div className="absolute -inset-12" style={{ x: imageX, y: imageY, scale: backdropScale }}>
             <Image
@@ -95,7 +95,7 @@ export function HeroSection() {
           <div className="absolute inset-0 bg-gradient-to-r from-stone-950/45 via-stone-950/25 to-transparent" />
         </div>
 
-        <motion.div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-5 pb-[calc(7.5rem+env(safe-area-inset-bottom))] pt-28 sm:px-8 sm:pb-[calc(2.5rem+env(safe-area-inset-bottom))] lg:pb-14" style={{ opacity: contentOpacity, x: contentX, y: contentY }}>
+        <motion.div className="relative z-10 mx-auto flex min-h-[calc(100svh-6.35rem)] max-w-7xl flex-col justify-end px-5 pb-[calc(3rem+env(safe-area-inset-bottom))] pt-12 sm:px-8 sm:pb-[calc(2.25rem+env(safe-area-inset-bottom))] lg:min-h-[calc(100svh-10.1rem)] lg:pb-8 lg:pt-16" style={{ opacity: contentOpacity, x: contentX, y: contentY }}>
           <div className="max-w-2xl">
             <motion.p
               initial={{ opacity: 0, y: 16 }}

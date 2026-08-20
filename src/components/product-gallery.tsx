@@ -89,13 +89,13 @@ export function ProductGallery({
         ))}
       </div>
 
-      <div className={`hidden gap-6 sm:flex sm:h-[min(68svh,42rem)] sm:items-stretch ${desktopClassName}`}>
+      <div className={`hidden sm:grid sm:h-[min(68svh,42rem)] sm:grid-cols-[minmax(0,1fr)_minmax(8rem,0.3fr)] sm:items-stretch sm:gap-6 ${desktopClassName}`}>
         {views.slice(0, 1).map((view, index) => (
           <button
             key={view.label}
             type="button"
             onClick={() => openLightbox(index)}
-            className="group relative h-full aspect-[4/5] cursor-zoom-in overflow-hidden bg-transparent text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+            className="group relative h-full w-full cursor-zoom-in overflow-hidden bg-transparent text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
             aria-label={`Open ${view.label} in full screen`}
           >
             <Image src={view.src} alt={view.alt} fill sizes="(max-width: 1023px) 50vw, 40vw" preload={index === 0} className={`${view.fit === "contain" ? "object-contain" : "object-cover group-hover:scale-[1.035]"} transition-transform duration-700 ease-out motion-reduce:transition-none`} style={{ objectPosition: view.position }} />

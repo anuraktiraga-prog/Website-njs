@@ -8,7 +8,6 @@ const ambientSound = "/audio/anurrakti-ambient.mp3";
 declare global {
   interface Window {
     __anurraktiIntroSoundPlayed?: boolean;
-    __anurraktiSiteReady?: boolean;
     __anurraktiHeroRevealStarted?: boolean;
   }
 }
@@ -17,7 +16,6 @@ export function HomeSound() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const hasAttemptedPlayback = useRef(false);
   const shouldWaitForInteraction = useRef(false);
-  const isSiteReady = useRef(false);
   const isHeroReady = useRef(false);
   const isAudioReady = useRef(false);
   const playbackTimer = useRef<number | undefined>(undefined);
@@ -48,17 +46,12 @@ export function HomeSound() {
     if (!audio) return;
 
     const tryAutoplayWhenReady = () => {
-      if (!isSiteReady.current || !isHeroReady.current || !isAudioReady.current) return;
+      if (!isHeroReady.current || !isAudioReady.current) return;
       if (playbackTimer.current) window.clearTimeout(playbackTimer.current);
 
       playbackTimer.current = window.setTimeout(() => {
         void playSound("autoplay");
       }, 0);
-    };
-
-    const playAfterSiteReady = () => {
-      isSiteReady.current = true;
-      tryAutoplayWhenReady();
     };
 
     const playWithHeroReveal = () => {
@@ -76,7 +69,6 @@ export function HomeSound() {
       void playSound("interaction");
     };
 
-    window.addEventListener("anurrakti:site-ready", playAfterSiteReady, { once: true });
     window.addEventListener("anurrakti:hero-reveal-start", playWithHeroReveal, { once: true });
     window.addEventListener("pointerdown", enableAfterInteraction, { passive: true });
     window.addEventListener("keydown", enableAfterInteraction);
@@ -89,17 +81,12 @@ export function HomeSound() {
       audio.load();
     }
 
-    if (window.__anurraktiSiteReady) {
-      window.setTimeout(playAfterSiteReady, 0);
-    }
-
     if (window.__anurraktiHeroRevealStarted) {
       window.setTimeout(playWithHeroReveal, 0);
     }
 
     return () => {
       if (playbackTimer.current) window.clearTimeout(playbackTimer.current);
-      window.removeEventListener("anurrakti:site-ready", playAfterSiteReady);
       window.removeEventListener("anurrakti:hero-reveal-start", playWithHeroReveal);
       window.removeEventListener("pointerdown", enableAfterInteraction);
       window.removeEventListener("keydown", enableAfterInteraction);

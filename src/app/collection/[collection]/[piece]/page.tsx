@@ -142,7 +142,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <span aria-hidden="true" className="mr-2">←</span> The {collection.name} collection
         </Link>
 
-        <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(22rem,0.8fr)] lg:items-start lg:gap-10">
+        <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(22rem,0.95fr)] lg:items-start lg:gap-8">
           <ProductGallery views={galleryViews} desktopClassName="lg:h-[min(58svh,42rem)] lg:aspect-auto" />
 
           <section className="min-w-0 self-start">
