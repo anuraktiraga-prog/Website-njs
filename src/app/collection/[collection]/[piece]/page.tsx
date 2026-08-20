@@ -35,6 +35,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   if (!piece) return {};
 
   const url = productPath(piece);
+  const productImageUrl = `${url}/opengraph-image`;
 
   return {
     title: `${piece.collectionName} ${piece.title} | ANURRAKTI`,
@@ -45,13 +46,13 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
       title: `${piece.collectionName} ${piece.title} | ANURRAKTI`,
       description: piece.description.join(" "),
       url,
-      images: [{ url: piece.src, width: piece.width, height: piece.height, alt: piece.alt }],
+      images: [{ url: productImageUrl, width: 1200, height: 630, alt: piece.alt }],
     },
     twitter: {
       card: "summary_large_image",
       title: `${piece.collectionName} ${piece.title} | ANURRAKTI`,
       description: piece.description.join(" "),
-      images: [piece.src],
+      images: [productImageUrl],
     },
   };
 }
@@ -71,8 +72,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
     collected: "This piece has found its home.",
   } as const;
   const detailImages = piece.detailImageMetadata ?? [];
+  const productUrl = `https://www.anurrakti.com${productPath(piece)}`;
   const enquiryText = encodeURIComponent(
-    `Hello ANURRAKTI, I would like to enquire about ${piece.collectionName} ${piece.title}.`,
+    `Hello ANURRAKTI, I would like to enquire about ${piece.collectionName} ${piece.title}.\n\nProduct link: ${productUrl}`,
   );
   const galleryViews: ProductGalleryView[] = [
     {
@@ -112,7 +114,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     name: `${piece.collectionName} ${piece.title}`,
     description: piece.description.join(" "),
     image: [piece.src, ...detailImages.map((image) => image.src)].map((src) => `https://www.anurrakti.com${src}`),
-    url: `https://www.anurrakti.com${productPath(piece)}`,
+    url: productUrl,
     brand: { "@type": "Brand", name: "ANURRAKTI" },
     category: "Saree",
     color: colours.join(", "),

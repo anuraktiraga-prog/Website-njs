@@ -3,33 +3,64 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const minimumDisplayMs = 1700;
+const revealDelayMs = 140;
+const minimumVisibleMs = 360;
+const exitDelayMs = 90;
+const fadeDurationMs = 220;
+
+declare global {
+  interface Window {
+    __anurraktiSiteReady?: boolean;
+  }
+}
 
 export function LoadingScreen() {
   const [progress, setProgress] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
     const startTime = window.performance.now();
-    const progressTimer = window.setInterval(() => {
-      setProgress((current) => {
-        if (current >= 92) return current;
-        const nextStep = current < 45 ? 7 : current < 75 ? 4 : 2;
-        return Math.min(current + nextStep, 92);
-      });
-    }, 95);
+    let visibleStartTime = 0;
+    let animationFrame: number | undefined;
     let finishTimer: number | undefined;
     let hideTimer: number | undefined;
+    let hasCompleted = false;
 
-    document.body.style.overflow = "hidden";
+    const animateProgress = () => {
+      const elapsed = window.performance.now() - startTime;
+      const loadRatio = Math.min(elapsed / 700, 1);
+      const easedProgress = 18 + (1 - Math.pow(1 - loadRatio, 2)) * 78;
+      setProgress((current) => Math.max(current, Math.min(Math.round(easedProgress), 96)));
+
+      if (!hasCompleted) {
+        animationFrame = window.requestAnimationFrame(animateProgress);
+      }
+    };
+
+    const announceReady = () => {
+      window.__anurraktiSiteReady = true;
+      window.dispatchEvent(new Event("anurrakti:site-ready"));
+    };
 
     const completeIntro = () => {
-      const elapsed = window.performance.now() - startTime;
-      const remaining = Math.max(minimumDisplayMs - elapsed, 0);
+      if (hasCompleted) return;
+      hasCompleted = true;
+      if (revealTimer) window.clearTimeout(revealTimer);
+
+      if (!visibleStartTime) {
+        announceReady();
+        setIsHidden(true);
+        return;
+      }
+
+      const elapsedVisibleTime = window.performance.now() - visibleStartTime;
+      const remaining = Math.max(minimumVisibleMs - elapsedVisibleTime, 0);
 
       finishTimer = window.setTimeout(() => {
+        if (animationFrame) window.cancelAnimationFrame(animationFrame);
         setProgress(100);
 
         hideTimer = window.setTimeout(() => {
@@ -38,10 +69,20 @@ export function LoadingScreen() {
           hideTimer = window.setTimeout(() => {
             document.body.style.overflow = previousOverflow;
             setIsHidden(true);
-          }, 620);
-        }, 360);
+            announceReady();
+          }, fadeDurationMs);
+        }, exitDelayMs);
       }, remaining);
     };
+
+    const revealTimer = window.setTimeout(() => {
+      if (hasCompleted) return;
+
+      visibleStartTime = window.performance.now();
+      document.body.style.overflow = "hidden";
+      setIsVisible(true);
+      animationFrame = window.requestAnimationFrame(animateProgress);
+    }, revealDelayMs);
 
     if (document.readyState === "complete") {
       completeIntro();
@@ -50,7 +91,8 @@ export function LoadingScreen() {
     }
 
     return () => {
-      window.clearInterval(progressTimer);
+      if (revealTimer) window.clearTimeout(revealTimer);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
       if (finishTimer) window.clearTimeout(finishTimer);
       if (hideTimer) window.clearTimeout(hideTimer);
       window.removeEventListener("load", completeIntro);
@@ -58,13 +100,13 @@ export function LoadingScreen() {
     };
   }, []);
 
-  if (isHidden) return null;
+  if (isHidden || !isVisible) return null;
 
   const logoFill = `${100 - progress}%`;
 
   return (
     <div
-      className={`fixed inset-0 z-[999] flex min-h-[100svh] items-center justify-center bg-[#0d0b09] text-[#fff7ec] transition-opacity duration-700 ease-out ${
+      className={`fixed inset-0 z-[999] flex min-h-[100svh] items-center justify-center bg-[#0d0b09] text-[#fff7ec] transition-opacity duration-300 ease-out ${
         isLeaving ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
       role="status"
