@@ -42,11 +42,11 @@ export default function CollectionPage() {
           <div className="max-w-3xl">
             <p className="eyebrow">From the House of ANURRAKTI</p>
             <h1 className="type-display mt-5 max-w-3xl font-serif text-stone-950">
-              Choose the expression.
+              Choose what speaks to you.
             </h1>
             <p className="type-body mt-6 max-w-2xl text-stone-700">
-              EHSAAS and RAGA hold different moods of the ANURRAKTI language:
-              emotion, artistry and the enduring presence of the drape.
+              EHSAAS and RAGA carry different moods of the ANURRAKTI language—each
+              shaped by emotion, artistry and the enduring presence of the drape.
             </p>
           </div>
 

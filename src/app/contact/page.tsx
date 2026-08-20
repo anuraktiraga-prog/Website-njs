@@ -8,12 +8,12 @@ import { contactLinks } from "@/lib/collection";
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Contact ANURRAKTI for collection enquiries, private recommendations, ready-to-wear pieces and gifting assistance.",
+    "Contact ANURRAKTI to find a collection piece that speaks to you or request a private recommendation.",
   alternates: { canonical: "/contact" },
   openGraph: {
     title: "Contact ANURRAKTI",
     description:
-      "Begin a conversation about an ANURRAKTI piece, private recommendation or gift.",
+      "Tell us what speaks to you and begin a private conversation with ANURRAKTI.",
     url: "/contact",
   },
 };
@@ -52,7 +52,7 @@ export default function ContactPage() {
     url: "https://www.anurrakti.com/contact",
     name: "Contact ANURRAKTI",
     description:
-      "Contact ANURRAKTI for collection enquiries, private recommendations, ready-to-wear pieces and gifting assistance.",
+      "Contact ANURRAKTI to find a collection piece that speaks to you or request a private recommendation.",
     inLanguage: "en-IN",
     isPartOf: { "@id": "https://www.anurrakti.com/#website" },
     about: { "@id": "https://www.anurrakti.com/#organization" },
@@ -76,10 +76,11 @@ export default function ContactPage() {
           <div className="mt-6 grid gap-8 lg:grid-cols-[0.68fr_0.32fr] lg:items-end lg:gap-16">
             <div>
               <h1 className="type-page-title max-w-4xl font-serif text-stone-950">
-                Begin a conversation with ANURRAKTI.
+                Tell us what speaks to you.
               </h1>
               <p className="type-lead mt-7 max-w-2xl text-stone-700">
-                For a collection piece, a private recommendation, ready-to-wear or a considered gift.
+                A piece, a colour, an occasion or a feeling—we will help you find
+                the expression that feels right.
               </p>
             </div>
             <p className="max-w-md text-sm leading-relaxed text-stone-600">
@@ -93,7 +94,7 @@ export default function ContactPage() {
             <div>
               <p className="eyebrow">Direct contact</p>
               <h2 id="direct-contact" className="mt-4 font-serif text-3xl leading-tight text-stone-950 sm:text-4xl">
-                Choose the channel that suits you.
+                Choose how you would like to begin.
               </h2>
             </div>
             <div className="grid gap-px bg-stone-900/15 sm:grid-cols-2">
@@ -125,7 +126,7 @@ export default function ContactPage() {
           <div className="max-w-4xl">
             <p className="eyebrow">Private enquiry</p>
             <h2 id="contact-form-heading" className="mt-4 font-serif text-4xl leading-tight text-stone-950 sm:text-5xl">
-              Tell us what you are considering.
+              What are you drawn to?
             </h2>
             <p className="mt-5 max-w-2xl text-stone-700">
               Your details are used to respond to this enquiry. Read our{" "}

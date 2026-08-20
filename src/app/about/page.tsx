@@ -6,12 +6,12 @@ import { SiteHeader } from "@/components/site-header";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Discover ANURRAKTI, an Indian fashion house shaped by textile, memory, emotion and considered design.",
+    "Discover ANURRAKTI, an Indian fashion house crafting one-of-one sarees through heritage, passion and personal expression.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About ANURRAKTI",
     description:
-      "An Indian fashion house shaped by textile, memory, emotion and considered design.",
+      "An Indian fashion house crafting one-of-one sarees through heritage, passion and personal expression.",
     url: "/about",
     images: [
       {
@@ -32,13 +32,13 @@ const principles = [
   },
   {
     number: "02",
-    title: "Emotion through the drape",
-    body: "A piece is considered not only as cloth, but as something carried into celebrations, rituals, portraits and personal memory.",
+    title: "Crafted with feeling",
+    body: "Every drape begins with emotion—shaped through colour, movement and detail to hold meaning beyond the moment.",
   },
   {
     number: "03",
-    title: "Made to feel singular",
-    body: "The intention is a considered wardrobe: pieces chosen personally and designed to hold their own character.",
+    title: "Chosen from the heart",
+    body: "We believe the right piece is felt before it is explained: personal, instinctive and unmistakably your own.",
   },
 ];
 
@@ -50,7 +50,7 @@ export default function AboutPage() {
     url: "https://www.anurrakti.com/about",
     name: "About ANURRAKTI",
     description:
-      "Discover ANURRAKTI, an Indian fashion house shaped by textile, memory, emotion and considered design.",
+      "Discover ANURRAKTI, an Indian fashion house crafting one-of-one sarees through heritage, passion and personal expression.",
     inLanguage: "en-IN",
     isPartOf: { "@id": "https://www.anurrakti.com/#website" },
     about: { "@id": "https://www.anurrakti.com/#organization" },
@@ -71,10 +71,12 @@ export default function AboutPage() {
             <div className="max-w-xl">
               <p className="eyebrow text-[#7e271e]">About ANURRAKTI</p>
               <h1 className="type-page-title mt-5 font-serif text-stone-950">
-                Pieces made to be remembered.
+                Crafted once. Remembered for a lifetime.
               </h1>
               <p className="type-lead mt-7 text-stone-700">
-                ANURRAKTI is an Indian fashion house shaped by memory, craft and character—where textile heritage meets a contemporary eye.
+                ANURRAKTI is an Indian fashion house where textile heritage,
+                passion and personal expression meet in pieces made to be felt
+                as deeply as they are seen.
               </p>
             </div>
             <figure className="relative aspect-[4/5] overflow-hidden bg-stone-900">
@@ -98,10 +100,12 @@ export default function AboutPage() {
             <p className="eyebrow lg:pt-2">Our point of view</p>
             <div>
               <h2 id="point-of-view" className="section-title max-w-3xl">
-                Made once. Remembered longer.
+                Wear what speaks to your soul.
               </h2>
               <p className="type-body mt-7 max-w-2xl text-stone-700">
-                A singular piece can hold more than material. It can hold identity, memory and the way a woman chooses to be seen. ANURRAKTI brings that belief into the relationship between textile, silhouette and detail.
+                What you wear can hold identity, memory and emotion. ANURRAKTI
+                brings that belief into every relationship between textile,
+                silhouette and detail—so the final choice feels entirely your own.
               </p>
             </div>
           </div>
@@ -134,7 +138,8 @@ export default function AboutPage() {
                 Begin with the textile. Follow the feeling.
               </h2>
               <p className="mt-6 leading-relaxed text-stone-300">
-                Explore the current collections or begin a private conversation about a piece, an occasion or a considered gift.
+                Explore the current collections and follow the piece that feels
+                unmistakably yours—or begin a private conversation.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/collection" className="btn-light">Explore collections</Link>

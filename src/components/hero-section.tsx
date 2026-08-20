@@ -111,7 +111,8 @@ export function HeroSection() {
               transition={{ duration: 1.35, delay: isContentVisible ? 0.12 : 0, ease: [0.22, 1, 0.36, 1] }}
               className="type-page-title max-w-2xl font-serif text-[#fff5df]"
             >
-              Wear What Cannot be Replicated.
+              <span className="block">Crafted once.</span>
+              <span className="block">Remembered for a lifetime.</span>
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
@@ -119,7 +120,7 @@ export function HeroSection() {
               transition={{ duration: 0.9, delay: isContentVisible ? 0.55 : 0, ease: [0.22, 1, 0.36, 1] }}
               className="mt-5 max-w-lg type-body text-stone-100"
             >
-              One of one Indian clothing, created for women who carry heritage with presence.
+              One-of-one Indian clothing, crafted with passion and chosen by the heart.
             </motion.p>
           </div>
 

@@ -21,11 +21,11 @@ export function CollectionSection({
         </p>
         <div className="min-w-0 animate-[collection-rise_700ms_ease-out_100ms_both]">
           <h2 className="section-title max-w-4xl font-serif text-stone-950">
-            {featuredOnly ? "Pieces with a point of view." : `${collection.name} collection.`}
+            {featuredOnly ? "Choose what feels like you." : `${collection.name} collection.`}
           </h2>
           <p className="type-body mt-6 max-w-[40rem] text-stone-700 sm:mt-8">
             {featuredOnly
-              ? "Created individually. Chosen personally. Never designed to disappear into a room."
+              ? "Each piece carries its own character. The one you choose should feel unmistakably yours."
               : collection.description}
           </p>
         </div>

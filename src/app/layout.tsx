@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s | ANURRAKTI",
   },
   description:
-    "ANURRAKTI is an Indian fashion house creating singular clothing through textile, emotion and considered design.",
+    "ANURRAKTI is an Indian fashion house of one-of-one sarees—crafted once, remembered for a lifetime.",
   authors: [{ name: "ANURRAKTI", url: "https://www.anurrakti.com/about" }],
   creator: "ANURRAKTI",
   publisher: "ANURRAKTI",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     siteName: "ANURRAKTI",
     title: "ANURRAKTI",
     description:
-      "An Indian fashion house creating singular clothing through textile, emotion and considered design.",
+      "An Indian fashion house of one-of-one sarees—crafted once, remembered for a lifetime.",
     images: [
       {
         url: "/opengraph-image.png",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ANURRAKTI",
     description:
-      "An Indian fashion house creating singular clothing through textile, emotion and considered design.",
+      "An Indian fashion house of one-of-one sarees—crafted once, remembered for a lifetime.",
     images: ["/opengraph-image.png"],
   },
 };
@@ -72,7 +72,7 @@ const siteStructuredData = {
       name: "ANURRAKTI",
       url: "https://www.anurrakti.com",
       description:
-        "ANURRAKTI is an Indian fashion house creating singular clothing through textile, emotion and considered design.",
+        "ANURRAKTI is an Indian fashion house of one-of-one sarees—crafted once, remembered for a lifetime.",
       logo: {
         "@type": "ImageObject",
         url: "https://www.anurrakti.com/logos/anurrakti-stamp.png",
@@ -99,7 +99,7 @@ const siteStructuredData = {
       url: "https://www.anurrakti.com",
       name: "ANURRAKTI",
       description:
-        "An Indian fashion house creating singular clothing through textile, emotion and considered design.",
+        "An Indian fashion house of one-of-one sarees—crafted once, remembered for a lifetime.",
       inLanguage: "en-IN",
       publisher: { "@id": "https://www.anurrakti.com/#organization" },
     },

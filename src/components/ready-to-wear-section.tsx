@@ -10,10 +10,10 @@ export function ReadyToWearSection() {
       <div className="section-shell grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
         <div className="max-w-xl">
           <p className="eyebrow">Ready to wear</p>
-          <h2 className="section-title mt-5">Dresses &amp; kurtis, soon.</h2>
+          <h2 className="section-title mt-5">A new expression, soon.</h2>
           <p className="mt-6 text-base leading-7 text-stone-700">
-            A new expression of ANURRAKTI is taking shape: everyday pieces
-            with the same attention to colour, craft and feeling.
+            Dresses and kurtis are taking shape—everyday pieces crafted with
+            the same passion, colour and feeling.
           </p>
           <Link className="btn-secondary mt-8" href="/ready-to-wear">Stay tuned</Link>
         </div>

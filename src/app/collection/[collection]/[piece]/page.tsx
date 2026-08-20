@@ -251,7 +251,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="flex max-w-2xl flex-col gap-4">
           <p className="eyebrow">The world around the piece</p>
           <h2 id="editorial-world" className="type-section font-serif text-stone-950">
-            Made to be felt before it is remembered.
+            Chosen by feeling. Remembered for a lifetime.
           </h2>
           <p className="type-body max-w-xl text-stone-700">
             Campaign imagery is atmospheric; the product photography above shows this piece itself.

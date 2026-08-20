@@ -3,7 +3,7 @@ import { campaignImages } from "@/lib/collection";
 
 const craftNotes = [
   "Indian textile heritage, reimagined.",
-  "Emotion, expressed through the drape.",
+  "Crafted with passion, chosen by feeling.",
   "Made to be collected, not consumed.",
 ];
 
@@ -19,11 +19,11 @@ export function CraftSection() {
         <div className="max-w-xl self-center lg:pb-8">
           <p className="eyebrow text-[#7e271e]">The House</p>
           <h1 className="section-title mt-5 max-w-xl text-[#1d1915]">
-            Pieces made to be remembered.
+            Crafted once. Remembered for a lifetime.
           </h1>
           <p className="type-body mt-7 max-w-xl text-[#4d443d]">
             ANURRAKTI is a study in memory, craft and character—where Indian
-            heritage meets a contemporary eye.
+            textile heritage becomes a deeply personal expression.
           </p>
           <div className="mt-12 grid gap-0 border-t border-stone-900/15">
             {craftNotes.map((note, index) => (

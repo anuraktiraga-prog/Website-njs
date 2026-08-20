@@ -26,7 +26,9 @@ export function ReadyToWearReveal() {
           duration={2.4}
           className="mx-auto max-w-2xl"
         />
-        <p className="mt-8 text-xs uppercase tracking-[0.2em] text-stone-600">Stay tuned</p>
+        <p className="mt-8 text-xs uppercase tracking-[0.2em] text-stone-600">
+          Crafted for the everyday / Coming soon
+        </p>
       </div>
     </section>
   );
