@@ -10,6 +10,7 @@ import { InstagramIcon, WhatsAppIcon } from "@/components/social-icons";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "The House", href: "/house" },
+  { label: "Blog", href: "/blogs" },
   { label: "Ready to Wear", href: "/ready-to-wear" },
   { label: "Gift Concierge", href: "/gift-concierge" },
   { label: "Enquire", href: "/#viewing" },
@@ -95,7 +96,7 @@ export function SiteHeader() {
       </div>
 
       <nav className="hidden border-t border-stone-900/10 lg:block" aria-label="Primary navigation">
-        <ul className="mx-auto flex h-11 max-w-4xl items-center justify-center gap-8 type-nav font-medium">
+        <ul className="mx-auto flex h-11 max-w-5xl items-center justify-center gap-8 type-nav font-medium">
           {navItems.slice(0, 1).map((item) => (
             <li key={item.href}><Link className="transition-colors hover:text-[#7e271e]" href={item.href}>{item.label}</Link></li>
           ))}

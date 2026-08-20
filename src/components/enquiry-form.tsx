@@ -6,8 +6,7 @@ import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/analytics";
 
-export const GOOGLE_SHEETS_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbzxlncpCkQhIwLSlZkIgS1ZI-siqMtWeSjtDvQ9xgqa-I8JTZp-oomh6atD-rgJcO08/exec";
+const ENQUIRY_ENDPOINT = "/api/enquiry";
 
 export function EnquiryForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -19,16 +18,17 @@ export function EnquiryForm() {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    // The Apps Script endpoint accepts a standard form body. `no-cors` avoids
-    // a browser preflight request while the submission is recorded in Sheets.
     setStatus("sending");
-    void fetch(GOOGLE_SHEETS_ENDPOINT, {
+    void fetch(ENQUIRY_ENDPOINT, {
       method: "POST",
-      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
       body: new URLSearchParams(
         Array.from(formData.entries()).map(([key, value]) => [key, String(value)]),
       ),
-    }).then(() => {
+    }).then((response) => {
+      if (!response.ok) throw new Error("Enquiry submission failed");
       form.reset();
       setStatus("sent");
       trackEvent("enquiry_completion");

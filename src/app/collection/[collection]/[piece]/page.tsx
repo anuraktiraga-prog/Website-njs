@@ -9,10 +9,10 @@ import {
   campaignImages,
   collectionPath,
   collections,
-  contactLinks,
   getCollection,
   getCollectionPiece,
   productPath,
+  whatsappPath,
 } from "@/lib/collection";
 
 type ProductPageProps = {
@@ -73,9 +73,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   } as const;
   const detailImages = piece.detailImageMetadata ?? [];
   const productUrl = `https://www.anurrakti.com${productPath(piece)}`;
-  const enquiryText = encodeURIComponent(
-    `Hello ANURRAKTI, I would like to enquire about ${piece.collectionName} ${piece.title}.\n\nProduct link: ${productUrl}`,
-  );
+  const enquiryText = `Hello ANURRAKTI, I would like to enquire about ${piece.collectionName} ${piece.title}.\n\nProduct link: ${productUrl}`;
   const galleryViews: ProductGalleryView[] = [
     {
       src: piece.src,
@@ -108,22 +106,57 @@ export default async function ProductPage({ params }: ProductPageProps) {
     .filter((related) => related.slug !== piece.slug)
     .slice(0, 3);
 
-  const productStructuredData = {
+  const pageStructuredData = {
     "@context": "https://schema.org",
-    "@type": "Product",
-    name: `${piece.collectionName} ${piece.title}`,
-    description: piece.description.join(" "),
-    image: [piece.src, ...detailImages.map((image) => image.src)].map((src) => `https://www.anurrakti.com${src}`),
-    url: productUrl,
-    brand: { "@type": "Brand", name: "ANURRAKTI" },
-    category: "Saree",
-    color: colours.join(", "),
-    additionalProperty: [
-      { "@type": "PropertyValue", name: "Collection", value: piece.collectionName },
-      { "@type": "PropertyValue", name: "Garment type", value: "Saree" },
-      ...(details?.oneOfOne
-        ? [{ "@type": "PropertyValue", name: "Edition", value: "One of one" }]
-        : []),
+    "@graph": [
+      {
+        "@type": "ItemPage",
+        "@id": `${productUrl}#webpage`,
+        url: productUrl,
+        name: `${piece.collectionName} ${piece.title} | ANURRAKTI`,
+        description: piece.description.join(" "),
+        image: [piece.src, ...detailImages.map((image) => image.src)].map((src) => `https://www.anurrakti.com${src}`),
+        isPartOf: {
+          "@type": "WebSite",
+          name: "ANURRAKTI",
+          url: "https://www.anurrakti.com",
+        },
+        about: {
+          "@type": "Thing",
+          name: `${piece.collectionName} ${piece.title}`,
+          description: piece.note,
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${productUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://www.anurrakti.com",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Collections",
+            item: "https://www.anurrakti.com/collection",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: collection.name,
+            item: `https://www.anurrakti.com${collectionPath(collection)}`,
+          },
+          {
+            "@type": "ListItem",
+            position: 4,
+            name: `${piece.collectionName} ${piece.title}`,
+            item: productUrl,
+          },
+        ],
+      },
     ],
   };
 
@@ -132,7 +165,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <SiteHeader />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(productStructuredData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageStructuredData) }}
       />
       <main className="mx-auto w-full max-w-[90rem] px-5 pb-12 pt-6 sm:px-8 lg:px-10 lg:pb-8">
         <Link
@@ -183,7 +216,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               eventName="product_enquiry_start"
               eventProperties={{ product: `${piece.collectionName} ${piece.title}` }}
               additionalEvents={[{ name: "whatsapp_click", properties: { placement: "product" } }]}
-              href={`${contactLinks.whatsappPrimary.split("?")[0]}?text=${enquiryText}`}
+              href={whatsappPath(enquiryText)}
               target="_blank"
               rel="noreferrer"
               className="mt-5 inline-flex w-full items-center justify-center bg-[#7e271e] px-6 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-[#f7f1e8] transition-colors hover:bg-stone-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"

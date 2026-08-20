@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 export const metadata = {
   title: "The House",
   description: "The story and point of view behind ANURRAKTI.",
+  alternates: { canonical: "/house" },
 };
 
 export default function HousePage() {

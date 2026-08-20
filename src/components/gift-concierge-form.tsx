@@ -4,10 +4,10 @@ import { FormEvent, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { GOOGLE_SHEETS_ENDPOINT } from "@/components/enquiry-form";
 import { trackEvent } from "@/lib/analytics";
 
 type Status = "idle" | "sending" | "sent" | "error";
+const ENQUIRY_ENDPOINT = "/api/enquiry";
 
 export function GiftConciergeForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -28,9 +28,11 @@ export function GiftConciergeForm() {
     ].join("\n");
 
     setStatus("sending");
-    void fetch(GOOGLE_SHEETS_ENDPOINT, {
+    void fetch(ENQUIRY_ENDPOINT, {
       method: "POST",
-      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
       body: new URLSearchParams({
         name: String(data.get("name") || ""),
         phone: String(data.get("phone") || ""),
@@ -38,7 +40,8 @@ export function GiftConciergeForm() {
         product: "Gift Concierge",
         message,
       }),
-    }).then(() => {
+    }).then((response) => {
+      if (!response.ok) throw new Error("Gift concierge submission failed");
       form.reset();
       setStatus("sent");
       trackEvent("gift_concierge_completion");

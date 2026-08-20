@@ -1,0 +1,21 @@
+# ANURRAKTI
+
+> ANURRAKTI is an Indian fashion house creating singular clothing through textile, emotion and considered design.
+
+Site: https://www.anurrakti.com
+Sitemap: https://www.anurrakti.com/sitemap.xml
+
+## Key pages
+
+- [Home](https://www.anurrakti.com/): The ANURRAKTI world, campaign imagery, collection entry points and private enquiry.
+- [Collections](https://www.anurrakti.com/collection): EHSAAS and RAGA collection entry point.
+- [EHSAAS](https://www.anurrakti.com/collection/ehsaas): The EHSAAS saree collection.
+- [RAGA](https://www.anurrakti.com/collection/raga): The RAGA saree collection.
+- [The House](https://www.anurrakti.com/house): Brand point of view and craft language.
+- [Gift Concierge](https://www.anurrakti.com/gift-concierge): Private gifting enquiry.
+- [Ready to Wear](https://www.anurrakti.com/ready-to-wear): Forthcoming ready-to-wear expression.
+- [Privacy](https://www.anurrakti.com/privacy): Privacy information.
+
+## Contact
+
+Private enquiry is available through WhatsApp and Instagram from the website header and enquiry sections.

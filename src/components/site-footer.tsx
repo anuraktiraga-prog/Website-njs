@@ -8,6 +8,9 @@ export function SiteFooter() {
           ANURRAKTI
         </p>
         <div className="flex flex-wrap gap-x-6 gap-y-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-600">
+          <Link href="/blogs" className="transition-colors hover:text-[#7e271e]">
+            Blog
+          </Link>
           <Link href="/privacy" className="transition-colors hover:text-[#7e271e]">
             Privacy policy
           </Link>

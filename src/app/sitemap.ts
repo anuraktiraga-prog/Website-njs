@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { blogPath, blogPosts } from "@/lib/blog";
 import { collectionImages, collectionPath, collections, productPath } from "@/lib/collection";
 
 const siteUrl = "https://www.anurrakti.com";
@@ -8,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const pages: MetadataRoute.Sitemap = [
     { url: siteUrl, lastModified: now, changeFrequency: "monthly", priority: 1 },
     { url: `${siteUrl}/collection`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${siteUrl}/blogs`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${siteUrl}/house`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${siteUrl}/ready-to-wear`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${siteUrl}/gift-concierge`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
@@ -27,6 +29,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.8,
+    })),
+    ...blogPosts.map((post) => ({
+      url: `${siteUrl}${blogPath(post)}`,
+      lastModified: new Date(post.updatedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+      images: [`${siteUrl}${post.hero.src}`],
     })),
   ];
 }

@@ -75,11 +75,16 @@ export function productPath(piece: CollectionPiece) {
   return `/collection/${piece.collectionId}/${piece.slug}`;
 }
 
+export const defaultWhatsAppMessage =
+  "Hello ANURRAKTI, I would like to enquire about the collection.";
+
+export function whatsappPath(message = defaultWhatsAppMessage, phone = "918800219663") {
+  return `/whatsapp?phone=${encodeURIComponent(phone)}&text=${encodeURIComponent(message)}`;
+}
+
 export const contactLinks = {
-  whatsappPrimary:
-    "https://wa.me/918800219663?text=Hello%20ANURRAKTI%2C%20I%20would%20like%20to%20enquire%20about%20the%20collection.",
-  whatsappSecondary:
-    "https://wa.me/919958704890?text=Hello%20ANURRAKTI%2C%20I%20would%20like%20to%20enquire%20about%20the%20collection.",
+  whatsappPrimary: whatsappPath(),
+  whatsappSecondary: whatsappPath(defaultWhatsAppMessage, "919958704890"),
   call: "tel:+919958704890",
   instagram: "https://www.instagram.com/anurrakti/",
 };

@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "Privacy information for visitors to the ANURRAKTI website.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {
