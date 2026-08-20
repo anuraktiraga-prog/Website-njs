@@ -8,6 +8,12 @@ import { campaignImages } from "@/lib/collection";
 import { GyroDepth } from "@/components/experimental/gyro-depth";
 import { trackEvent } from "@/lib/analytics";
 
+declare global {
+  interface Window {
+    __anurraktiHeroRevealStarted?: boolean;
+  }
+}
+
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isImageReady, setIsImageReady] = useState(false);
@@ -32,7 +38,11 @@ export function HeroSection() {
 
   useEffect(() => {
     if (!isImageReady) return;
-    const revealTimer = window.setTimeout(() => setIsContentVisible(true), 500);
+    const revealTimer = window.setTimeout(() => {
+      window.__anurraktiHeroRevealStarted = true;
+      window.dispatchEvent(new Event("anurrakti:hero-reveal-start"));
+      setIsContentVisible(true);
+    }, 500);
     return () => window.clearTimeout(revealTimer);
   }, [isImageReady]);
 
