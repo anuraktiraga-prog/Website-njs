@@ -33,7 +33,7 @@ export default function GiftConciergePage() {
         <section className="section-shell py-14 sm:py-20" aria-labelledby="gift-next-step">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div><p className="eyebrow">Continue exploring</p><h2 id="gift-next-step" className="type-subheading mt-3 font-serif text-stone-950">Discover something singular.</h2></div>
-            <Link href="/collection" className="btn-secondary">Explore EHSAAS</Link>
+            <Link href="/collection" className="btn-secondary">Explore collections</Link>
           </div>
         </section>
       </main>

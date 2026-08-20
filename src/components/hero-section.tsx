@@ -52,10 +52,10 @@ export function HeroSection() {
   }
 
   return (
-    <section ref={sectionRef} id="top" className="relative min-h-[clamp(42rem,116svh,72rem)] bg-stone-950 text-stone-50" onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
+    <section ref={sectionRef} id="top" className="relative -mt-px min-h-[100svh] overflow-hidden bg-stone-950 text-stone-50" onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
       <GyroDepth className="sticky top-0 min-h-[100svh] overflow-hidden">
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-          <motion.div className="absolute -inset-8" style={{ x: imageX, y: imageY, scale: backdropScale }}>
+          <motion.div className="absolute -inset-12" style={{ x: imageX, y: imageY, scale: backdropScale }}>
             <Image
               src={heroImage.src}
               alt=""
@@ -67,21 +67,22 @@ export function HeroSection() {
               onLoad={() => setIsImageReady(true)}
               className="h-full w-full object-cover object-[52%_28%]"
             />
+            <video
+              className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[52%_28%] opacity-[0.28] mix-blend-screen"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              poster={heroImage.src}
+              onLoadedData={() => setIsImageReady(true)}
+              aria-hidden="true"
+            >
+              <source src="/videos/house-drape-study.mp4" type="video/mp4" />
+            </video>
           </motion.div>
-          <video
-            className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.28] mix-blend-screen"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster={heroImage.src}
-            aria-hidden="true"
-          >
-            <source src="/videos/house-drape-study.mp4" type="video/mp4" />
-          </video>
           <div className="absolute inset-0 bg-stone-950/35" />
-          <div className="absolute inset-y-0 left-0 w-2/3 bg-stone-950/25" />
+          <div className="absolute inset-0 bg-gradient-to-r from-stone-950/45 via-stone-950/25 to-transparent" />
         </div>
 
         <motion.div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-5 pb-[calc(2.5rem+env(safe-area-inset-bottom))] pt-28 sm:px-8 lg:pb-14" style={{ opacity: contentOpacity, x: contentX, y: contentY }}>
@@ -100,7 +101,7 @@ export function HeroSection() {
               transition={{ duration: 1.35, delay: isContentVisible ? 0.12 : 0, ease: [0.22, 1, 0.36, 1] }}
               className="type-page-title max-w-2xl font-serif text-[#fff5df]"
             >
-              Wear what cannot be repeated.
+              Wear What Cannot be Replicated.
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 16 }}

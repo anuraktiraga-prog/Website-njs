@@ -13,7 +13,13 @@ export type ProductGalleryView = {
   imageViewType?: "product" | "detail";
 };
 
-export function ProductGallery({ views }: { views: ProductGalleryView[] }) {
+export function ProductGallery({
+  views,
+  desktopClassName = "",
+}: {
+  views: ProductGalleryView[];
+  desktopClassName?: string;
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -68,10 +74,10 @@ export function ProductGallery({ views }: { views: ProductGalleryView[] }) {
             key={view.label}
             type="button"
             onClick={() => openLightbox(index)}
-            className="group relative aspect-[4/5] w-full shrink-0 snap-center cursor-zoom-in overflow-hidden bg-stone-200 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+            className="group relative aspect-[4/5] w-full shrink-0 snap-center cursor-zoom-in overflow-hidden bg-transparent text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
             aria-label={`Open ${view.label} in full screen`}
           >
-            <Image src={view.src} alt={view.alt} fill sizes="100vw" preload={index === 0} className={`${view.fit === "contain" ? "object-contain" : "object-cover"} transition-transform duration-700 ease-out motion-reduce:transition-none group-hover:scale-[1.025]`} style={{ objectPosition: view.position }} />
+            <Image src={view.src} alt={view.alt} fill sizes="100vw" preload={index === 0} className={`${view.fit === "contain" ? "object-contain" : "object-cover group-hover:scale-[1.025]"} transition-transform duration-700 ease-out motion-reduce:transition-none`} style={{ objectPosition: view.position }} />
             <span className="pointer-events-none absolute inset-x-3 bottom-3 translate-y-2 bg-stone-950/75 px-3 py-2 text-center text-[0.65rem] uppercase tracking-[0.18em] text-[#fff5df] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none">Open full image</span>
           </button>
         ))}
@@ -83,19 +89,33 @@ export function ProductGallery({ views }: { views: ProductGalleryView[] }) {
         ))}
       </div>
 
-      <div className="hidden gap-4 sm:grid sm:grid-cols-[minmax(0,1.9fr)_minmax(11rem,1fr)] sm:grid-rows-3 sm:aspect-[4/5]">
-        {views.slice(0, 4).map((view, index) => (
+      <div className={`hidden gap-6 sm:flex sm:h-[min(68svh,42rem)] sm:items-stretch ${desktopClassName}`}>
+        {views.slice(0, 1).map((view, index) => (
           <button
             key={view.label}
             type="button"
             onClick={() => openLightbox(index)}
-            className={`group relative min-h-0 cursor-zoom-in overflow-hidden bg-stone-200 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e] ${index === 0 ? "sm:row-span-3" : ""}`}
+            className="group relative h-full aspect-[4/5] cursor-zoom-in overflow-hidden bg-transparent text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
             aria-label={`Open ${view.label} in full screen`}
           >
-            <Image src={view.src} alt={view.alt} fill sizes="(max-width: 1023px) 50vw, 40vw" preload={index === 0} className={`${view.fit === "contain" ? "object-contain" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.035] motion-reduce:transition-none`} style={{ objectPosition: view.position }} />
+            <Image src={view.src} alt={view.alt} fill sizes="(max-width: 1023px) 50vw, 40vw" preload={index === 0} className={`${view.fit === "contain" ? "object-contain" : "object-cover group-hover:scale-[1.035]"} transition-transform duration-700 ease-out motion-reduce:transition-none`} style={{ objectPosition: view.position }} />
             <span className="pointer-events-none absolute inset-x-4 bottom-4 translate-y-2 bg-stone-950/75 px-3 py-2 text-center text-[0.65rem] uppercase tracking-[0.18em] text-[#fff5df] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none">Open full image</span>
           </button>
         ))}
+        <div className="flex h-full flex-col gap-6">
+          {views.slice(1, 4).map((view, index) => (
+            <button
+              key={view.label}
+              type="button"
+              onClick={() => openLightbox(index + 1)}
+              className="group relative aspect-[4/5] h-[calc((100%-3rem)/3)] cursor-zoom-in overflow-hidden bg-transparent text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+              aria-label={`Open ${view.label} in full screen`}
+            >
+              <Image src={view.src} alt={view.alt} fill sizes="(max-width: 1023px) 28vw, 14vw" className={`${view.fit === "contain" ? "object-contain" : "object-cover group-hover:scale-[1.035]"} transition-transform duration-700 ease-out motion-reduce:transition-none`} style={{ objectPosition: view.position }} />
+              <span className="pointer-events-none absolute inset-x-4 bottom-4 translate-y-2 bg-stone-950/75 px-3 py-2 text-center text-[0.65rem] uppercase tracking-[0.18em] text-[#fff5df] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none">Open full image</span>
+            </button>
+          ))}
+        </div>
       </div>
 
       {lightboxIndex !== null ? (

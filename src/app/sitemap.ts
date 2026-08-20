@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { collectionImages, collectionSlug } from "@/lib/collection";
+import { collectionImages, collectionPath, collections, productPath } from "@/lib/collection";
 
 const siteUrl = "https://www.anurrakti.com";
 
@@ -16,8 +16,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...pages,
+    ...collections.map((collection) => ({
+      url: `${siteUrl}${collectionPath(collection)}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+    })),
     ...collectionImages.map((piece) => ({
-      url: `${siteUrl}/collection/${collectionSlug(piece)}`,
+      url: `${siteUrl}${productPath(piece)}`,
       lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.8,

@@ -1,9 +1,9 @@
 "use client";
 
-import { type PointerEvent, useState } from "react";
+import { type PointerEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ImageFrame } from "@/components/image-frame";
-import { collectionSlug, type CollectionPiece } from "@/lib/collection";
+import { productPath, type CollectionPiece } from "@/lib/collection";
 import { trackEvent } from "@/lib/analytics";
 
 function getDisplayName(title: string) {
@@ -11,11 +11,22 @@ function getDisplayName(title: string) {
   return match ? { number: match[1], name: match[2] } : { number: "", name: title };
 }
 
-export function CollectionCard({ image, index }: { image: CollectionPiece; index: number }) {
+export function CollectionCard({
+  image,
+  index,
+  variant = "archive",
+}: {
+  image: CollectionPiece;
+  index: number;
+  variant?: "archive" | "featured";
+}) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isMobileInView, setIsMobileInView] = useState(false);
+  const cardRef = useRef<HTMLElement | null>(null);
   const isFeatured = index === 0 || index === 3;
   const display = getDisplayName(image.title);
-  const href = `/collection/${collectionSlug(image)}`;
+  const href = productPath(image);
+  const isFeaturedCard = variant === "featured";
 
   const updateTilt = (event: PointerEvent<HTMLElement>) => {
     if (!isFeatured || event.pointerType === "touch") return;
@@ -26,8 +37,28 @@ export function CollectionCard({ image, index }: { image: CollectionPiece; index
     });
   };
 
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card || !("IntersectionObserver" in window)) return;
+
+    const mobileQuery = window.matchMedia("(max-width: 639px)");
+    if (!mobileQuery.matches) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsMobileInView(entry.isIntersecting && entry.intersectionRatio >= 0.5);
+      },
+      { threshold: [0, 0.5, 0.72] },
+    );
+
+    observer.observe(card);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <article
+      ref={cardRef}
       className="group animate-[collection-rise_700ms_ease-out_both] [perspective:1100px]"
       style={{ animationDelay: `${180 + index * 90}ms` }}
       onPointerMove={updateTilt}
@@ -43,28 +74,37 @@ export function CollectionCard({ image, index }: { image: CollectionPiece; index
         className="block rounded-[0.55rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
         style={isFeatured ? { transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` } : undefined}
       >
-        <div className="relative overflow-hidden rounded-[0.55rem] border border-stone-900/10 bg-[#e7dccd] p-2.5 shadow-[0_5px_18px_rgba(61,45,33,0.06)] transition-[background-color,transform,box-shadow] duration-500 ease-out group-hover:-translate-y-1 group-hover:bg-[#f7f0e6] group-hover:shadow-[0_14px_30px_rgba(61,45,33,0.12)] sm:p-3">
-          <div className="overflow-hidden rounded-[0.35rem]">
+        <div className={`relative overflow-hidden border transition-[background-color,transform,box-shadow,opacity] duration-500 ease-out group-hover:-translate-y-1 ${
+          isMobileInView
+            ? "max-sm:-translate-y-1 max-sm:bg-[#fbf6ef] max-sm:opacity-100 max-sm:shadow-[0_16px_34px_rgba(61,45,33,0.14)]"
+            : "max-sm:opacity-72 max-sm:shadow-none"
+        } ${isFeaturedCard ? "rounded-none border-stone-900/15 bg-[#f3eadf] p-2 shadow-[0_8px_24px_rgba(61,45,33,0.05)] group-hover:bg-[#fbf6ef] group-hover:shadow-[0_16px_34px_rgba(61,45,33,0.12)] sm:p-2.5" : "rounded-[0.55rem] border-stone-900/10 bg-[#e7dccd] p-2.5 shadow-[0_5px_18px_rgba(61,45,33,0.06)] group-hover:bg-[#f7f0e6] group-hover:shadow-[0_14px_30px_rgba(61,45,33,0.12)] sm:p-3"}`}>
+          <div className={isFeaturedCard ? "overflow-hidden" : "overflow-hidden rounded-[0.35rem]"}>
             <ImageFrame
               image={image}
-              className="aspect-[4/5]"
+              className={isFeaturedCard ? "aspect-[3/4]" : "aspect-[4/5]"}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              imageClassName="brightness-[0.88] saturate-[0.82] transition-[filter,transform] duration-700 group-hover:brightness-105 group-hover:saturate-110 group-hover:scale-[1.035]"
+              imageClassName={`object-contain transition-[filter] duration-700 group-hover:brightness-105 group-hover:saturate-110 ${
+                isMobileInView
+                  ? "max-sm:brightness-105 max-sm:saturate-110"
+                  : "max-sm:brightness-[0.74] max-sm:saturate-[0.64]"
+              } sm:brightness-[0.88] sm:saturate-[0.82]`}
+              noBleed
             />
           </div>
 
-          <div className="relative z-10 px-1 pb-1 pt-4 sm:px-2 sm:pt-5">
+          <div className={`relative z-10 px-1 pb-1 pt-4 sm:px-2 sm:pt-5 ${isFeaturedCard ? "sm:pt-6" : ""}`}>
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0">
                 <div className="flex items-baseline gap-3">
                   {display.number ? (
-                    <span className="archive-index text-[#7e271e]">
+                    <span className={`archive-index ${isFeaturedCard ? "text-stone-500" : "text-[#7e271e]"}`}>
                       <span>{display.number}</span>
                       <span className="geometry-line" aria-hidden="true" />
                     </span>
                   ) : null}
                   {display.name ? (
-                    <h3 className="truncate font-serif text-[clamp(1.15rem,1.8vw,1.5rem)] leading-tight text-stone-950">
+                    <h3 className={`truncate font-serif leading-tight text-stone-950 ${isFeaturedCard ? "text-[clamp(1.05rem,1.5vw,1.3rem)]" : "text-[clamp(1.15rem,1.8vw,1.5rem)]"}`}>
                       {display.name}
                     </h3>
                   ) : null}
@@ -73,7 +113,7 @@ export function CollectionCard({ image, index }: { image: CollectionPiece; index
               </div>
             </div>
 
-            <div className="mt-4 flex items-center justify-between border-t border-stone-900/10 pt-3 text-[0.66rem] font-medium uppercase tracking-[0.18em] text-[#7e271e]">
+            <div className={`mt-4 flex items-center justify-between border-t pt-3 text-[0.66rem] font-medium uppercase tracking-[0.18em] ${isFeaturedCard ? "border-stone-900/15 text-stone-600" : "border-stone-900/10 text-[#7e271e]"}`}>
               <span>View piece</span>
               <span aria-hidden="true" className="text-base leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
             </div>

@@ -69,6 +69,7 @@ export function EnquiryForm() {
           <select id="enquiry-product" name="product" defaultValue="Private enquiry" className="enquiry-field bg-[#f9f5ef] text-[#1d1915]">
             <option>Private enquiry</option>
             <option>EHSAAS collection</option>
+            <option>RAGA collection</option>
             <option>Custom enquiry</option>
             <option>Other</option>
           </select>

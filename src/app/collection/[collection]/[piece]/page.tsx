@@ -2,45 +2,54 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ProductGallery, type ProductGalleryView } from "@/components/product-gallery";
 import { AnalyticsLink } from "@/components/analytics-link";
+import { ProductGallery, type ProductGalleryView } from "@/components/product-gallery";
 import { SiteHeader } from "@/components/site-header";
 import {
   campaignImages,
-  collectionImages,
-  collectionSlug,
+  collectionPath,
+  collections,
   contactLinks,
+  getCollection,
   getCollectionPiece,
+  productPath,
 } from "@/lib/collection";
 
 type ProductPageProps = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ collection: string; piece: string }>;
 };
 
 export function generateStaticParams() {
-  return collectionImages.map((piece) => ({ slug: collectionSlug(piece) }));
+  return collections.flatMap((collection) =>
+    collection.pieces.map((piece) => ({
+      collection: collection.id,
+      piece: piece.slug,
+    })),
+  );
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const piece = getCollectionPiece(slug);
+  const { collection: collectionId, piece: pieceSlug } = await params;
+  const piece = getCollectionPiece(collectionId, pieceSlug);
 
   if (!piece) return {};
 
+  const url = productPath(piece);
+
   return {
-    title: `${piece.title} | EHSAAS Collection`,
+    title: `${piece.collectionName} ${piece.title} | ANURRAKTI`,
     description: piece.description.join(" "),
-    alternates: { canonical: `/collection/${collectionSlug(piece)}` },
+    alternates: { canonical: url },
     openGraph: {
       type: "website",
-      title: `${piece.title} | EHSAAS Collection | ANURRAKTI`,
+      title: `${piece.collectionName} ${piece.title} | ANURRAKTI`,
       description: piece.description.join(" "),
-      url: `/collection/${collectionSlug(piece)}`,
+      url,
       images: [{ url: piece.src, width: piece.width, height: piece.height, alt: piece.alt }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${piece.title} | EHSAAS Collection | ANURRAKTI`,
+      title: `${piece.collectionName} ${piece.title} | ANURRAKTI`,
       description: piece.description.join(" "),
       images: [piece.src],
     },
@@ -48,10 +57,11 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const { slug } = await params;
-  const piece = getCollectionPiece(slug);
+  const { collection: collectionId, piece: pieceSlug } = await params;
+  const collection = getCollection(collectionId);
+  const piece = getCollectionPiece(collectionId, pieceSlug);
 
-  if (!piece) notFound();
+  if (!collection || !piece) notFound();
 
   const colours = piece.palette.split(" / ");
   const details = piece.productDetails;
@@ -60,24 +70,24 @@ export default async function ProductPage({ params }: ProductPageProps) {
     reserved: "Reserved for private viewing.",
     collected: "This piece has found its home.",
   } as const;
-  const detailImages = piece.detailImageMetadata ?? (piece.detailImages ?? []).map((src, index) => ({
-    src,
-    alt: `${piece.title} textile detail ${index + 1} showing the fabric and surface pattern`,
-    imageViewType: "detail" as const,
-  }));
+  const detailImages = piece.detailImageMetadata ?? [];
   const enquiryText = encodeURIComponent(
-    `Hello ANURRAKTI, I would like to enquire about ${piece.title} from the EHSAAS collection.`,
+    `Hello ANURRAKTI, I would like to enquire about ${piece.collectionName} ${piece.title}.`,
   );
   const galleryViews: ProductGalleryView[] = [
-    { src: piece.src, alt: piece.alt, position: "center", label: "Full drape", imageViewType: "product" },
+    {
+      src: piece.src,
+      alt: piece.alt,
+      position: "center",
+      fit: "contain",
+      label: "Full drape",
+      imageViewType: "product",
+    },
     ...detailImages.map((image, index) => ({
       src: image.src,
       alt: image.alt,
-      // Detail shots are already tightly framed; keep them nearly 1:1 so the
-      // gallery reveals the full textile study instead of magnifying the same
-      // patch across every tile.
-      position: ["center 30%", "left 55%", "right 65%"][index] ?? "center",
-      fit: "cover" as const,
+      position: "center",
+      fit: "contain" as const,
       label: ["Textile detail", "Border detail", "Texture study"][index] ?? `Detail ${index + 1}`,
       imageViewType: image.imageViewType === "material" ? "detail" : image.imageViewType,
     })),
@@ -88,39 +98,31 @@ export default async function ProductPage({ params }: ProductPageProps) {
     ["Material", details?.material],
     ["Construction", details?.construction],
     ["Design work", details?.designWork],
-    ["Border", details?.border],
-    ["Motif", details?.motif],
-    ["Weave", details?.weave],
-    ["Embroidery / print", details?.embroideryOrPrint],
-    ["Pallu", details?.pallu],
     ["Care", details?.care],
     ["Availability", details?.availability],
   ].filter((entry): entry is [string, string] => Boolean(entry[1]));
 
-  const relatedPieces = collectionImages
-    .filter((related) => related.title !== piece.title)
+  const relatedPieces = collection.pieces
+    .filter((related) => related.slug !== piece.slug)
     .slice(0, 3);
 
   const productStructuredData = {
     "@context": "https://schema.org",
     "@type": "Product",
-    name: `${piece.title} — EHSAAS`,
+    name: `${piece.collectionName} ${piece.title}`,
     description: piece.description.join(" "),
     image: [piece.src, ...detailImages.map((image) => image.src)].map((src) => `https://www.anurrakti.com${src}`),
-    url: `https://www.anurrakti.com/collection/${collectionSlug(piece)}`,
+    url: `https://www.anurrakti.com${productPath(piece)}`,
     brand: { "@type": "Brand", name: "ANURRAKTI" },
     category: "Saree",
     color: colours.join(", "),
     additionalProperty: [
-      { "@type": "PropertyValue", name: "Collection", value: "EHSAAS" },
+      { "@type": "PropertyValue", name: "Collection", value: piece.collectionName },
       { "@type": "PropertyValue", name: "Garment type", value: "Saree" },
       ...(details?.oneOfOne
         ? [{ "@type": "PropertyValue", name: "Edition", value: "One of one" }]
         : []),
     ],
-    ...(details?.price && /^\s*[₹\d][\d,]*(?:\.\d+)?\s*$/.test(details.price)
-      ? { offers: { "@type": "Offer", price: details.price.replace(/[^\d.]/g, ""), priceCurrency: "INR", url: `https://www.anurrakti.com/collection/${collectionSlug(piece)}` } }
-      : {}),
   };
 
   return (
@@ -130,63 +132,63 @@ export default async function ProductPage({ params }: ProductPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productStructuredData) }}
       />
-      <main className="section-shell pb-20 pt-8 sm:pt-12">
+      <main className="mx-auto w-full max-w-[90rem] px-5 pb-12 pt-6 sm:px-8 lg:px-10 lg:pb-8">
         <Link
-          href="/collection"
-          className="inline-flex text-xs font-medium uppercase tracking-[0.2em] text-stone-700 transition-opacity hover:opacity-65 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+          href={collectionPath(collection)}
+          className="inline-flex text-[0.68rem] font-medium uppercase tracking-[0.2em] text-stone-700 transition-opacity hover:opacity-65 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
         >
-          <span aria-hidden="true" className="mr-2">←</span> The EHSAAS collection
+          <span aria-hidden="true" className="mr-2">←</span> The {collection.name} collection
         </Link>
 
-        <div className="mt-10 grid min-w-0 gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(20rem,0.8fr)] lg:gap-16">
-          <ProductGallery views={galleryViews} />
+        <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(22rem,0.8fr)] lg:items-start lg:gap-10">
+          <ProductGallery views={galleryViews} desktopClassName="lg:h-[min(58svh,42rem)] lg:aspect-auto" />
 
           <section className="min-w-0 self-start">
-            <p className="eyebrow">EHSAAS / Private enquiry</p>
-            <h1 className="type-display mt-5 max-w-xl font-serif text-stone-950">
+            <p className="eyebrow">{collection.name} / Private enquiry</p>
+            <h1 className="mt-4 max-w-xl font-serif text-[clamp(4.25rem,7.5vw,7rem)] leading-[0.88] tracking-[-0.04em] text-stone-950">
               {piece.title}
             </h1>
-            <p className="mt-6 text-lg italic leading-8 text-stone-700">{piece.note}</p>
-            <p className="mt-7 max-w-xl text-base leading-7 text-stone-700">
+            <p className="mt-5 text-base italic leading-7 text-stone-700">{piece.note}</p>
+            <p className="mt-5 max-w-xl text-[0.95rem] leading-6 text-stone-700">
               {piece.description[0]} {piece.description[1]}
             </p>
 
             {details?.oneOfOne || details?.price ? (
-              <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs uppercase tracking-[0.16em] text-stone-600">
+              <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.68rem] uppercase tracking-[0.16em] text-stone-600">
                 {details.oneOfOne ? <span className="text-[#7e271e]">One of one</span> : null}
                 {details.price ? <span>{details.price}</span> : null}
               </div>
             ) : null}
 
             {piece.status ? (
-              <p className="mt-4 text-sm text-stone-600" role="status">
+              <p className="mt-3 text-sm text-stone-600" role="status">
                 {statusCopy[piece.status]}
               </p>
             ) : null}
 
             {productFacts.length ? (
-              <dl className="mt-10 border-y border-stone-300">
+              <dl className="mt-6 border-y border-stone-300">
                 {productFacts.map(([label, value], index) => (
-                  <div key={label} className={`grid grid-cols-[minmax(7rem,0.7fr)_minmax(0,1.3fr)] gap-4 py-5 text-sm ${index < productFacts.length - 1 ? "border-b border-stone-300" : ""}`}>
-                    <dt className="uppercase tracking-[0.16em] text-stone-500">{label}</dt>
+                  <div key={label} className={`grid grid-cols-[minmax(6.5rem,0.72fr)_minmax(0,1.28fr)] gap-4 py-3 text-[0.82rem] leading-5 ${index < productFacts.length - 1 ? "border-b border-stone-300" : ""}`}>
+                    <dt className="uppercase tracking-[0.14em] text-stone-500">{label}</dt>
                     <dd className="text-stone-800">{value}</dd>
                   </div>
                 ))}
               </dl>
             ) : null}
 
-      <AnalyticsLink
-        eventName="product_enquiry_start"
-        eventProperties={{ product: piece.title }}
-        additionalEvents={[{ name: "whatsapp_click", properties: { placement: "product" } }]}
+            <AnalyticsLink
+              eventName="product_enquiry_start"
+              eventProperties={{ product: `${piece.collectionName} ${piece.title}` }}
+              additionalEvents={[{ name: "whatsapp_click", properties: { placement: "product" } }]}
               href={`${contactLinks.whatsappPrimary.split("?")[0]}?text=${enquiryText}`}
               target="_blank"
               rel="noreferrer"
-              className="mt-9 inline-flex w-full items-center justify-center bg-[#7e271e] px-6 py-4 text-xs font-medium uppercase tracking-[0.2em] text-[#f7f1e8] transition-colors hover:bg-stone-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+              className="mt-5 inline-flex w-full items-center justify-center bg-[#7e271e] px-6 py-3.5 text-xs font-medium uppercase tracking-[0.2em] text-[#f7f1e8] transition-colors hover:bg-stone-950 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
             >
               Enquire about this piece
             </AnalyticsLink>
-            <p className="mt-4 text-center text-xs leading-5 text-stone-500">
+            <p className="mt-3 text-center text-xs leading-5 text-stone-500">
               For availability, material composition and handwork details.
             </p>
           </section>
@@ -196,8 +198,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <section className="section-shell border-t border-stone-300 py-16 sm:py-24" aria-labelledby="editorial-world">
         <div className="flex max-w-2xl flex-col gap-4">
           <p className="eyebrow">The world around the piece</p>
-          <h2 id="editorial-world" className="type-section font-serif text-stone-950">Made to be felt before it is remembered.</h2>
-          <p className="type-body max-w-xl text-stone-700">Campaign imagery is atmospheric; the product photography above shows this piece itself.</p>
+          <h2 id="editorial-world" className="type-section font-serif text-stone-950">
+            Made to be felt before it is remembered.
+          </h2>
+          <p className="type-body max-w-xl text-stone-700">
+            Campaign imagery is atmospheric; the product photography above shows this piece itself.
+          </p>
         </div>
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
           {campaignImages.slice(0, 2).map((image) => (
@@ -211,15 +217,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <section className="section-shell border-t border-stone-300 py-16 sm:py-24" aria-labelledby="related-pieces">
         <div className="flex items-end justify-between gap-6">
           <h2 id="related-pieces" className="type-subheading font-serif text-stone-950">Related pieces</h2>
-          <Link href="/collection" className="type-cta text-stone-700 underline-offset-4 hover:underline">View collection</Link>
+          <Link href={collectionPath(collection)} className="type-cta text-stone-700 underline-offset-4 hover:underline">
+            View {collection.name}
+          </Link>
         </div>
         <div className="mt-8 grid gap-5 sm:grid-cols-3">
           {relatedPieces.map((related) => (
-            <AnalyticsLink key={related.title} href={`/collection/${collectionSlug(related)}`} eventName="related_product_open" eventProperties={{ product: related.title }} className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]">
+            <AnalyticsLink key={related.slug} href={productPath(related)} eventName="related_product_open" eventProperties={{ product: `${related.collectionName} ${related.title}` }} className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]">
               <div className="relative aspect-[4/5] overflow-hidden bg-stone-200">
-                <Image src={related.src} alt={related.alt} fill sizes="(max-width: 639px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03] motion-reduce:transition-none" />
+                <Image src={related.src} alt={related.alt} fill sizes="(max-width: 639px) 100vw, 33vw" className="object-contain transition-transform duration-700 group-hover:scale-[1.02] motion-reduce:transition-none" />
               </div>
-              <p className="mt-3 type-label text-stone-600">{related.title}</p>
+              <p className="mt-3 type-label text-stone-600">{related.collectionName} {related.title}</p>
             </AnalyticsLink>
           ))}
         </div>

@@ -5,6 +5,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { LoadingScreen } from "@/components/loading-screen";
 import { SiteFooter } from "@/components/site-footer";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" data-scroll-behavior="smooth" className={cn("h-full antialiased", "font-sans", geist.variable)}>
       <body className="min-h-full flex flex-col">
+        <LoadingScreen />
         {children}
         <SiteFooter />
         <Script

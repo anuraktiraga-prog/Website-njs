@@ -1,3 +1,5 @@
+export type CollectionId = "ehsaas" | "raga";
+
 export type BrandImage = {
   src: string;
   alt: string;
@@ -7,7 +9,6 @@ export type BrandImage = {
   width: number;
   height: number;
   detailImages?: string[];
-  /** The role this image plays in search, accessibility, and editorial layout. */
   imageViewType?: "product" | "detail" | "campaign" | "material";
   detailImageMetadata?: ProductImage[];
 };
@@ -34,19 +35,44 @@ export type ProductDetails = {
 };
 
 export type CollectionPiece = BrandImage & {
-  collection?: string;
+  collectionId: CollectionId;
+  collectionName: string;
+  collectionNumber: string;
+  slug: string;
   garmentType?: string;
   status?: "available" | "reserved" | "collected";
   description: [string, string];
   productDetails?: ProductDetails;
 };
 
+export type CollectionArchive = {
+  id: CollectionId;
+  name: string;
+  number: string;
+  slug: CollectionId;
+  title: string;
+  note: string;
+  description: string;
+  heroImages: BrandImage[];
+  pieces: CollectionPiece[];
+};
+
+const productSize = {
+  width: 1080,
+  height: 1350,
+};
+
 export function collectionSlug(piece: CollectionPiece) {
-  return piece.title
-    .toLowerCase()
-    .replace(/^\d+\s+/, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
+  return piece.slug;
+}
+
+export function collectionPath(collection: CollectionArchive | CollectionId) {
+  const id = typeof collection === "string" ? collection : collection.id;
+  return `/collection/${id}`;
+}
+
+export function productPath(piece: CollectionPiece) {
+  return `/collection/${piece.collectionId}/${piece.slug}`;
 }
 
 export const contactLinks = {
@@ -101,192 +127,145 @@ export const campaignImages: BrandImage[] = [
   },
 ];
 
-export const collectionImages: CollectionPiece[] = [
-  {
-    src: "/images/collection/final/product-01-full.png",
-    alt: "Black saree with gold motifs and a red brocade border arranged on a sculptural chair",
-    title: "01",
-    note: "The depth of midnight meets the brilliance of vermilion.",
+const paletteByPiece: Record<CollectionId, string[]> = {
+  ehsaas: [
+    "Black / Red / Gold",
+    "Red / Ivory / Teal",
+    "Ivory / Vermilion",
+    "Ivory / Checks",
+    "Black / Rust",
+    "Charcoal / Ivory",
+  ],
+  raga: [
+    "Black / Red / Gold",
+    "Ivory / Vermilion",
+    "Midnight / Gold",
+    "Ivory / Rose",
+    "Graphite / Red",
+    "Ivory / Black",
+  ],
+};
+
+const notesByPiece: Record<CollectionId, string[]> = {
+  ehsaas: [
+    "The depth of midnight meets the brilliance of vermilion.",
+    "A vivid story of colour, movement and memory.",
+    "A canvas of stories, framed in vermilion.",
+    "A quiet study in ivory, colour and line.",
+    "Shadowed cloth, warmed by illustration.",
+    "A pale canvas touched by quiet ornament.",
+  ],
+  raga: [
+    "A darker note, composed for evening.",
+    "A rhythm of illustration and vermilion.",
+    "Colour held with ceremony and restraint.",
+    "An ivory expression softened by gesture.",
+    "A grounded drape with archival character.",
+    "Line, shadow and textile in conversation.",
+  ],
+};
+
+function makePiece(collectionId: CollectionId, index: number): CollectionPiece {
+  const number = String(index).padStart(2, "0");
+  const collectionName = collectionId === "ehsaas" ? "EHSAAS" : "RAGA";
+  const collectionNumber = collectionId === "ehsaas" ? "01" : "02";
+  const basePath = `/images/collection/${collectionId}/${number}`;
+
+  return {
+    src: `${basePath}/main.png`,
+    alt: `${collectionName} ${number} saree shown as a complete product image`,
+    title: number,
+    note: notesByPiece[collectionId][index - 1],
     description: [
-      "A dark expression framed with red and antique gold.",
-      "Created for evenings that ask for stillness and presence.",
+      `${collectionName} ${number} is presented as an edited textile study, allowing the full drape to remain visible.`,
+      "Detail images reveal the surface, border and movement without cropping the finished composition.",
     ],
-    palette: "Black / Red / Gold",
-    width: 1465,
-    height: 2200,
-    detailImages: [
-      "/images/collection/ehsaas-details/01-detail-6943.png",
-      "/images/collection/ehsaas-details/01-detail-6939.png",
-      "/images/collection/ehsaas-details/01-artboard12.png",
-    ],
+    palette: paletteByPiece[collectionId][index - 1],
+    width: productSize.width,
+    height: productSize.height,
+    collectionId,
+    collectionName,
+    collectionNumber,
+    slug: number,
+    garmentType: "Saree",
+    status: "available",
+    imageViewType: "product",
+    detailImageMetadata: [1, 2, 3].map((detailIndex) => ({
+      src: `${basePath}/detail-${detailIndex}.png`,
+      alt: `${collectionName} ${number} detail ${detailIndex} showing the textile surface and drape`,
+      imageViewType: "detail" as const,
+    })),
+    productDetails: {
+      oneOfOne: true,
+      material: "Available on enquiry",
+      construction: "Saree",
+      designWork: "Surface, border and drape study",
+      care: "Dry clean only",
+      availability: "Private enquiry",
+    },
+  };
+}
+
+export const ehsaasCollection: CollectionPiece[] = [1, 2, 3, 4, 5, 6].map((index) =>
+  makePiece("ehsaas", index),
+);
+
+export const ragaCollection: CollectionPiece[] = [1, 2, 3, 4, 5, 6].map((index) =>
+  makePiece("raga", index),
+);
+
+function makeHeroImages(pieces: CollectionPiece[]): BrandImage[] {
+  return pieces.flatMap((piece) =>
+    (piece.detailImageMetadata ?? []).map((image, index) => ({
+      src: image.src,
+      alt: image.alt,
+      title: `${piece.collectionName} ${piece.title} Detail ${index + 1}`,
+      note: piece.note,
+      palette: piece.palette,
+      width: productSize.width,
+      height: productSize.height,
+      imageViewType: "detail" as const,
+    })),
+  );
+}
+
+export const collections: CollectionArchive[] = [
+  {
+    id: "ehsaas",
+    slug: "ehsaas",
+    name: "EHSAAS",
+    number: "01",
+    title: "EHSAAS",
+    note: "An ode to emotion, artistry and the enduring beauty of the saree.",
+    description:
+      "EHSAAS brings together colour, illustration and drape in six singular expressions from the House of ANURRAKTI.",
+    heroImages: makeHeroImages(ehsaasCollection),
+    pieces: ehsaasCollection,
   },
   {
-    src: "/images/collection/final/product-02-full.png",
-    alt: "Red saree with an illustrated animal panel arranged on a sculptural chair",
-    title: "02",
-    note: "A vivid story of colour, movement and memory.",
-    description: [
-      "Illustrated figures unfold across a warm red ground with a playful, hand-drawn spirit.",
-      "A joyful drape composed for movement, conversation and celebration.",
-    ],
-    palette: "Red / Ivory / Teal",
-    width: 1465,
-    height: 2200,
-    detailImages: [
-      "/images/collection/ehsaas-details/02-detail-6924.png",
-      "/images/collection/ehsaas-details/02-detail-6926-clean.png",
-      "/images/collection/ehsaas-details/02-detail-6939.png",
-    ],
-  },
-  {
-    src: "/images/collection/final/product-3.png",
-    alt: "Ivory saree with illustrated writing and a rust ruffle border",
-    title: "03",
-    note: "A canvas of stories, framed in vermilion.",
-    description: [
-      "Illustrated forms unfold across ivory, each carrying its own character.",
-      "The vermilion border holds the composition with warmth and memory.",
-    ],
-    palette: "Ivory / Red / Navy",
-    width: 1465,
-    height: 2200,
-  },
-  {
-    src: "/images/collection/final/product-4.png",
-    alt: "Ivory saree with a multicolour checked border on a sculptural chair",
-    title: "04",
-    note: "A quiet drape held by gold and shadow.",
-    description: [
-      "A graphite body lets the border carry the visual rhythm.",
-      "Restrained, enduring and composed with a ceremonial edge.",
-    ],
-    palette: "Grey / Red / Gold",
-    width: 1465,
-    height: 2200,
-  },
-  {
-    src: "/images/collection/final/product-5.png",
-    alt: "Black saree with a rust illustrated panel on a sculptural chair",
-    title: "05",
-    note: "A golden expression with a softened festive pulse.",
-    description: [
-      "Warm colour gathers around the drape with an archival sensibility.",
-      "Made for moments that call for light without excess.",
-    ],
-    palette: "Gold / Ivory",
-    width: 2200,
-    height: 2200,
-  },
-  {
-    src: "/images/collection/final/product-6.png",
-    alt: "Charcoal and white saree with illustrated writing and tassels",
-    title: "06",
-    note: "A pale canvas touched by quiet ornament.",
-    description: [
-      "Soft tones allow the border and fall to speak with restraint.",
-      "An expression of clarity, grace and considered craft.",
-    ],
-    palette: "Ivory / Silver",
-    width: 2200,
-    height: 2200,
-  },
-  {
-    src: "/images/collection/final/product-7.png",
-    alt: "Red saree with a hand-drawn animal panel and ruffled border",
-    title: "07 MEHR",
-    note: "Colour gathered with affection and ease.",
-    description: [
-      "A piece shaped by warmth, movement and a gentle festive spirit.",
-      "The drape carries softness while the border gives it form.",
-    ],
-    palette: "Rose / Gold",
-    width: 2200,
-    height: 2200,
-  },
-  {
-    src: "/images/collection/final/product-8.png",
-    alt: "Ivory saree with red and navy animal motifs and a striped border",
-    title: "08 RASA",
-    note: "A darker note, composed for evening.",
-    description: [
-      "Shadowed tones create a grounded expression of ceremony.",
-      "Its detail is quiet at first, then slowly becomes the story.",
-    ],
-    palette: "Black / Gold",
-    width: 2200,
-    height: 2200,
-  },
-  {
-    src: "/images/collection/final/product-9.png",
-    alt: "Black saree with gold motifs and a red brocade border",
-    title: "09 NOOR",
-    note: "Light held gently across the textile.",
-    description: [
-      "A luminous drape designed around softness and air.",
-      "Its beauty sits between simplicity and ornament.",
-    ],
-    palette: "Ivory / Blush",
-    width: 2200,
-    height: 2200,
-  },
-  {
-    src: "/images/collection/final/product-10.png",
-    alt: "Grey saree with a checked fall and black and gold border",
-    title: "10 REKHA",
-    note: "Line, rhythm and border in conversation.",
-    description: [
-      "A graphic expression where structure becomes elegance.",
-      "The saree carries a contemporary eye without losing its rootedness.",
-    ],
-    palette: "Grey / Gold",
-    width: 2200,
-    height: 2200,
-  },
-  {
-    src: "/images/collection/final/product-11.png",
-    alt: "Ivory saree with fine linear woven stripes",
-    title: "11 MEHFIL",
-    note: "Made for rooms filled with memory.",
-    description: [
-      "A celebratory drape with colour held in measured balance.",
-      "Its character is expressive, but never loud.",
-    ],
-    palette: "Red / Gold",
-    width: 2200,
-    height: 2200,
-  },
-  {
-    src: "/images/collection/final/product-12.png",
-    alt: "Bright red saree with a gold embellished border",
-    title: "12 ANGANA",
-    note: "An intimate expression of home and occasion.",
-    description: [
-      "Colour and craft meet with the warmth of familiar spaces.",
-      "A drape that feels personal before it feels formal.",
-    ],
-    palette: "Earth / Vermilion",
-    width: 2200,
-    height: 2200,
-  },
-  {
-    src: "/images/collection/final/product-13.png",
-    alt: "Coral and grey saree with a patterned gold border",
-    title: "13 SONA",
-    note: "A gold-lit study in textile and gesture.",
-    description: [
-      "This piece carries ornament through tone rather than excess.",
-      "Created to feel enduring, luminous and collected.",
-    ],
-    palette: "Gold / Ochre",
-    width: 2200,
-    height: 2200,
+    id: "raga",
+    slug: "raga",
+    name: "RAGA",
+    number: "02",
+    title: "RAGA",
+    note: "A quieter rhythm of textile, shadow and ceremonial colour.",
+    description:
+      "RAGA extends the ANURRAKTI language through six considered drapes, each composed around movement and memory.",
+    heroImages: makeHeroImages(ragaCollection),
+    pieces: ragaCollection,
   },
 ];
 
-export const ehsaasCollection = collectionImages.slice(0, 6);
+export const collectionImages: CollectionPiece[] = collections.flatMap(
+  (collection) => collection.pieces,
+);
 
-export function getCollectionPiece(slug: string) {
-  return collectionImages.find((piece) => collectionSlug(piece) === slug);
+export function getCollection(collectionId: string) {
+  return collections.find((collection) => collection.id === collectionId);
+}
+
+export function getCollectionPiece(collectionId: string, pieceSlug: string) {
+  return getCollection(collectionId)?.pieces.find((piece) => piece.slug === pieceSlug);
 }
 
 // The House section intentionally features only polished campaign photography.

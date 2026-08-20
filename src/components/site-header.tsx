@@ -4,16 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { trackEvent } from "@/lib/analytics";
+import { contactLinks } from "@/lib/collection";
+import { InstagramIcon, WhatsAppIcon } from "@/components/social-icons";
 
 const navItems = [
   { label: "Home", href: "/" },
   { label: "The House", href: "/house" },
+  { label: "Ready to Wear", href: "/ready-to-wear" },
   { label: "Gift Concierge", href: "/gift-concierge" },
   { label: "Enquire", href: "/#viewing" },
 ];
 
 const collectionItems = [
-  { label: "EHSAAS", description: "The inaugural saree collection", href: "/collection" },
+  { label: "EHSAAS", description: "The inaugural saree collection", href: "/collection/ehsaas" },
+  { label: "RAGA", description: "The second expression", href: "/collection/raga" },
 ];
 
 export function SiteHeader() {
@@ -21,9 +25,9 @@ export function SiteHeader() {
   const [isCollectionOpen, setIsCollectionOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-stone-900/10 bg-[#f6f0e7] text-[#1d1915]">
+    <header className="sticky top-0 z-50 bg-[#f6f0e7] text-[#1d1915]">
       <div className="bg-[#7e271e] px-4 py-1.5 text-center text-[10px] font-semibold uppercase tracking-[0.16em] text-[#fff7ec] sm:text-[11px]">
-        Discover the first ANURRAKTI expression — EHSAAS
+        Discover the ANURRAKTI collections
         <Link className="ml-3 underline underline-offset-4" href="/collection">
           Explore
         </Link>
@@ -44,25 +48,50 @@ export function SiteHeader() {
             alt="ANURRAKTI"
             width={1206}
             height={890}
-            className="h-8 w-auto object-contain sm:h-9"
+            className="h-[4rem] w-auto object-contain sm:h-[4.35rem]"
           />
         </Link>
 
-        <button
-          type="button"
-          className="ml-auto inline-flex h-10 w-10 items-center justify-center lg:hidden"
-          aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-          aria-expanded={isMenuOpen}
-          aria-controls="mobile-navigation"
-          onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
-        >
-          <span className="sr-only">Menu</span>
-          <span className="grid gap-1.5" aria-hidden="true">
-            <span className={`h-px w-6 bg-[#1d1915] transition-transform ${isMenuOpen ? "translate-y-[7px] rotate-45" : ""}`} />
-            <span className={`h-px w-6 bg-[#1d1915] transition-opacity ${isMenuOpen ? "opacity-0" : ""}`} />
-            <span className={`h-px w-6 bg-[#1d1915] transition-transform ${isMenuOpen ? "-translate-y-[7px] -rotate-45" : ""}`} />
-          </span>
-        </button>
+        <div className="ml-auto flex items-center gap-1.5">
+          <a
+            href={contactLinks.instagram}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-10 w-10 items-center justify-center text-[#1d1915] transition-colors hover:text-[#7e271e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+            aria-label="Open ANURRAKTI on Instagram"
+            onClick={() => trackEvent("direct_contact_click", { channel: "instagram", placement: "header" })}
+          >
+            <InstagramIcon className="h-5 w-5" />
+          </a>
+          <a
+            href={contactLinks.whatsappPrimary}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex h-10 w-10 items-center justify-center text-[#1d1915] transition-colors hover:text-[#7e271e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+            aria-label="Text ANURRAKTI on WhatsApp"
+            onClick={() => {
+              trackEvent("whatsapp_click", { placement: "header" });
+              trackEvent("direct_contact_click", { channel: "whatsapp", placement: "header" });
+            }}
+          >
+            <WhatsAppIcon className="h-5 w-5" />
+          </a>
+          <button
+            type="button"
+            className="inline-flex h-10 w-10 items-center justify-center lg:hidden"
+            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
+          >
+            <span className="sr-only">Menu</span>
+            <span className="grid gap-1.5" aria-hidden="true">
+              <span className={`h-px w-6 bg-[#1d1915] transition-transform ${isMenuOpen ? "translate-y-[7px] rotate-45" : ""}`} />
+              <span className={`h-px w-6 bg-[#1d1915] transition-opacity ${isMenuOpen ? "opacity-0" : ""}`} />
+              <span className={`h-px w-6 bg-[#1d1915] transition-transform ${isMenuOpen ? "-translate-y-[7px] -rotate-45" : ""}`} />
+            </span>
+          </button>
+        </div>
       </div>
 
       <nav className="hidden border-t border-stone-900/10 lg:block" aria-label="Primary navigation">
@@ -108,7 +137,7 @@ export function SiteHeader() {
       {isMenuOpen ? (
         <nav id="mobile-navigation" className="border-t border-stone-900/10 bg-[#fffaf2] px-5 py-5 lg:hidden" aria-label="Mobile navigation">
           <ul className="mx-auto grid max-w-7xl gap-0.5">
-            <li><Link href="/collection" className="block border-b border-stone-900/10 py-3.5 font-serif text-[clamp(1.2rem,5vw,1.5rem)] leading-tight" onClick={() => setIsMenuOpen(false)}>Collections — EHSAAS</Link></li>
+            <li><Link href="/collection" className="block border-b border-stone-900/10 py-3.5 font-serif text-[clamp(1.2rem,5vw,1.5rem)] leading-tight" onClick={() => setIsMenuOpen(false)}>Collections</Link></li>
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="block border-b border-stone-900/10 py-3.5 font-serif text-[clamp(1.2rem,5vw,1.5rem)] leading-tight" onClick={() => {

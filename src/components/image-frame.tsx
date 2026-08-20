@@ -11,6 +11,7 @@ type ImageFrameProps = {
   priority?: boolean;
   sizes: string;
   caption?: string;
+  noBleed?: boolean;
 };
 
 export function ImageFrame({
@@ -20,6 +21,7 @@ export function ImageFrame({
   priority = false,
   sizes,
   caption,
+  noBleed = false,
 }: ImageFrameProps) {
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
@@ -28,6 +30,7 @@ export function ImageFrame({
   const imageY = useSpring(useTransform(pointerY, [-1, 1], [-6, 6]), { stiffness: 55, damping: 20 });
 
   function handlePointerMove(event: React.PointerEvent<HTMLElement>) {
+    if (noBleed) return;
     if (reduceMotion || event.pointerType === "touch") return;
     const bounds = event.currentTarget.getBoundingClientRect();
     pointerX.set(((event.clientX - bounds.left) / bounds.width - 0.5) * 2);
@@ -47,7 +50,7 @@ export function ImageFrame({
       onPointerMove={handlePointerMove}
       onPointerLeave={resetPointer}
     >
-      <motion.div className="h-full w-full scale-[1.06] motion-reduce:transform-none" style={{ x: imageX, y: imageY }}>
+      <motion.div className={`h-full w-full motion-reduce:transform-none ${noBleed ? "" : "scale-[1.06]"}`} style={noBleed ? undefined : { x: imageX, y: imageY }}>
         <Image
           src={image.src}
           alt={image.alt}
