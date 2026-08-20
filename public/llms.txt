@@ -4,18 +4,42 @@
 
 Site: https://www.anurrakti.com
 Sitemap: https://www.anurrakti.com/sitemap.xml
+Language: English (India)
 
 ## Key pages
 
 - [Home](https://www.anurrakti.com/): The ANURRAKTI world, campaign imagery, collection entry points and private enquiry.
+- [About ANURRAKTI](https://www.anurrakti.com/about): The house, its point of view and its approach to textile, memory and considered design.
 - [Collections](https://www.anurrakti.com/collection): EHSAAS and RAGA collection entry point.
 - [EHSAAS](https://www.anurrakti.com/collection/ehsaas): The EHSAAS saree collection.
 - [RAGA](https://www.anurrakti.com/collection/raga): The RAGA saree collection.
 - [The House](https://www.anurrakti.com/house): Brand point of view and craft language.
-- [Gift Concierge](https://www.anurrakti.com/gift-concierge): Private gifting enquiry.
+- [Saree Guides and Stories](https://www.anurrakti.com/blogs): The ANURRAKTI journal index.
 - [Ready to Wear](https://www.anurrakti.com/ready-to-wear): Forthcoming ready-to-wear expression.
-- [Privacy](https://www.anurrakti.com/privacy): Privacy information.
+- [Contact](https://www.anurrakti.com/contact): Enquiry form, WhatsApp, telephone and Instagram contact options.
+
+## Saree guides
+
+- [Types of Sarees in India](https://www.anurrakti.com/blogs/types-of-sarees-in-india): Eight regional saree traditions, their origins and defining characteristics.
+- [How to Choose a Saree for Every Occasion](https://www.anurrakti.com/blogs/how-to-choose-saree-for-every-occasion): A practical framework based on role, formality, place, movement and the complete look.
+- [How to Choose a Saree for Your Body Type](https://www.anurrakti.com/blogs/how-to-choose-saree-for-your-body-type): Styling principles centred on proportion, comfort and personal preference.
+- [How to Drape a Saree](https://www.anurrakti.com/blogs/how-to-drape-a-saree): A step-by-step beginner's guide to preparing, pleating and securing a saree.
+- [How to Care for Sarees](https://www.anurrakti.com/blogs/how-to-care-for-sarees): Washing, handling and storage guidance across common saree materials.
+- [Saree Fabrics Explained](https://www.anurrakti.com/blogs/saree-fabrics-explained): An introduction to silk, cotton, blends and construction terminology.
+- [How to Choose a Saree Blouse](https://www.anurrakti.com/blogs/how-to-choose-saree-blouse): Fit, fabric and design considerations for a saree blouse.
+- [Saree Colour Combinations](https://www.anurrakti.com/blogs/saree-colour-combinations): A practical guide to hue, value, contrast and colour relationships.
+
+## Policies
+
+- [Privacy Policy](https://www.anurrakti.com/privacy): How ANURRAKTI collects, uses, shares and protects information.
+- [Terms and Conditions](https://www.anurrakti.com/terms): Terms governing use of the website and private enquiries.
 
 ## Contact
 
-Private enquiry is available through WhatsApp and Instagram from the website header and enquiry sections.
+Private enquiry is available through the [Contact page](https://www.anurrakti.com/contact), WhatsApp, telephone and Instagram.
+
+## Content notes
+
+- Product availability is confirmed through private enquiry; the website does not provide public checkout.
+- Blog articles identify ANURRAKTI Editorial as the author and include visible sources and further reading.
+- Canonical URLs and the XML sitemap are the authoritative indexes for current content.

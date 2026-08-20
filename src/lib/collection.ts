@@ -85,6 +85,8 @@ export function whatsappPath(message = defaultWhatsAppMessage, phone = "91880021
 export const contactLinks = {
   whatsappPrimary: whatsappPath(),
   whatsappSecondary: whatsappPath(defaultWhatsAppMessage, "919958704890"),
+  callPrimary: "tel:+918800219663",
+  callSecondary: "tel:+919958704890",
   call: "tel:+919958704890",
   instagram: "https://www.instagram.com/anurrakti/",
 };

@@ -12,7 +12,6 @@ const navItems = [
   { label: "The House", href: "/house" },
   { label: "Blog", href: "/blogs" },
   { label: "Ready to Wear", href: "/ready-to-wear" },
-  { label: "Gift Concierge", href: "/gift-concierge" },
   { label: "Enquire", href: "/#viewing" },
 ];
 
@@ -129,7 +128,6 @@ export function SiteHeader() {
           {navItems.slice(1).map((item) => (
             <li key={item.href}><Link className="transition-colors hover:text-[#7e271e]" href={item.href} onClick={() => {
               if (item.label === "The House") trackEvent("the_house_click", { placement: "header" });
-              if (item.label === "Gift Concierge") trackEvent("gift_concierge_start", { placement: "header" });
             }}>{item.label}</Link></li>
           ))}
         </ul>
@@ -144,7 +142,6 @@ export function SiteHeader() {
                 <Link href={item.href} className="block border-b border-stone-900/10 py-3.5 font-serif text-[clamp(1.2rem,5vw,1.5rem)] leading-tight" onClick={() => {
                   setIsMenuOpen(false);
                   if (item.label === "The House") trackEvent("the_house_click", { placement: "mobile_header" });
-                  if (item.label === "Gift Concierge") trackEvent("gift_concierge_start", { placement: "mobile_header" });
                 }}>{item.label}</Link>
               </li>
             ))}

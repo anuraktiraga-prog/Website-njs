@@ -40,16 +40,57 @@ export default async function ArchivePage({ params }: ArchivePageProps) {
 
   if (!collection) notFound();
 
+  const collectionUrl = `https://www.anurrakti.com${collectionPath(collection)}`;
   const collectionStructuredData = {
     "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: `${collection.name} Collection`,
-    itemListElement: collection.pieces.map((piece, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      url: `https://www.anurrakti.com${productPath(piece)}`,
-      name: `${piece.collectionName} ${piece.title}`,
-    })),
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${collectionUrl}#webpage`,
+        url: collectionUrl,
+        name: `${collection.name} Collection | ANURRAKTI`,
+        description: collection.description,
+        inLanguage: "en-IN",
+        isPartOf: { "@id": "https://www.anurrakti.com/#website" },
+        mainEntity: { "@id": `${collectionUrl}#item-list` },
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${collectionUrl}#item-list`,
+        name: `${collection.name} Collection`,
+        numberOfItems: collection.pieces.length,
+        itemListElement: collection.pieces.map((piece, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          url: `https://www.anurrakti.com${productPath(piece)}`,
+          name: `${piece.collectionName} ${piece.title}`,
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${collectionUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://www.anurrakti.com",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Collections",
+            item: "https://www.anurrakti.com/collection",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: collection.name,
+            item: collectionUrl,
+          },
+        ],
+      },
+    ],
   };
 
   return (
@@ -57,7 +98,9 @@ export default async function ArchivePage({ params }: ArchivePageProps) {
       <SiteHeader />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionStructuredData) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(collectionStructuredData).replace(/</g, "\\u003c"),
+        }}
       />
       <main className="flex-1">
         <CollectionDepthTracker />

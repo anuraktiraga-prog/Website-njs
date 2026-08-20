@@ -117,15 +117,30 @@ export default async function ProductPage({ params }: ProductPageProps) {
         description: piece.description.join(" "),
         image: [piece.src, ...detailImages.map((image) => image.src)].map((src) => `https://www.anurrakti.com${src}`),
         isPartOf: {
-          "@type": "WebSite",
+          "@id": "https://www.anurrakti.com/#website",
+        },
+        mainEntity: { "@id": `${productUrl}#product` },
+      },
+      {
+        "@type": "Product",
+        "@id": `${productUrl}#product`,
+        url: productUrl,
+        name: `${piece.collectionName} ${piece.title}`,
+        description: piece.description.join(" "),
+        image: [piece.src, ...detailImages.map((image) => image.src)].map(
+          (src) => `https://www.anurrakti.com${src}`,
+        ),
+        category: piece.garmentType ?? "Saree",
+        color: colours,
+        brand: {
+          "@type": "Brand",
           name: "ANURRAKTI",
-          url: "https://www.anurrakti.com",
         },
-        about: {
-          "@type": "Thing",
-          name: `${piece.collectionName} ${piece.title}`,
-          description: piece.note,
-        },
+        additionalProperty: productFacts.map(([name, value]) => ({
+          "@type": "PropertyValue",
+          name,
+          value,
+        })),
       },
       {
         "@type": "BreadcrumbList",
@@ -165,7 +180,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <SiteHeader />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageStructuredData) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(pageStructuredData).replace(/</g, "\\u003c"),
+        }}
       />
       <main className="mx-auto w-full max-w-[90rem] px-5 pb-12 pt-6 sm:px-8 lg:px-10 lg:pb-8">
         <Link
