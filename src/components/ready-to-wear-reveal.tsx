@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useReducedMotion } from "motion/react";
 import { TextFlippingBoard } from "@/components/ui/text-flipping-board";
 
 const REVEAL_CYCLE_MS = 12_000;
+const subscribeToHydration = () => () => {};
 
 export function ReadyToWearReveal() {
   const [cycle, setCycle] = useState(0);
+  const mounted = useSyncExternalStore(subscribeToHydration, () => true, () => false);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -20,12 +22,18 @@ export function ReadyToWearReveal() {
     <section className="flex min-h-[clamp(36rem,calc(100svh-8rem),54rem)] items-center justify-center bg-[#eadfce] px-5 py-[clamp(4rem,9vw,7rem)] pb-[calc(clamp(4rem,9vw,7rem)+env(safe-area-inset-bottom))] text-center sm:px-10">
       <div className="w-full max-w-2xl">
         <p className="eyebrow mb-8">ANURRAKTI / Ready to wear</p>
-        <TextFlippingBoard
-          key={cycle}
-          text="COMING SOON"
-          duration={2.4}
-          className="mx-auto max-w-2xl"
-        />
+        {mounted ? (
+          <TextFlippingBoard
+            key={cycle}
+            text="COMING SOON"
+            duration={2.4}
+            className="mx-auto max-w-2xl"
+          />
+        ) : (
+          <p className="mx-auto border-[6px] border-[#451b17] bg-[#2a201c] px-6 py-16 font-mono text-[clamp(1.5rem,7vw,4.5rem)] font-bold tracking-[0.12em] text-[#f1ddc6] sm:border-[8px]">
+            COMING SOON
+          </p>
+        )}
         <p className="mt-8 text-xs uppercase tracking-[0.2em] text-stone-600">
           Crafted for the everyday / Coming soon
         </p>

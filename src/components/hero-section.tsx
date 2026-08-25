@@ -111,6 +111,7 @@ export function HeroSection() {
               transition={{ duration: 1.35, delay: isContentVisible ? 0.12 : 0, ease: [0.22, 1, 0.36, 1] }}
               className="type-page-title max-w-2xl font-serif text-[#fff5df]"
             >
+              <span className="sr-only">ANURRAKTI one-of-one sarees: </span>
               <span className="block">Crafted once.</span>
               <span className="block">Remembered for a lifetime.</span>
             </motion.h1>

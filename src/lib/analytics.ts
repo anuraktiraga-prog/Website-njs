@@ -4,9 +4,14 @@ type AnalyticsValue = string | number | boolean;
 
 type AnalyticsProperties = Record<string, AnalyticsValue>;
 
+type GoogleTagProperties = Record<
+  string,
+  AnalyticsValue | (() => void)
+>;
+
 declare global {
   interface Window {
-    gtag?: (command: "event", eventName: string, properties?: AnalyticsProperties) => void;
+    gtag?: (command: "event", eventName: string, properties?: GoogleTagProperties) => void;
   }
 }
 

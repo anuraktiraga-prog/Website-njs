@@ -38,7 +38,7 @@ export function CollectionMarquee({
 
   return (
     <section className="relative isolate min-h-[clamp(34rem,68svh,48rem)] overflow-hidden border-b border-stone-900/10 bg-[#1d1915]">
-      <div className="absolute inset-0" aria-live="polite">
+      <div className="absolute inset-0">
         {editorialImages.map((image, index) => (
           <div
             key={image.src}
@@ -71,7 +71,9 @@ export function CollectionMarquee({
               <span className="geometry-line" aria-hidden="true" />
               <span>{title}</span>
             </div>
-            <h1 className="type-page-title mt-3 max-w-2xl font-serif text-[#fff7ec]">{title}</h1>
+            <h1 className="type-page-title mt-3 max-w-2xl font-serif text-[#fff7ec]">
+              {title}<span className="sr-only"> saree collection</span>
+            </h1>
             <p className="type-body mt-5 max-w-md text-[#f4dfc7]/90">
               {copy}
             </p>

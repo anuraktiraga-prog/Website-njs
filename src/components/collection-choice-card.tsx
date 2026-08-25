@@ -38,11 +38,12 @@ export function CollectionChoiceCard({
   }, [index, reduceMotion, visibleSlides.length]);
 
   return (
-    <Link
-      href={collectionPath(collection)}
-      className="group relative isolate flex min-h-[31rem] overflow-hidden bg-stone-950 text-white shadow-[0_18px_42px_rgba(29,25,21,0.16)] transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_22px_54px_rgba(29,25,21,0.22)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e] sm:min-h-[36rem] md:border md:border-stone-900/10 lg:min-h-[42rem]"
-      aria-label={`Discover the ${collection.name} collection`}
-    >
+    <article className="h-full">
+      <Link
+        href={collectionPath(collection)}
+        className="group relative isolate flex min-h-[31rem] overflow-hidden bg-stone-950 text-white shadow-[0_18px_42px_rgba(29,25,21,0.16)] transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_22px_54px_rgba(29,25,21,0.22)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e] sm:min-h-[36rem] md:border md:border-stone-900/10 lg:min-h-[42rem]"
+        aria-label={`Discover the ${collection.name} collection`}
+      >
       <div className="absolute inset-0" aria-hidden="true">
         {visibleSlides.map((slide, slideIndex) => (
           <Image
@@ -88,6 +89,7 @@ export function CollectionChoiceCard({
           />
         ))}
       </div>
-    </Link>
+      </Link>
+    </article>
   );
 }

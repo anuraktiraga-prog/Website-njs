@@ -74,7 +74,7 @@ export function CollectionCard({
         className="block rounded-[0.55rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
         style={isFeatured ? { transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)` } : undefined}
       >
-        <div className={`relative overflow-hidden border transition-[background-color,transform,box-shadow,opacity] duration-500 ease-out group-hover:-translate-y-1 ${
+        <figure className={`relative overflow-hidden border transition-[background-color,transform,box-shadow,opacity] duration-500 ease-out group-hover:-translate-y-1 ${
           isMobileInView
             ? "max-sm:-translate-y-1 max-sm:bg-[#fbf6ef] max-sm:opacity-100 max-sm:shadow-[0_16px_34px_rgba(61,45,33,0.14)]"
             : "max-sm:opacity-72 max-sm:shadow-none"
@@ -93,7 +93,7 @@ export function CollectionCard({
             />
           </div>
 
-          <div className={`relative z-10 px-1 pb-1 pt-4 sm:px-2 sm:pt-5 ${isFeaturedCard ? "sm:pt-6" : ""}`}>
+          <figcaption className={`relative z-10 px-1 pb-1 pt-4 sm:px-2 sm:pt-5 ${isFeaturedCard ? "sm:pt-6" : ""}`}>
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0">
                 <div className="flex items-baseline gap-3">
@@ -113,12 +113,12 @@ export function CollectionCard({
               </div>
             </div>
 
-            <div className={`mt-4 flex items-center justify-between border-t pt-3 text-[0.66rem] font-medium uppercase tracking-[0.18em] ${isFeaturedCard ? "border-stone-900/15 text-stone-600" : "border-stone-900/10 text-[#7e271e]"}`}>
+            <footer className={`mt-4 flex items-center justify-between border-t pt-3 text-[0.66rem] font-medium uppercase tracking-[0.18em] ${isFeaturedCard ? "border-stone-900/15 text-stone-600" : "border-stone-900/10 text-[#7e271e]"}`}>
               <span>View piece</span>
               <span aria-hidden="true" className="text-base leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </div>
-          </div>
-        </div>
+            </footer>
+          </figcaption>
+        </figure>
       </Link>
     </article>
   );

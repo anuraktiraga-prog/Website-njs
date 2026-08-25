@@ -19,12 +19,35 @@ export function CraftSection() {
         <div className="max-w-xl self-center lg:pb-8">
           <p className="eyebrow text-[#7e271e]">The House</p>
           <h1 className="section-title mt-5 max-w-xl text-[#1d1915]">
+            <span className="sr-only">The House of ANURRAKTI: </span>
             Crafted once. Remembered for a lifetime.
           </h1>
           <p className="type-body mt-7 max-w-xl text-[#4d443d]">
             ANURRAKTI is a study in memory, craft and character—where Indian
             textile heritage becomes a deeply personal expression.
           </p>
+          <div className="mt-7 max-w-xl space-y-5 text-base leading-7 text-[#4d443d]">
+            <p>
+              The House approaches the saree as both clothing and personal archive.
+              Colour, illustration, border and movement are considered together, so a
+              piece can carry atmosphere while leaving room for the wearer&apos;s own story.
+              Each expression is presented through full product views and closer textile
+              studies, allowing the complete drape and its details to be seen separately.
+            </p>
+            <p>
+              ANURRAKTI&apos;s collections are made to be encountered slowly. Rather than
+              treating every piece as interchangeable, the House gives each saree an
+              individual place within a wider emotional world. Campaign images establish
+              that world; dedicated product pages show the piece itself and provide the
+              confirmed information available for private enquiry.
+            </p>
+            <p>
+              The process of choosing begins with attention: a colour that stays with
+              you, a composition that feels familiar, or a drape connected to a moment.
+              Private enquiry creates space to ask about availability, material and
+              details before making a decision.
+            </p>
+          </div>
           <div className="mt-12 grid gap-0 border-t border-stone-900/15">
             {craftNotes.map((note, index) => (
               <p

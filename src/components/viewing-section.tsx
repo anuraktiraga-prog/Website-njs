@@ -3,6 +3,7 @@
 import { contactLinks } from "@/lib/collection";
 import { InstagramIcon, WhatsAppIcon } from "@/components/social-icons";
 import { EnquiryForm } from "@/components/enquiry-form";
+import { CallConversionLink } from "@/components/call-conversion-link";
 import { trackEvent } from "@/lib/analytics";
 
 export function ViewingSection() {
@@ -22,7 +23,7 @@ export function ViewingSection() {
           <EnquiryForm />
           <div className="mt-7 flex flex-wrap gap-3">
             <a className="btn-primary gap-2" href={contactLinks.whatsappPrimary} target="_blank" rel="noreferrer" onClick={() => { trackEvent("whatsapp_click", { placement: "enquiry" }); trackEvent("direct_contact_click", { channel: "whatsapp" }); }}><WhatsAppIcon className="h-4 w-4" />Speak with ANURRAKTI</a>
-            <a className="btn-secondary" href={contactLinks.call} onClick={() => trackEvent("direct_contact_click", { channel: "phone" })}>Call ANURRAKTI</a>
+            <CallConversionLink className="btn-secondary" href={contactLinks.call} placement="enquiry">Call ANURRAKTI</CallConversionLink>
             <a className="btn-secondary gap-2" href={contactLinks.instagram} target="_blank" rel="noreferrer" onClick={() => trackEvent("direct_contact_click", { channel: "instagram" })}><InstagramIcon className="h-4 w-4" />DM on Instagram</a>
           </div>
         </div>

@@ -87,6 +87,11 @@ export default async function BlogArticlePage({ params }: BlogPageProps) {
   if (!post) notFound();
 
   const articleUrl = `https://www.anurrakti.com${blogPath(post)}`;
+  const currentPostIndex = blogPosts.findIndex((blogPost) => blogPost.slug === post.slug);
+  const relatedPosts = Array.from(
+    { length: Math.min(3, blogPosts.length - 1) },
+    (_, offset) => blogPosts[(currentPostIndex + offset + 1) % blogPosts.length],
+  );
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -217,6 +222,36 @@ export default async function BlogArticlePage({ params }: BlogPageProps) {
           {post.kind === "fabrics" && <FabricsArticle post={post} />}
           {post.kind === "blouse" && <BlouseArticle post={post} />}
           {post.kind === "colour" && <ColourArticle post={post} />}
+
+          <section className="section-shell border-t border-stone-900/15 py-14 sm:py-20" aria-labelledby="related-guides">
+            <div className="flex flex-wrap items-end justify-between gap-5">
+              <div>
+                <p className="eyebrow">Continue reading</p>
+                <h2 id="related-guides" className="type-subheading mt-4 font-serif text-stone-950">
+                  Related saree guides
+                </h2>
+              </div>
+              <Link href="/blogs" className="type-cta text-stone-700 underline-offset-4 hover:underline">
+                View all guides
+              </Link>
+            </div>
+            <ul className="mt-9 grid list-none gap-px bg-stone-900/15 md:grid-cols-3">
+              {relatedPosts.map((relatedPost) => (
+                <li key={relatedPost.slug}>
+                  <Link
+                    href={blogPath(relatedPost)}
+                    className="group block h-full bg-[#f7f1e8] p-6 transition-colors hover:bg-[#efe5d7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#7e271e] sm:p-8"
+                  >
+                    <p className="eyebrow">{relatedPost.eyebrow}</p>
+                    <h3 className="mt-4 font-serif text-2xl leading-tight text-stone-950 transition-colors group-hover:text-[#7e271e]">
+                      {relatedPost.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-6 text-stone-700">{relatedPost.excerpt}</p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
         </article>
       </main>
     </>

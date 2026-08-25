@@ -110,6 +110,30 @@ export default async function ArchivePage({ params }: ArchivePageProps) {
           title={collection.name}
           copy={collection.note}
         />
+        <section className="section-shell border-b border-stone-900/10 py-14 sm:py-20" aria-labelledby="collection-introduction">
+          <div className="grid gap-8 lg:grid-cols-[0.65fr_1.35fr] lg:gap-16">
+            <div>
+              <p className="eyebrow">Collection {collection.number}</p>
+              <h2 id="collection-introduction" className="type-subheading mt-4 font-serif text-stone-950">
+                Enter the world of {collection.name}.
+              </h2>
+            </div>
+            <div className="max-w-2xl space-y-5 text-base leading-7 text-stone-700">
+              <p>{collection.description}</p>
+              <p>
+                The six one-of-one sarees are presented first as a collection and then
+                through individual product pages. Explore each full drape, move through
+                its closer textile views, and compare the colour palettes that give every
+                piece its own character within the {collection.name} story.
+              </p>
+              <p>
+                Material composition and further design details are available through
+                private enquiry, so the information you receive can be specific to the
+                piece you are considering.
+              </p>
+            </div>
+          </div>
+        </section>
         <CollectionSection collection={collection} />
         <ViewingSection />
       </main>

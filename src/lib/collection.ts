@@ -89,7 +89,7 @@ export const contactLinks = {
   callSecondary: "tel:+919958704890",
   call: "tel:+919958704890",
   instagram: "https://www.instagram.com/anurrakti/",
-};
+} as const;
 
 export const campaignImages: BrandImage[] = [
   {

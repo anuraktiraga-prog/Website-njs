@@ -63,7 +63,7 @@ export function ProductGallery({
   };
 
   return (
-    <>
+    <section aria-label="Product image gallery">
       <div
         ref={carouselRef}
         onScroll={updateActiveSlide}
@@ -132,6 +132,6 @@ export function ProductGallery({
           <button type="button" onClick={next} className="absolute right-3 top-1/2 z-10 -translate-y-1/2 px-3 py-4 text-3xl text-[#fff5df] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#fff5df] sm:right-8" aria-label="Next image">›</button>
         </div>
       ) : null}
-    </>
+    </section>
   );
 }

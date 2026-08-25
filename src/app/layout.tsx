@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.anurrakti.com"),
   alternates: { canonical: "/" },
   title: {
-    default: "ANURRAKTI",
+    default: "One-of-One Sarees | ANURRAKTI",
     template: "%s | ANURRAKTI",
   },
   description:
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "/",
     siteName: "ANURRAKTI",
-    title: "ANURRAKTI",
+    title: "One-of-One Sarees | ANURRAKTI",
     description:
       "An Indian fashion house of one-of-one sarees—crafted once, remembered for a lifetime.",
     images: [
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ANURRAKTI",
+    title: "One-of-One Sarees | ANURRAKTI",
     description:
       "An Indian fashion house of one-of-one sarees—crafted once, remembered for a lifetime.",
     images: ["/opengraph-image.png"],
@@ -142,7 +142,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           {`window.dataLayer = window.dataLayer || [];
 function gtag(){window.dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-Y243DNTB9B');`}
+gtag('config', 'G-Y243DNTB9B');
+gtag('config', 'AW-18406520726');`}
         </Script>
         <Analytics />
         <SpeedInsights />

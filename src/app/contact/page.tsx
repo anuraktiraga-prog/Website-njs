@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CallConversionLink } from "@/components/call-conversion-link";
 import { EnquiryForm } from "@/components/enquiry-form";
 import { InstagramIcon, WhatsAppIcon } from "@/components/social-icons";
 import { SiteHeader } from "@/components/site-header";
@@ -76,6 +77,7 @@ export default function ContactPage() {
           <div className="mt-6 grid gap-8 lg:grid-cols-[0.68fr_0.32fr] lg:items-end lg:gap-16">
             <div>
               <h1 className="type-page-title max-w-4xl font-serif text-stone-950">
+                <span className="sr-only">Contact ANURRAKTI: </span>
                 Tell us what speaks to you.
               </h1>
               <p className="type-lead mt-7 max-w-2xl text-stone-700">
@@ -97,17 +99,12 @@ export default function ContactPage() {
                 Choose how you would like to begin.
               </h2>
             </div>
-            <div className="grid gap-px bg-stone-900/15 sm:grid-cols-2">
+            <address className="not-italic">
+              <ul className="grid list-none gap-px bg-stone-900/15 sm:grid-cols-2">
               {contactMethods.map((method) => {
                 const Icon = method.icon;
-                return (
-                  <a
-                    key={`${method.label}-${method.detail}`}
-                    href={method.href}
-                    target={method.label === "Call" ? undefined : "_blank"}
-                    rel={method.label === "Call" ? undefined : "noreferrer"}
-                    className="group bg-[#f7f1e8] p-6 transition-colors hover:bg-[#efe5d7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#7e271e]"
-                  >
+                const content = (
+                  <>
                     <span className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-stone-500">
                       {Icon ? <Icon className="h-4 w-4" /> : null}
                       {method.label}
@@ -115,10 +112,38 @@ export default function ContactPage() {
                     <span className="mt-4 block font-serif text-2xl text-stone-950 transition-colors group-hover:text-[#7e271e]">
                       {method.detail}
                     </span>
-                  </a>
+                  </>
+                );
+
+                if (method.label === "Call") {
+                  return (
+                    <li key={`${method.label}-${method.detail}`}>
+                      <CallConversionLink
+                        href={method.href as `tel:${string}`}
+                        placement="contact_page"
+                        className="group block h-full bg-[#f7f1e8] p-6 transition-colors hover:bg-[#efe5d7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#7e271e]"
+                      >
+                        {content}
+                      </CallConversionLink>
+                    </li>
+                  );
+                }
+
+                return (
+                  <li key={`${method.label}-${method.detail}`}>
+                    <a
+                      href={method.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group block h-full bg-[#f7f1e8] p-6 transition-colors hover:bg-[#efe5d7] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#7e271e]"
+                    >
+                      {content}
+                    </a>
+                  </li>
                 );
               })}
-            </div>
+              </ul>
+            </address>
           </div>
         </section>
 
@@ -135,6 +160,19 @@ export default function ContactPage() {
               </Link>{" "}
               for more information.
             </p>
+            <div className="mt-8 max-w-2xl space-y-4 text-sm leading-7 text-stone-700">
+              <p>
+                You can enquire about a specific saree, ask for help comparing pieces,
+                or begin with a colour, mood or occasion. Including the collection and
+                piece number helps us understand which product page you are viewing.
+              </p>
+              <p>
+                Material composition, design details and current availability are
+                confirmed as part of the conversation. You do not need to make a choice
+                before getting in touch; the purpose of the enquiry is to help you review
+                the available information at your own pace.
+              </p>
+            </div>
             <EnquiryForm />
           </div>
         </section>

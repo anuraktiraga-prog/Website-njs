@@ -42,6 +42,7 @@ export default function CollectionPage() {
           <div className="max-w-3xl">
             <p className="eyebrow">From the House of ANURRAKTI</p>
             <h1 className="type-display mt-5 max-w-3xl font-serif text-stone-950">
+              <span className="sr-only">ANURRAKTI saree collections: </span>
               Choose what speaks to you.
             </h1>
             <p className="type-body mt-6 max-w-2xl text-stone-700">
@@ -54,6 +55,25 @@ export default function CollectionPage() {
             {collections.map((collection, index) => (
               <CollectionChoiceCard key={collection.id} collection={collection} index={index} />
             ))}
+          </div>
+
+          <div className="mt-14 grid gap-8 border-t border-stone-900/10 pt-10 lg:grid-cols-2 lg:gap-16">
+            <h2 className="type-subheading max-w-lg font-serif text-stone-950">
+              Two collections, twelve individual expressions.
+            </h2>
+            <div className="max-w-2xl space-y-5 text-base leading-7 text-stone-700">
+              <p>
+                Each collection page brings its six sarees together as a complete visual
+                chapter. From there, individual product pages offer a full-drape image,
+                closer textile views, the confirmed colour palette and current availability.
+              </p>
+              <p>
+                Begin with the collection whose mood draws you in, then take time with
+                the pieces one by one. If a particular saree speaks to you, private enquiry
+                is available for material composition, design details and guidance before
+                you decide.
+              </p>
+            </div>
           </div>
         </section>
         <ViewingSection />

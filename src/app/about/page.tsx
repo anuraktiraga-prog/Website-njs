@@ -71,6 +71,7 @@ export default function AboutPage() {
             <div className="max-w-xl">
               <p className="eyebrow text-[#7e271e]">About ANURRAKTI</p>
               <h1 className="type-page-title mt-5 font-serif text-stone-950">
+                <span className="sr-only">About ANURRAKTI: </span>
                 Crafted once. Remembered for a lifetime.
               </h1>
               <p className="type-lead mt-7 text-stone-700">

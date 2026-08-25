@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   const productImageUrl = `${url}/opengraph-image`;
 
   return {
-    title: `${piece.collectionName} ${piece.title} | ANURRAKTI`,
+    title: `${piece.collectionName} ${piece.title}`,
     description: piece.description.join(" "),
     alternates: { canonical: url },
     openGraph: {
@@ -102,9 +102,13 @@ export default async function ProductPage({ params }: ProductPageProps) {
     ["Availability", details?.availability],
   ].filter((entry): entry is [string, string] => Boolean(entry[1]));
 
-  const relatedPieces = collection.pieces
-    .filter((related) => related.slug !== piece.slug)
-    .slice(0, 3);
+  const currentPieceIndex = collection.pieces.findIndex(
+    (collectionPiece) => collectionPiece.slug === piece.slug,
+  );
+  const relatedPieces = Array.from(
+    { length: Math.min(3, collection.pieces.length - 1) },
+    (_, offset) => collection.pieces[(currentPieceIndex + offset + 1) % collection.pieces.length],
+  );
 
   const pageStructuredData = {
     "@context": "https://schema.org",
@@ -119,28 +123,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
         isPartOf: {
           "@id": "https://www.anurrakti.com/#website",
         },
-        mainEntity: { "@id": `${productUrl}#product` },
-      },
-      {
-        "@type": "Product",
-        "@id": `${productUrl}#product`,
-        url: productUrl,
-        name: `${piece.collectionName} ${piece.title}`,
-        description: piece.description.join(" "),
-        image: [piece.src, ...detailImages.map((image) => image.src)].map(
-          (src) => `https://www.anurrakti.com${src}`,
-        ),
-        category: piece.garmentType ?? "Saree",
-        color: colours,
-        brand: {
-          "@type": "Brand",
-          name: "ANURRAKTI",
-        },
-        additionalProperty: productFacts.map(([name, value]) => ({
-          "@type": "PropertyValue",
-          name,
-          value,
-        })),
       },
       {
         "@type": "BreadcrumbList",
@@ -192,13 +174,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <span aria-hidden="true" className="mr-2">←</span> The {collection.name} collection
         </Link>
 
-        <div className="mt-6 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(22rem,0.95fr)] lg:items-start lg:gap-8">
+        <article className="mt-6 grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(22rem,0.95fr)] lg:items-start lg:gap-8">
           <ProductGallery views={galleryViews} desktopClassName="lg:h-[min(58svh,42rem)] lg:aspect-auto" />
 
-          <section className="min-w-0 self-start">
+          <section className="min-w-0 self-start" aria-labelledby="product-title">
             <p className="eyebrow">{collection.name} / Private enquiry</p>
-            <h1 className="mt-4 max-w-xl font-serif text-[clamp(4.25rem,7.5vw,7rem)] leading-[0.88] tracking-[-0.04em] text-stone-950">
+            <h1 id="product-title" className="mt-4 max-w-xl font-serif text-[clamp(4.25rem,7.5vw,7rem)] leading-[0.88] tracking-[-0.04em] text-stone-950">
+              <span className="sr-only">{piece.collectionName} </span>
               {piece.title}
+              <span className="sr-only"> one-of-one saree</span>
             </h1>
             <p className="mt-5 text-base italic leading-7 text-stone-700">{piece.note}</p>
             <p className="mt-5 max-w-xl text-[0.95rem] leading-6 text-stone-700">
@@ -243,8 +227,18 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <p className="mt-3 text-center text-xs leading-5 text-stone-500">
               For availability, material composition and handwork details.
             </p>
+
+            <div className="mt-7 border-t border-stone-300 pt-6">
+              <h2 className="font-serif text-2xl text-stone-950">Viewing this piece</h2>
+              <p className="mt-3 text-sm leading-6 text-stone-700">
+                Begin with the full drape to see the complete composition of {piece.collectionName} {piece.title},
+                then move through the closer views to examine its surface, border and movement. Its recorded palette
+                brings together {colours.join(", ")}. As a one-of-one saree, current availability and confirmed material
+                or design details are shared directly through private enquiry.
+              </p>
+            </div>
           </section>
-        </div>
+        </article>
       </main>
 
       <section className="section-shell border-t border-stone-300 py-16 sm:py-24" aria-labelledby="editorial-world">
@@ -259,9 +253,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
           {campaignImages.slice(0, 2).map((image) => (
-            <div key={image.src} className="relative aspect-[4/5] overflow-hidden bg-stone-200">
+            <figure key={image.src} className="relative aspect-[4/5] overflow-hidden bg-stone-200">
               <Image src={image.src} alt={image.alt} fill sizes="(max-width: 639px) 100vw, 50vw" className="object-cover" />
-            </div>
+              <figcaption className="sr-only">{image.title}: {image.note}</figcaption>
+            </figure>
           ))}
         </div>
       </section>
@@ -273,16 +268,20 @@ export default async function ProductPage({ params }: ProductPageProps) {
             View {collection.name}
           </Link>
         </div>
-        <div className="mt-8 grid gap-5 sm:grid-cols-3">
+        <ul className="mt-8 grid list-none gap-5 sm:grid-cols-3">
           {relatedPieces.map((related) => (
-            <AnalyticsLink key={related.slug} href={productPath(related)} eventName="related_product_open" eventProperties={{ product: `${related.collectionName} ${related.title}` }} className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]">
-              <div className="relative aspect-[4/5] overflow-hidden bg-stone-200">
-                <Image src={related.src} alt={related.alt} fill sizes="(max-width: 639px) 100vw, 33vw" className="object-contain transition-transform duration-700 group-hover:scale-[1.02] motion-reduce:transition-none" />
-              </div>
-              <p className="mt-3 type-label text-stone-600">{related.collectionName} {related.title}</p>
-            </AnalyticsLink>
+            <li key={related.slug}>
+              <AnalyticsLink href={productPath(related)} eventName="related_product_open" eventProperties={{ product: `${related.collectionName} ${related.title}` }} className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]">
+                <figure>
+                  <div className="relative aspect-[4/5] overflow-hidden bg-stone-200">
+                    <Image src={related.src} alt={related.alt} fill sizes="(max-width: 639px) 100vw, 33vw" className="object-contain transition-transform duration-700 group-hover:scale-[1.02] motion-reduce:transition-none" />
+                  </div>
+                  <figcaption className="mt-3 type-label text-stone-600">{related.collectionName} {related.title}</figcaption>
+                </figure>
+              </AnalyticsLink>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
     </>
   );

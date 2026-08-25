@@ -18,6 +18,7 @@ export default function PrivacyPage() {
         <article className="section-shell max-w-4xl">
           <p className="eyebrow">Legal / Privacy policy</p>
           <h1 className="type-page-title mt-5 max-w-3xl font-serif text-stone-950">
+            <span className="sr-only">ANURRAKTI Privacy Policy: </span>
             Your privacy, held with care.
           </h1>
           <p className="type-lead mt-6 max-w-2xl text-stone-700">

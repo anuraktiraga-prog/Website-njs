@@ -27,6 +27,44 @@ export default function ReadyToWearPage() {
       <SiteHeader />
       <main className="flex-1">
         <ReadyToWearReveal />
+        <section className="section-shell border-t border-stone-900/10 py-16 sm:py-24">
+          <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+            <div>
+              <p className="eyebrow text-[#7e271e]">A forthcoming expression</p>
+              <h1 className="type-section mt-5 max-w-xl font-serif text-stone-950">
+                <span className="sr-only">ANURRAKTI Ready to Wear: </span>
+                A considered approach to everyday dressing.
+              </h1>
+            </div>
+            <div className="max-w-2xl space-y-6 text-base leading-8 text-stone-700">
+              <p>
+                ANURRAKTI Ready to Wear will extend the House&apos;s point of view into
+                considered clothing for everyday life. The forthcoming collection is
+                being shaped around ease, character and personal expression, with the
+                same attention to colour, movement and feeling that defines the wider
+                ANURRAKTI world.
+              </p>
+              <p>
+                This page is an early introduction rather than a product catalogue.
+                Silhouettes, availability, sizing and material information will be
+                shared here when the collection is ready. Until then, the current saree
+                collections remain available to explore through their individual product
+                pages and private enquiry.
+              </p>
+              <p>
+                If you would like to hear about the ready-to-wear launch, contact the
+                House and tell us what you are drawn to. We can note your interest and
+                help you explore the pieces that are available now without making an
+                assumption about fit, fabric or occasion before those details are confirmed.
+              </p>
+              <p>
+                Future updates will be published on this page, keeping the collection
+                information, imagery and ways to enquire together in one place. That will
+                make it clear when the expression moves from preview to availability.
+              </p>
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );

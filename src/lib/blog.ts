@@ -1455,10 +1455,6 @@ const howToChooseSareeBlousePost: BlogPost = {
       href: "https://www.psscive.ac.in/storage/uploads/textbooks/pdf/english/self-employed-tailor-english-class-%2012.pdf",
     },
     {
-      title: "Specialized Sewing Machine Operator handbook — NSDC",
-      href: "https://www.nsdcindia.org/scmp/assets/image/1248079803-Specialized_Sewing_Machine_Operator_English.pdf",
-    },
-    {
       title: "Vocational practical guidelines for cutting and tailoring — NIOS",
       href: "https://cdn.nios.ac.in/cms/documents/2020/Oct/21/Vocational_Guideline_Practical_Final.pdf",
     },

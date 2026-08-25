@@ -15,7 +15,7 @@ export function CollectionSection({
 
   return (
     <section id="collection" className="section-shell overflow-hidden">
-      <div className="mb-12 grid gap-8 lg:mb-16 lg:grid-cols-[minmax(10rem,0.3fr)_minmax(0,1fr)] lg:gap-12">
+      <header className="mb-12 grid gap-8 lg:mb-16 lg:grid-cols-[minmax(10rem,0.3fr)_minmax(0,1fr)] lg:gap-12">
         <p className="eyebrow animate-[collection-rise_600ms_ease-out_both] lg:pt-4">
           {featuredOnly ? "Selected pieces" : `${collection.number} ${collection.name}`}
         </p>
@@ -29,13 +29,15 @@ export function CollectionSection({
               : collection.description}
           </p>
         </div>
-      </div>
+      </header>
 
-      <div className={`grid gap-x-5 gap-y-12 ${featuredOnly ? "sm:grid-cols-3 lg:gap-x-8" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
+      <ul className={`grid list-none gap-x-5 gap-y-12 ${featuredOnly ? "sm:grid-cols-3 lg:gap-x-8" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
         {pieces.map((image, index) => (
-          <CollectionCard key={image.src} image={image} index={index} variant={featuredOnly ? "featured" : "archive"} />
+          <li key={image.src}>
+            <CollectionCard image={image} index={index} variant={featuredOnly ? "featured" : "archive"} />
+          </li>
         ))}
-      </div>
+      </ul>
 
       {featuredOnly ? (
         <div className="mt-10 flex justify-center">
