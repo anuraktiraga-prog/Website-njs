@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 import { contactLinks } from "@/lib/collection";
 import { InstagramIcon, WhatsAppIcon } from "@/components/social-icons";
@@ -21,20 +22,101 @@ const collectionItems = [
 ];
 
 export function SiteHeader() {
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCollectionOpen, setIsCollectionOpen] = useState(false);
+  const [isHeaderHovered, setIsHeaderHovered] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [isCompactMode, setIsCompactMode] = useState(false);
+  const lastScrollY = useRef(0);
+  const directionStartY = useRef(0);
+  const scrollDirection = useRef<"up" | "down" | null>(null);
+  const animationFrame = useRef<number | null>(null);
+
+  useEffect(() => {
+    const updateHeader = () => {
+      const currentScrollY = window.scrollY;
+      const nextDirection = currentScrollY > lastScrollY.current ? "down" : "up";
+
+      if (nextDirection !== scrollDirection.current) {
+        scrollDirection.current = nextDirection;
+        directionStartY.current = currentScrollY;
+      }
+
+      const directionalDistance = Math.abs(currentScrollY - directionStartY.current);
+
+      setHasScrolled(currentScrollY > 40);
+      if (currentScrollY < 120) {
+        setIsHeaderVisible(true);
+        setIsCompactMode(false);
+      } else if (nextDirection === "down" && directionalDistance > 36) {
+        setIsHeaderVisible(false);
+      } else if (nextDirection === "up" && directionalDistance > 18) {
+        setIsCompactMode(true);
+        setIsHeaderVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    const handleScroll = () => {
+      if (animationFrame.current !== null) return;
+      animationFrame.current = window.requestAnimationFrame(() => {
+        updateHeader();
+        animationFrame.current = null;
+      });
+    };
+
+    updateHeader();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (animationFrame.current !== null) {
+        window.cancelAnimationFrame(animationFrame.current);
+      }
+    };
+  }, []);
+
+  const isHome = pathname === "/";
+  const isInteracting = isHeaderHovered || isMenuOpen || isCollectionOpen;
+  const isTransparent = isHome && !hasScrolled && !isInteracting;
+  const isCompact = isHome && isCompactMode && !isMenuOpen;
+  const headerVisible = isHeaderVisible || isMenuOpen || isCollectionOpen;
+  const borderColor = isTransparent ? "border-stone-100/25" : "border-stone-900/10";
+  const interactiveHoverColor = isTransparent ? "hover:text-[#f4dfc7]" : "hover:text-[#7e271e]";
 
   return (
-    <header className="sticky top-0 z-50 bg-[#f6f0e7] text-[#1d1915]">
-      <div className="bg-[#7e271e] px-4 py-1.5 text-center text-[10px] font-semibold uppercase tracking-[0.16em] text-[#fff7ec] sm:text-[11px]">
+    <header
+      className={`${isHome ? "fixed" : "sticky"} inset-x-0 top-0 z-50 will-change-transform transition-[transform,background-color,color,box-shadow] ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        isTransparent
+          ? "bg-transparent text-[#fff7ec]"
+          : "bg-[#f6f0e7] text-[#1d1915] shadow-[0_8px_28px_rgba(29,25,21,0.08)]"
+      }`}
+      style={{
+        transform: headerVisible ? "translate3d(0, 0, 0)" : "translate3d(0, -100%, 0)",
+        transitionDuration: "360ms, 160ms, 160ms, 180ms",
+      }}
+      onMouseEnter={() => setIsHeaderHovered(true)}
+      onMouseLeave={() => setIsHeaderHovered(false)}
+      onKeyDown={(event) => {
+        if (event.key === "Escape") {
+          setIsCollectionOpen(false);
+          setIsMenuOpen(false);
+        }
+      }}
+    >
+      <div className={`overflow-hidden bg-[#7e271e] text-[#fff7ec] transition-[max-height,opacity,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        isCompact ? "max-h-0 py-0 opacity-0" : "max-h-10 px-4 py-1.5 opacity-100"
+      } text-center text-[10px] font-semibold uppercase tracking-[0.16em] sm:text-[11px]`}>
         Discover the ANURRAKTI collections
         <Link className="ml-3 underline underline-offset-4" href="/collection">
           Explore
         </Link>
       </div>
 
-      <div className="relative mx-auto flex h-16 max-w-[90rem] items-center justify-between px-4 sm:px-8 lg:h-[4.5rem]">
-        <p className="hidden text-[10px] uppercase tracking-[0.2em] text-stone-500 lg:block">
+      <div className={`relative mx-auto flex max-w-[90rem] items-center justify-between px-4 transition-[height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-8 ${isCompact ? "h-14" : "h-16 lg:h-[4.5rem]"}`}>
+        <p className={`hidden text-[10px] uppercase tracking-[0.2em] lg:block ${isTransparent ? "text-stone-100/80" : "text-stone-500"}`}>
           Crafted in India
         </p>
 
@@ -48,7 +130,8 @@ export function SiteHeader() {
             alt="ANURRAKTI"
             width={1206}
             height={890}
-            className="h-[4rem] w-auto object-contain sm:h-[4.35rem]"
+            className={`w-auto object-contain transition-[height,filter] ease-[cubic-bezier(0.22,1,0.36,1)] ${isCompact ? "h-12" : "h-[4rem] sm:h-[4.35rem]"} ${isTransparent ? "brightness-0 invert" : ""}`}
+            style={{ transitionDuration: "500ms, 160ms" }}
           />
         </Link>
 
@@ -57,7 +140,7 @@ export function SiteHeader() {
             href={contactLinks.instagram}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-10 w-10 items-center justify-center text-[#1d1915] transition-colors hover:text-[#7e271e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+            className={`inline-flex h-10 w-10 items-center justify-center transition-colors ${interactiveHoverColor} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current`}
             aria-label="Open ANURRAKTI on Instagram"
             onClick={() => trackEvent("direct_contact_click", { channel: "instagram", placement: "header" })}
           >
@@ -67,7 +150,7 @@ export function SiteHeader() {
             href={contactLinks.whatsappPrimary}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-10 w-10 items-center justify-center text-[#1d1915] transition-colors hover:text-[#7e271e] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+            className={`inline-flex h-10 w-10 items-center justify-center transition-colors ${interactiveHoverColor} focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current`}
             aria-label="Text ANURRAKTI on WhatsApp"
             onClick={() => {
               trackEvent("whatsapp_click", { placement: "header" });
@@ -86,18 +169,22 @@ export function SiteHeader() {
           >
             <span className="sr-only">Menu</span>
             <span className="grid gap-1.5" aria-hidden="true">
-              <span className={`h-px w-6 bg-[#1d1915] transition-transform ${isMenuOpen ? "translate-y-[7px] rotate-45" : ""}`} />
-              <span className={`h-px w-6 bg-[#1d1915] transition-opacity ${isMenuOpen ? "opacity-0" : ""}`} />
-              <span className={`h-px w-6 bg-[#1d1915] transition-transform ${isMenuOpen ? "-translate-y-[7px] -rotate-45" : ""}`} />
+              <span className={`h-px w-6 bg-current transition-transform ${isMenuOpen ? "translate-y-[7px] rotate-45" : ""}`} />
+              <span className={`h-px w-6 bg-current transition-opacity ${isMenuOpen ? "opacity-0" : ""}`} />
+              <span className={`h-px w-6 bg-current transition-transform ${isMenuOpen ? "-translate-y-[7px] -rotate-45" : ""}`} />
             </span>
           </button>
         </div>
       </div>
 
-      <nav className="hidden border-t border-stone-900/10 lg:block" aria-label="Primary navigation">
+      <nav
+        className={`hidden overflow-hidden border-t transition-[max-height,opacity,border-color] ease-[cubic-bezier(0.22,1,0.36,1)] lg:block ${borderColor} ${isCompact ? "max-h-0 opacity-0" : "max-h-12 opacity-100"}`}
+        style={{ transitionDuration: "500ms, 500ms, 160ms" }}
+        aria-label="Primary navigation"
+      >
         <ul className="mx-auto flex h-11 max-w-5xl items-center justify-center gap-8 type-nav font-medium">
           {navItems.slice(0, 1).map((item) => (
-            <li key={item.href}><Link className="transition-colors hover:text-[#7e271e]" href={item.href}>{item.label}</Link></li>
+            <li key={item.href}><Link className={`transition-colors ${interactiveHoverColor}`} href={item.href}>{item.label}</Link></li>
           ))}
           <li
             className="relative h-full"
@@ -106,7 +193,7 @@ export function SiteHeader() {
           >
             <Link
               href="/collection"
-              className="flex h-full items-center gap-1.5 transition-colors hover:text-[#7e271e]"
+              className={`flex h-full items-center gap-1.5 transition-colors ${interactiveHoverColor}`}
               aria-haspopup="menu"
               aria-expanded={isCollectionOpen}
               onFocus={() => setIsCollectionOpen(true)}
@@ -126,7 +213,7 @@ export function SiteHeader() {
             ) : null}
           </li>
           {navItems.slice(1).map((item) => (
-            <li key={item.href}><Link className="transition-colors hover:text-[#7e271e]" href={item.href} onClick={() => {
+            <li key={item.href}><Link className={`transition-colors ${interactiveHoverColor}`} href={item.href} onClick={() => {
               if (item.label === "The House") trackEvent("the_house_click", { placement: "header" });
             }}>{item.label}</Link></li>
           ))}

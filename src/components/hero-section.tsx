@@ -75,8 +75,8 @@ export function HeroSection() {
   }
 
   return (
-    <section ref={sectionRef} id="top" className="relative -mt-px min-h-[calc(100svh-6.35rem)] overflow-hidden bg-stone-950 text-stone-50 lg:min-h-[calc(100svh-10.1rem)]" onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
-      <GyroDepth className="sticky top-0 min-h-[calc(100svh-6.35rem)] overflow-hidden lg:min-h-[calc(100svh-10.1rem)]">
+    <section ref={sectionRef} id="top" className="relative -mt-px min-h-svh overflow-hidden bg-stone-950 text-stone-50" onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
+      <GyroDepth className="sticky top-0 min-h-svh overflow-hidden">
         <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
           <motion.div className="absolute -inset-12" style={{ x: imageX, y: imageY, scale: backdropScale }}>
             <Image
@@ -109,7 +109,7 @@ export function HeroSection() {
           <div className="absolute inset-0 bg-gradient-to-r from-stone-950/45 via-stone-950/25 to-transparent" />
         </div>
 
-        <motion.div className="relative z-10 mx-auto flex min-h-[calc(100svh-6.35rem)] max-w-7xl flex-col justify-end px-5 pb-[calc(3rem+env(safe-area-inset-bottom))] pt-12 sm:px-8 sm:pb-[calc(2.25rem+env(safe-area-inset-bottom))] lg:min-h-[calc(100svh-10.1rem)] lg:pb-8 lg:pt-16" style={{ opacity: contentOpacity, x: contentX, y: contentY }}>
+        <motion.div className="relative z-10 mx-auto flex min-h-svh max-w-7xl flex-col justify-end px-5 pb-[calc(3rem+env(safe-area-inset-bottom))] pt-40 sm:px-8 sm:pb-[calc(2.25rem+env(safe-area-inset-bottom))] lg:pb-8 lg:pt-44" style={{ opacity: contentOpacity, x: contentX, y: contentY }}>
           <div className="max-w-2xl">
             <motion.p
               initial={{ opacity: 0, y: 16 }}
@@ -145,10 +145,9 @@ export function HeroSection() {
             transition={{ duration: 0.85, delay: isContentVisible ? 0.8 : 0, ease: [0.22, 1, 0.36, 1] }}
             className="mt-6 border-t border-stone-50/25 pt-4 sm:mt-8 sm:pt-5"
           >
-            <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:gap-3">
+            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
               <Link className="btn-light min-w-0 px-2 text-center sm:px-5" href="/collection" onClick={() => trackEvent("hero_discover_click")}>Discover</Link>
-              <Link className="btn-ghost min-w-0 px-2 text-center sm:px-5" href="/house" onClick={() => trackEvent("the_house_click", { placement: "hero" })}>The House</Link>
-              <Link className="btn-ghost min-w-0 px-2 text-center sm:px-5" href="/#viewing">Enquire</Link>
+              <Link className="btn-ghost min-w-0 px-2 text-center sm:px-5" href="/#viewing">Contact Us</Link>
             </div>
           </motion.div>
         </motion.div>
