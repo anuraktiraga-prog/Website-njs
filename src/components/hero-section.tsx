@@ -17,6 +17,7 @@ declare global {
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isImageReady, setIsImageReady] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const pointerX = useMotionValue(0);
@@ -45,6 +46,18 @@ export function HeroSection() {
     }, 500);
     return () => window.clearTimeout(revealTimer);
   }, [isImageReady]);
+
+  useEffect(() => {
+    if (!isImageReady || prefersReducedMotion) return;
+
+    const connection = (navigator as Navigator & {
+      connection?: { saveData?: boolean };
+    }).connection;
+    if (connection?.saveData) return;
+
+    const videoTimer = window.setTimeout(() => setShouldLoadVideo(true), 800);
+    return () => window.clearTimeout(videoTimer);
+  }, [isImageReady, prefersReducedMotion]);
 
   if (!heroImage) return null;
 
@@ -77,19 +90,20 @@ export function HeroSection() {
               onLoad={() => setIsImageReady(true)}
               className="h-full w-full object-cover object-[52%_28%]"
             />
-            <video
-              className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[52%_28%] opacity-[0.28] mix-blend-screen"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-              poster={heroImage.src}
-              onLoadedData={() => setIsImageReady(true)}
-              aria-hidden="true"
-            >
-              <source src="/videos/house-drape-study.mp4" type="video/mp4" />
-            </video>
+            {shouldLoadVideo ? (
+              <video
+                className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[52%_28%] opacity-[0.28] mix-blend-screen"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster={heroImage.src}
+                aria-hidden="true"
+              >
+                <source src="/videos/house-drape-study.mp4" type="video/mp4" />
+              </video>
+            ) : null}
           </motion.div>
           <div className="absolute inset-0 bg-stone-950/35" />
           <div className="absolute inset-0 bg-gradient-to-r from-stone-950/45 via-stone-950/25 to-transparent" />
@@ -121,7 +135,7 @@ export function HeroSection() {
               transition={{ duration: 0.9, delay: isContentVisible ? 0.55 : 0, ease: [0.22, 1, 0.36, 1] }}
               className="mt-5 max-w-lg type-body text-stone-100"
             >
-              One-of-one Indian clothing, crafted with passion and chosen by the heart.
+              One-of-one Indian sarees, crafted with passion and chosen by the heart.
             </motion.p>
           </div>
 

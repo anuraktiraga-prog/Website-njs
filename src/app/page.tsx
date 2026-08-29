@@ -2,7 +2,7 @@ import { BrandPropositionSection } from "@/components/brand-proposition-section"
 import { CollectionSection } from "@/components/collection-section";
 import { HeroSection } from "@/components/hero-section";
 import { HomeSound } from "@/components/home-sound";
-import { LoadingScreen } from "@/components/loading-screen";
+import { SareeDiscoverySection } from "@/components/saree-discovery-section";
 import { SiteHeader } from "@/components/site-header";
 import { SingularSection } from "@/components/singular-section";
 import { ViewingSection } from "@/components/viewing-section";
@@ -13,9 +13,9 @@ export default function Home() {
       <SiteHeader />
       <main className="flex-1">
         <HomeSound />
-        <LoadingScreen />
         <HeroSection />
         <BrandPropositionSection />
+        <SareeDiscoverySection />
         <CollectionSection featuredOnly />
         <SingularSection />
         <ViewingSection />

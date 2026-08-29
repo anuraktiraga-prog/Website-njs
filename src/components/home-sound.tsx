@@ -8,6 +8,7 @@ const ambientSound = "/audio/anurrakti-ambient.mp3";
 declare global {
   interface Window {
     __anurraktiIntroSoundPlayed?: boolean;
+    __anurraktiIntroSoundAutoplayAttempted?: boolean;
     __anurraktiHeroRevealStarted?: boolean;
   }
 }
@@ -23,8 +24,10 @@ export function HomeSound() {
   const playSound = async (source: "autoplay" | "interaction") => {
     const audio = audioRef.current;
     if (!audio || hasAttemptedPlayback.current || window.__anurraktiIntroSoundPlayed) return;
+    if (source === "autoplay" && window.__anurraktiIntroSoundAutoplayAttempted) return;
 
     hasAttemptedPlayback.current = true;
+    if (source === "autoplay") window.__anurraktiIntroSoundAutoplayAttempted = true;
 
     try {
       audio.currentTime = 0;

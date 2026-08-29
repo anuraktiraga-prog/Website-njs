@@ -13,11 +13,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.anurrakti.com"),
   alternates: { canonical: "/" },
   title: {
-    default: "One-of-One Sarees | ANURRAKTI",
+    default: "Unique Indian Sarees | One-of-One Designs | ANURRAKTI",
     template: "%s | ANURRAKTI",
   },
   description:
-    "ANURRAKTI is an Indian fashion house of one-of-one sarees—crafted once, remembered for a lifetime.",
+    "Discover unique, one-of-one Indian sarees from ANURRAKTI. Explore twelve individual pieces across the EHSAAS and RAGA collections, available on enquiry.",
   authors: [{ name: "ANURRAKTI", url: "https://www.anurrakti.com/about" }],
   creator: "ANURRAKTI",
   publisher: "ANURRAKTI",
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: "/",
     siteName: "ANURRAKTI",
-    title: "One-of-One Sarees | ANURRAKTI",
+    title: "Unique Indian Sarees | One-of-One Designs | ANURRAKTI",
     description:
-      "An Indian fashion house of one-of-one sarees—crafted once, remembered for a lifetime.",
+      "Discover unique, one-of-one Indian sarees across the EHSAAS and RAGA collections, available on enquiry.",
     images: [
       {
         url: "/opengraph-image.png",
@@ -56,9 +56,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "One-of-One Sarees | ANURRAKTI",
+    title: "Unique Indian Sarees | One-of-One Designs | ANURRAKTI",
     description:
-      "An Indian fashion house of one-of-one sarees—crafted once, remembered for a lifetime.",
+      "Discover unique, one-of-one Indian sarees across the EHSAAS and RAGA collections, available on enquiry.",
     images: ["/opengraph-image.png"],
   },
 };
@@ -109,23 +109,7 @@ const siteStructuredData = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" data-scroll-behavior="smooth" className={cn("h-full antialiased", "font-sans", geist.variable)}>
-      <Script id="google-tag-manager" strategy="beforeInteractive">
-        {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PMZQPFZH');`}
-      </Script>
       <body className="min-h-full flex flex-col">
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PMZQPFZH"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-            title="Google Tag Manager"
-          />
-        </noscript>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

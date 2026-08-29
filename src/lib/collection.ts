@@ -172,6 +172,61 @@ const notesByPiece: Record<CollectionId, string[]> = {
   ],
 };
 
+const descriptionsByPiece: Record<CollectionId, [string, string][]> = {
+  ehsaas: [
+    [
+      "Black establishes the ground of this one-of-one saree, with red and gold creating the defining contrasts across the complete drape.",
+      "Closer views record the illustrated surface, border and shifts between its darker field and warmer accents.",
+    ],
+    [
+      "Red leads this one-of-one composition, while ivory and teal introduce lighter and cooler points within the full drape.",
+      "The detail studies keep the colour relationships visible across the surface, border and finished saree.",
+    ],
+    [
+      "Ivory forms the pale field of this one-of-one saree, framed by vermilion as its central colour contrast.",
+      "Full and closer views show how illustration, open space and the stronger border colour sit together.",
+    ],
+    [
+      "Ivory and checks shape this one-of-one saree through line, repetition and measured areas of colour.",
+      "The complete drape and detail images allow the checked composition, surface and border to be considered separately.",
+    ],
+    [
+      "Black and rust give this one-of-one saree a grounded palette, with the warmer tone carried through its illustrated surface.",
+      "Closer studies focus on how the darker field, border and rust-coloured details meet within the finished drape.",
+    ],
+    [
+      "Charcoal and ivory create a restrained contrast across this one-of-one saree and its recorded ornament.",
+      "The product views move from the complete drape to closer studies of its pale details, surface and border.",
+    ],
+  ],
+  raga: [
+    [
+      "Black gives this one-of-one saree its evening ground, while red and gold punctuate the complete composition.",
+      "Closer images follow the relationship between the dark field, warmer details and the finished border.",
+    ],
+    [
+      "Ivory and vermilion create a direct two-colour conversation across this one-of-one saree.",
+      "The full drape establishes the composition before closer views isolate its illustration, surface and border.",
+    ],
+    [
+      "Midnight and gold shape this one-of-one saree around a dark field and a measured ceremonial accent.",
+      "Detailed views show where the gold-toned elements sit across the surface and within the completed drape.",
+    ],
+    [
+      "Ivory and rose give this one-of-one saree a pale composition softened by a warmer secondary colour.",
+      "Full and closer photographs record the movement between its open field, surface details and border.",
+    ],
+    [
+      "Graphite and red form the grounded palette of this one-of-one saree, balancing a dark base with a stronger accent.",
+      "The detail studies examine how that contrast continues across the illustrated surface and finished edge.",
+    ],
+    [
+      "Ivory and black define this one-of-one saree through line, shadow and a clear light-dark contrast.",
+      "The complete drape and closer studies keep its surface, border and graphic relationship visible.",
+    ],
+  ],
+};
+
 function makePiece(collectionId: CollectionId, index: number): CollectionPiece {
   const number = String(index).padStart(2, "0");
   const collectionName = collectionId === "ehsaas" ? "EHSAAS" : "RAGA";
@@ -183,10 +238,7 @@ function makePiece(collectionId: CollectionId, index: number): CollectionPiece {
     alt: `${collectionName} ${number} saree shown as a complete product image`,
     title: number,
     note: notesByPiece[collectionId][index - 1],
-    description: [
-      `${collectionName} ${number} is presented as an edited textile study, allowing the full drape to remain visible.`,
-      "Detail images reveal the surface, border and movement without cropping the finished composition.",
-    ],
+    description: descriptionsByPiece[collectionId][index - 1],
     palette: paletteByPiece[collectionId][index - 1],
     width: productSize.width,
     height: productSize.height,

@@ -36,22 +36,25 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
   const url = productPath(piece);
   const productImageUrl = `${url}/opengraph-image`;
+  const [primaryColour, secondaryColour] = piece.palette.split(" / ");
+  const productTitle = `${piece.collectionName} ${piece.title} ${primaryColour} & ${secondaryColour} One-of-One Saree`;
+  const productDescription = `Explore ${piece.collectionName} ${piece.title}, a one-of-one saree in ${piece.palette.replaceAll(" / ", ", ")}. View the complete drape and details, then enquire privately.`;
 
   return {
-    title: `${piece.collectionName} ${piece.title}`,
-    description: piece.description.join(" "),
+    title: productTitle,
+    description: productDescription,
     alternates: { canonical: url },
     openGraph: {
       type: "website",
-      title: `${piece.collectionName} ${piece.title} | ANURRAKTI`,
-      description: piece.description.join(" "),
+      title: `${productTitle} | ANURRAKTI`,
+      description: productDescription,
       url,
       images: [{ url: productImageUrl, width: 1200, height: 630, alt: piece.alt }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${piece.collectionName} ${piece.title} | ANURRAKTI`,
-      description: piece.description.join(" "),
+      title: `${productTitle} | ANURRAKTI`,
+      description: productDescription,
       images: [productImageUrl],
     },
   };

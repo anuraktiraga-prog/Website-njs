@@ -26,6 +26,13 @@ export function CollectionChoiceCard({
     [collection.pieces],
   );
   const visibleSlides = slides.length ? slides : [{ src: collection.pieces[0].src, alt: collection.pieces[0].alt }];
+  const renderedSlideIndexes = reduceMotion
+    ? new Set([activeIndex])
+    : new Set([
+        (activeIndex - 1 + visibleSlides.length) % visibleSlides.length,
+        activeIndex,
+        (activeIndex + 1) % visibleSlides.length,
+      ]);
 
   useEffect(() => {
     if (reduceMotion || visibleSlides.length < 2) return;
@@ -45,7 +52,7 @@ export function CollectionChoiceCard({
         aria-label={`Discover the ${collection.name} collection`}
       >
       <div className="absolute inset-0" aria-hidden="true">
-        {visibleSlides.map((slide, slideIndex) => (
+        {visibleSlides.map((slide, slideIndex) => renderedSlideIndexes.has(slideIndex) ? (
           <Image
             key={slide.src}
             src={slide.src}
@@ -57,7 +64,7 @@ export function CollectionChoiceCard({
               slideIndex === activeIndex ? "opacity-100" : "opacity-0"
             }`}
           />
-        ))}
+        ) : null)}
       </div>
 
       <div className="absolute inset-0 bg-stone-950/40 sm:bg-stone-950/48" />

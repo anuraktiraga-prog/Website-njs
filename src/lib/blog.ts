@@ -77,6 +77,7 @@ export type ColourApproach = {
 type BlogPostBase = {
   slug: string;
   title: string;
+  seoTitle?: string;
   eyebrow: string;
   description: string;
   excerpt: string;
@@ -1293,6 +1294,7 @@ const howToChooseSareeBlousePost: BlogPost = {
   kind: "blouse",
   slug: "how-to-choose-saree-blouse",
   title: "How to Choose a Saree Blouse: Fit, Fabric and Design",
+  seoTitle: "How to Choose a Saree Blouse: Fit and Design",
   eyebrow: "The Saree Guide / 07",
   description:
     "Learn how to choose a saree blouse by checking fit, fabric, neckline, sleeves, closure and movement before the final fitting.",
@@ -1478,6 +1480,7 @@ const sareeColourCombinationsPost: BlogPost = {
   kind: "colour",
   slug: "saree-colour-combinations",
   title: "Saree Colour Combinations: A Practical Styling Guide",
+  seoTitle: "Saree Colour Combinations: Styling Guide",
   eyebrow: "The Saree Guide / 08",
   description:
     "Build saree colour combinations using contrast, proportion, blouse choices and lighting—without relying on rigid styling rules.",

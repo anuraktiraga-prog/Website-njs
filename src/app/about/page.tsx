@@ -4,14 +4,14 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title: { absolute: "About ANURRAKTI | Indian Fashion House" },
   description:
-    "Discover ANURRAKTI, an Indian fashion house crafting one-of-one sarees through heritage, passion and personal expression.",
+    "Learn about ANURRAKTI, an Indian fashion house presenting twelve one-of-one sarees across the EHSAAS and RAGA collections through private enquiry.",
   alternates: { canonical: "/about" },
   openGraph: {
-    title: "About ANURRAKTI",
+    title: "About ANURRAKTI | Indian Fashion House",
     description:
-      "An Indian fashion house crafting one-of-one sarees through heritage, passion and personal expression.",
+      "Meet ANURRAKTI and explore twelve one-of-one sarees across the EHSAAS and RAGA collections through private enquiry.",
     url: "/about",
     images: [
       {
@@ -27,18 +27,18 @@ export const metadata: Metadata = {
 const principles = [
   {
     number: "01",
-    title: "Heritage, reimagined",
-    body: "Indian textile traditions are approached with respect and a contemporary eye—allowing material, motif and movement to remain visible.",
+    title: "Two collections",
+    body: "EHSAAS and RAGA each bring together six one-of-one sarees, offering two distinct ways to enter the current ANURRAKTI collection.",
   },
   {
     number: "02",
-    title: "Crafted with feeling",
-    body: "Every drape begins with emotion—shaped through colour, movement and detail to hold meaning beyond the moment.",
+    title: "A closer view",
+    body: "Every saree page brings together the complete drape, detail photographs, confirmed palette and current availability.",
   },
   {
     number: "03",
-    title: "Chosen from the heart",
-    body: "We believe the right piece is felt before it is explained: personal, instinctive and unmistakably your own.",
+    title: "Private enquiry",
+    body: "Material composition and closer design information are confirmed for the exact piece before you make a decision.",
   },
 ];
 
@@ -50,7 +50,7 @@ export default function AboutPage() {
     url: "https://www.anurrakti.com/about",
     name: "About ANURRAKTI",
     description:
-      "Discover ANURRAKTI, an Indian fashion house crafting one-of-one sarees through heritage, passion and personal expression.",
+      "Learn about ANURRAKTI, an Indian fashion house presenting twelve one-of-one sarees across the EHSAAS and RAGA collections through private enquiry.",
     inLanguage: "en-IN",
     isPartOf: { "@id": "https://www.anurrakti.com/#website" },
     about: { "@id": "https://www.anurrakti.com/#organization" },
@@ -71,13 +71,12 @@ export default function AboutPage() {
             <div className="max-w-xl">
               <p className="eyebrow text-[#7e271e]">About ANURRAKTI</p>
               <h1 className="type-page-title mt-5 font-serif text-stone-950">
-                <span className="sr-only">About ANURRAKTI: </span>
-                Crafted once. Remembered for a lifetime.
+                About ANURRAKTI.
               </h1>
               <p className="type-lead mt-7 text-stone-700">
-                ANURRAKTI is an Indian fashion house where textile heritage,
-                passion and personal expression meet in pieces made to be felt
-                as deeply as they are seen.
+                ANURRAKTI presents twelve individual sarees across the EHSAAS
+                and RAGA collections. Each piece is shown through its complete
+                drape, details and recorded palette before private enquiry.
               </p>
             </div>
             <figure className="relative aspect-[4/5] overflow-hidden bg-stone-900">
@@ -85,7 +84,7 @@ export default function AboutPage() {
                 src="/images/campaign/anurrakti-staircase.png"
                 alt="Woman wearing a black and grey ANURRAKTI saree against a red staircase"
                 fill
-                priority
+                loading="eager"
                 sizes="(max-width: 1023px) 100vw, 55vw"
                 className="object-cover"
               />
@@ -98,15 +97,16 @@ export default function AboutPage() {
 
         <section className="section-shell border-b border-stone-900/10" aria-labelledby="point-of-view">
           <div className="grid gap-10 lg:grid-cols-[0.34fr_0.66fr] lg:gap-16">
-            <p className="eyebrow lg:pt-2">Our point of view</p>
+            <p className="eyebrow lg:pt-2">The experience</p>
             <div>
               <h2 id="point-of-view" className="section-title max-w-3xl">
-                Wear what speaks to your soul.
+                How ANURRAKTI works.
               </h2>
               <p className="type-body mt-7 max-w-2xl text-stone-700">
-                What you wear can hold identity, memory and emotion. ANURRAKTI
-                brings that belief into every relationship between textile,
-                silhouette and detail—so the final choice feels entirely your own.
+                Begin with a collection, compare its six sarees, then open an
+                individual piece for its complete visual record. If it feels
+                right, enquire privately to confirm material composition,
+                current availability and closer design information.
               </p>
             </div>
           </div>
@@ -139,8 +139,8 @@ export default function AboutPage() {
                 Begin with the textile. Follow the feeling.
               </h2>
               <p className="mt-6 leading-relaxed text-stone-300">
-                Explore the current collections and follow the piece that feels
-                unmistakably yours—or begin a private conversation.
+                Explore EHSAAS and RAGA, compare all twelve one-of-one sarees,
+                or begin a private conversation about a specific piece.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/collection" className="btn-light">Explore collections</Link>

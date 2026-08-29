@@ -35,8 +35,10 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
 
   if (!post) return {};
 
+  const seoTitle = post.seoTitle ?? post.title;
+
   return {
-    title: post.title,
+    title: seoTitle,
     description: post.description,
     authors: [{ name: "ANURRAKTI Editorial", url: "/about" }],
     category: post.eyebrow,
@@ -63,7 +65,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
     alternates: { canonical: blogPath(post) },
     openGraph: {
       type: "article",
-      title: `${post.title} | ANURRAKTI`,
+      title: `${seoTitle} | ANURRAKTI`,
       description: post.description,
       url: blogPath(post),
       publishedTime: post.publishedAt,

@@ -77,7 +77,7 @@ export function ProductGallery({
             className="group relative aspect-[4/5] w-full shrink-0 snap-center cursor-zoom-in overflow-hidden bg-transparent text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
             aria-label={`Open ${view.label} in full screen`}
           >
-            <Image src={view.src} alt={view.alt} fill sizes="100vw" preload={index === 0} className={`${view.fit === "contain" ? "object-contain" : "object-cover group-hover:scale-[1.025]"} transition-transform duration-700 ease-out motion-reduce:transition-none`} style={{ objectPosition: view.position }} />
+            <Image src={view.src} alt={view.alt} fill sizes="(max-width: 639px) calc(100vw - 2.5rem), 1px" preload={index === 0} className={`${view.fit === "contain" ? "object-contain" : "object-cover group-hover:scale-[1.025]"} transition-transform duration-700 ease-out motion-reduce:transition-none`} style={{ objectPosition: view.position }} />
             <span className="pointer-events-none absolute inset-x-3 bottom-3 translate-y-2 bg-stone-950/75 px-3 py-2 text-center text-[0.65rem] uppercase tracking-[0.18em] text-[#fff5df] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none">Open full image</span>
           </button>
         ))}

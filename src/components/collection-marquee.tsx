@@ -25,6 +25,13 @@ export function CollectionMarquee({
   const reduceMotion = useReducedMotion();
   const editorialImages = images.length ? images : fallbackImages;
   const imageCount = editorialImages.length;
+  const renderedImageIndexes = reduceMotion
+    ? new Set([activeIndex])
+    : new Set([
+        (activeIndex - 1 + imageCount) % imageCount,
+        activeIndex,
+        (activeIndex + 1) % imageCount,
+      ]);
 
   useEffect(() => {
     if (reduceMotion) return;
@@ -39,7 +46,7 @@ export function CollectionMarquee({
   return (
     <section className="relative isolate min-h-[clamp(34rem,68svh,48rem)] overflow-hidden border-b border-stone-900/10 bg-[#1d1915]">
       <div className="absolute inset-0">
-        {editorialImages.map((image, index) => (
+        {editorialImages.map((image, index) => renderedImageIndexes.has(index) ? (
           <div
             key={image.src}
             className={`absolute inset-0 transition-opacity duration-[1800ms] ease-in-out motion-reduce:transition-none ${index === activeIndex ? "opacity-100" : "opacity-0"}`}
@@ -57,7 +64,7 @@ export function CollectionMarquee({
               style={{ objectPosition: focalPoints[index] ?? "50% 50%" }}
             />
           </div>
-        ))}
+        ) : null)}
       </div>
 
       <div className="pointer-events-none absolute inset-0 bg-stone-950/32" />
