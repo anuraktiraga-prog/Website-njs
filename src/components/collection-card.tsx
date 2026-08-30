@@ -98,7 +98,7 @@ export function CollectionCard({
               <div className="min-w-0">
                 <div className="flex items-baseline gap-3">
                   {display.number ? (
-                    <span className={`archive-index ${isFeaturedCard ? "text-stone-500" : "text-[#7e271e]"}`}>
+                    <span className={`archive-index ${isFeaturedCard ? "text-stone-600" : "text-[#7e271e]"}`}>
                       <span>{display.number}</span>
                       <span className="geometry-line" aria-hidden="true" />
                     </span>

@@ -61,7 +61,7 @@ export function EnquiryForm() {
       </div>
       <div className="mt-4 grid gap-4">
         <Field>
-          <Label htmlFor="enquiry-email">Email <span className="font-normal text-stone-500">(optional)</span></Label>
+          <Label htmlFor="enquiry-email">Email <span className="font-normal text-stone-600">(optional)</span></Label>
           <Input id="enquiry-email" name="email" type="email" autoComplete="email" placeholder="Your email address" />
         </Field>
         <Field>

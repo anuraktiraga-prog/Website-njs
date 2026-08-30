@@ -8,12 +8,6 @@ import { campaignImages } from "@/lib/collection";
 import { GyroDepth } from "@/components/experimental/gyro-depth";
 import { trackEvent } from "@/lib/analytics";
 
-declare global {
-  interface Window {
-    __anurraktiHeroRevealStarted?: boolean;
-  }
-}
-
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isImageReady, setIsImageReady] = useState(false);
@@ -40,8 +34,6 @@ export function HeroSection() {
   useEffect(() => {
     if (!isImageReady) return;
     const revealTimer = window.setTimeout(() => {
-      window.__anurraktiHeroRevealStarted = true;
-      window.dispatchEvent(new Event("anurrakti:hero-reveal-start"));
       setIsContentVisible(true);
     }, 500);
     return () => window.clearTimeout(revealTimer);
@@ -51,12 +43,29 @@ export function HeroSection() {
     if (!isImageReady || prefersReducedMotion) return;
 
     const connection = (navigator as Navigator & {
-      connection?: { saveData?: boolean };
+      connection?: { effectiveType?: string; saveData?: boolean };
     }).connection;
-    if (connection?.saveData) return;
+    const isDesktopViewport = window.matchMedia("(min-width: 1024px)").matches;
+    const isConstrainedConnection =
+      connection?.saveData ||
+      connection?.effectiveType === "slow-2g" ||
+      connection?.effectiveType === "2g" ||
+      connection?.effectiveType === "3g";
 
-    const videoTimer = window.setTimeout(() => setShouldLoadVideo(true), 800);
-    return () => window.clearTimeout(videoTimer);
+    if (!isDesktopViewport || isConstrainedConnection) return;
+
+    const loadVideoAfterInteraction = () => {
+      setShouldLoadVideo(true);
+      window.removeEventListener("pointermove", loadVideoAfterInteraction);
+      window.removeEventListener("keydown", loadVideoAfterInteraction);
+    };
+
+    window.addEventListener("pointermove", loadVideoAfterInteraction, { passive: true, once: true });
+    window.addEventListener("keydown", loadVideoAfterInteraction, { once: true });
+    return () => {
+      window.removeEventListener("pointermove", loadVideoAfterInteraction);
+      window.removeEventListener("keydown", loadVideoAfterInteraction);
+    };
   }, [isImageReady, prefersReducedMotion]);
 
   if (!heroImage) return null;
@@ -87,6 +96,7 @@ export function HeroSection() {
               preload
               loading="eager"
               sizes="100vw"
+              quality={70}
               onLoad={() => setIsImageReady(true)}
               className="h-full w-full object-cover object-[52%_28%]"
             />

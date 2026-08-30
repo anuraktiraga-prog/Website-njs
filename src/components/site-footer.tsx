@@ -18,7 +18,7 @@ export function SiteFooter() {
             <li><a href={contactLinks.instagram} target="_blank" rel="noreferrer" className="transition-colors hover:text-[#7e271e]">Instagram</a></li>
           </ul>
         </nav>
-        <p className="text-[10px] uppercase tracking-[0.14em] text-stone-500 lg:text-right">
+        <p className="text-[10px] uppercase tracking-[0.14em] text-stone-600 lg:text-right">
           © {new Date().getFullYear()} ANURRAKTI
         </p>
       </div>
