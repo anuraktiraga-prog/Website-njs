@@ -329,39 +329,39 @@ const typesOfSareesPost: BlogPost = {
   ],
   sources: [
     {
-      title: "Woven Narratives — Ministry of Culture, Government of India",
+      title: "Woven Narratives | Ministry of Culture, Government of India",
       href: "https://www.indiaculture.gov.in/node/38441",
     },
     {
-      title: "Woven Narratives exhibition catalogue — Ministry of Culture",
+      title: "Woven Narratives exhibition catalogue | Ministry of Culture",
       href: "https://www.indiaculture.gov.in/sites/default/files/pdf/Woven_Narratives_16012024.pdf",
     },
     {
-      title: "Varanasi weaving and Banarasi sarees — Incredible India",
+      title: "Varanasi weaving and Banarasi sarees | Incredible India",
       href: "https://www.incredibleindia.gov.in/en/uttar-pradesh/varanasi/let-us-walk-in-varanasi",
     },
     {
-      title: "Kanchipuram, home of the Kanjeevaram saree — Incredible India",
+      title: "Kanchipuram, home of the Kanjeevaram saree | Incredible India",
       href: "https://www.incredibleindia.gov.in/en/tamil-nadu/kanchipuram",
     },
     {
-      title: "Chanderi fabric — Incredible India",
+      title: "Chanderi fabric | Incredible India",
       href: "https://www.incredibleindia.gov.in/en/madhya-pradesh/chanderi-fabric",
     },
     {
-      title: "Paithani sarees — Incredible India",
+      title: "Paithani sarees | Incredible India",
       href: "https://www.prod.incredibleindia.gov.in/content/incredible-india-v2/en/destinations/aurangabad/paithani-sarees.html",
     },
     {
-      title: "Jamnagari Bandhani — Incredible India",
+      title: "Jamnagari Bandhani | Incredible India",
       href: "https://www.incredibleindia.gov.in/en/gujarat/dwarka/jamnagari-bandhani",
     },
     {
-      title: "Sambalpuri sarees and Odisha's ikat tradition — Incredible India",
+      title: "Sambalpuri sarees and Odisha's ikat tradition | Incredible India",
       href: "https://www.incredibleindia.gov.in/en/odisha/cuttack/discover-a-canvas-of-creativity-and-culture-in-cuttack",
     },
     {
-      title: "Geographical Indications: an introduction — Intellectual Property India",
+      title: "Geographical Indications: an introduction | Intellectual Property India",
       href: "https://ipindia.gov.in/page-content/geographical-indications-an-introduction",
     },
   ],
@@ -446,7 +446,7 @@ const sareeForEveryOccasionPost: BlogPost = {
       priority: "Light, movement and proportion",
       direction: "A stronger focal point with a clean silhouette",
       paragraphs: [
-        "Evening events allow colour, sheen and surface detail to respond to artificial light. This does not require maximum embellishment. One decisive element—a graphic pallu, an unusual blouse, a luminous border or a saturated colour—often has more impact than several competing statements.",
+        "Evening events allow colour, sheen and surface detail to respond to artificial light. This does not require maximum embellishment. One decisive element, such as a graphic pallu, an unusual blouse, a luminous border or a saturated colour, often has more impact than several competing statements.",
         "Receptions also tend to involve greetings, dining and dancing. A controlled pallu and a drape you have worn before can matter more than choosing the most dramatic fabric in the wardrobe. Test how the saree looks while walking and sitting, not only while standing in front of a mirror.",
       ],
       considerations: [
@@ -477,7 +477,7 @@ const sareeForEveryOccasionPost: BlogPost = {
       direction: "Polished structure without ceremonial excess",
       paragraphs: [
         "A conference dinner, awards evening, office celebration and cultural programme may all be described as formal, but they do not share exactly the same atmosphere. Read the room: professional events usually benefit from a clear silhouette, a controlled pallu and surface detail that remains secondary to your presence.",
-        "Restraint does not mean removing personality. An interesting border, thoughtful colour pairing or distinctive blouse can make the look memorable. The goal is versatility—the same saree should be able to move from a formal gathering to a dinner with a change of jewellery or styling.",
+        "Restraint does not mean removing personality. An interesting border, thoughtful colour pairing or distinctive blouse can make the look memorable. The goal is versatility: the same saree should be able to move from a formal gathering to a dinner with a change of jewellery or styling.",
       ],
       considerations: [
         "Keep pleats neat and the pallu secure if you will be presenting or networking.",
@@ -518,15 +518,15 @@ const sareeForEveryOccasionPost: BlogPost = {
   ],
   sources: [
     {
-      title: "Indian textiles — Victoria and Albert Museum",
+      title: "Indian textiles | Victoria and Albert Museum",
       href: "https://www.vam.ac.uk/articles/indian-textiles",
     },
     {
-      title: "Woven Narratives — Ministry of Culture, Government of India",
+      title: "Woven Narratives | Ministry of Culture, Government of India",
       href: "https://www.indiaculture.gov.in/node/38441",
     },
     {
-      title: "Basics of Saree Draping — Beauty & Wellness Sector Skill Council",
+      title: "Basics of Saree Draping | Beauty & Wellness Sector Skill Council",
       href: "https://www.bwssc.in/wp-content/uploads/2025/12/BWS_N9019_Basics-of-Saree-Draping_v1.0_Participant_Handobook.pdf",
     },
   ],
@@ -547,9 +547,9 @@ const sareeForYourBodyTypePost: BlogPost = {
   title: "How to Choose a Saree for Your Body Type",
   eyebrow: "The Saree Guide / 03",
   description:
-    "Learn how to choose a saree for your body type using fabric, borders, pleats and drape—without restrictive rules about what you can wear.",
+    "Learn how to choose a saree for your body type using fabric, borders, pleats and drape without restrictive rules about what you can wear.",
   excerpt:
-    "A body-positive guide to fabric behaviour, scale, borders, pleats, pallus and blouse proportions—with experiments instead of restrictions.",
+    "A body-positive guide to fabric behaviour, scale, borders, pleats, pallus and blouse proportions, with experiments instead of restrictions.",
   publishedAt: "2026-07-31",
   updatedAt: "2026-07-31",
   readingTime: "10 minute read",
@@ -564,7 +564,7 @@ const sareeForYourBodyTypePost: BlogPost = {
   },
   introductionHeading: "Your body is not a problem to solve",
   introduction: [
-    "Searches for how to choose a saree for your body type often lead to strict lists: one fabric for a petite frame, another for a curvy frame, and several things each person is told to avoid. A saree is far more adaptable than those rules suggest. The textile, border, pleats, pallu and blouse all change the final silhouette—and each can be adjusted to express a different preference.",
+    "Searches for how to choose a saree for your body type often lead to strict lists: one fabric for a petite frame, another for a curvy frame, and several things each person is told to avoid. A saree is far more adaptable than those rules suggest. The textile, border, pleats, pallu and blouse all change the final silhouette, and each can be adjusted to express a different preference.",
     "A more useful question is not, ‘What am I allowed to wear?’ but, ‘What effect would I like to create?’ You may want a long uninterrupted line, strong structure, generous volume, a defined waist or an easy fluid drape. This guide turns those intentions into practical choices you can test in front of a mirror.",
   ],
   startingPoints: [
@@ -683,15 +683,15 @@ const sareeForYourBodyTypePost: BlogPost = {
   ],
   sources: [
     {
-      title: "Basics of Saree Draping — Beauty & Wellness Sector Skill Council",
+      title: "Basics of Saree Draping | Beauty & Wellness Sector Skill Council",
       href: "https://www.bwssc.in/wp-content/uploads/2025/12/BWS_N9019_Basics-of-Saree-Draping_v1.0_Participant_Handobook.pdf",
     },
     {
-      title: "Styling My Handloom — Office of the Development Commissioner for Handlooms",
+      title: "Styling My Handloom | Office of the Development Commissioner for Handlooms",
       href: "https://www.handlooms.nic.in/assets/img/EBOOK/STYLING%20MY%20HANDLOO.pdf",
     },
     {
-      title: "Indian textiles — Victoria and Albert Museum",
+      title: "Indian textiles | Victoria and Albert Museum",
       href: "https://www.vam.ac.uk/articles/indian-textiles",
     },
   ],
@@ -714,7 +714,7 @@ const howToDrapeSareePost: BlogPost = {
   description:
     "Learn how to drape a saree with this beginner-friendly Nivi guide covering preparation, pleats, pallu, pinning and final adjustments.",
   excerpt:
-    "A calm, beginner-friendly guide to the common Nivi drape—from preparing the foundation to setting the pleats and pallu securely.",
+    "A calm, beginner-friendly guide to the common Nivi drape, from preparing the foundation to setting the pleats and pallu securely.",
   publishedAt: "2026-08-04",
   updatedAt: "2026-08-04",
   readingTime: "9 minute read",
@@ -837,7 +837,7 @@ const howToDrapeSareePost: BlogPost = {
         "For an open pallu, spread the visible width across the shoulder and let the border fall clearly. For a pleated pallu, form even folds from the upper edge, place the border where you want it to show and pin the stack securely to the blouse at the shoulder.",
         "Complete the drape by looking from front, side and back. Walk, sit, turn, use a step and reach forward. Check that the hem clears the feet, the front pleats remain vertical, the waist feels secure and the pallu does not limit movement.",
       ],
-      tip: "Make one adjustment at a time—pallu length, pleat position or waist tension—so you can see which change solved the problem.",
+      tip: "Make one adjustment at a time, whether pallu length, pleat position or waist tension, so you can see which change solved the problem.",
     },
   ],
   troubleshooting: [
@@ -869,15 +869,15 @@ const howToDrapeSareePost: BlogPost = {
   ],
   sources: [
     {
-      title: "Basics of Saree Draping — Beauty & Wellness Sector Skill Council",
+      title: "Basics of Saree Draping | Beauty & Wellness Sector Skill Council",
       href: "https://www.bwssc.in/wp-content/uploads/2025/12/BWS_N9019_Basics-of-Saree-Draping_v1.0_Participant_Handobook.pdf",
     },
     {
-      title: "Styling My Handloom — Office of the Development Commissioner for Handlooms",
+      title: "Styling My Handloom | Office of the Development Commissioner for Handlooms",
       href: "https://www.handlooms.nic.in/assets/img/EBOOK/STYLING%20MY%20HANDLOO.pdf",
     },
     {
-      title: "Beauty Therapist, Class XII — PSSCIVE, NCERT",
+      title: "Beauty Therapist, Class XII | PSSCIVE, NCERT",
       href: "https://psscive.ac.in/storage/uploads/textbooks/pdf/english/beauty-therapist-english-class-%2012.pdf",
     },
   ],
@@ -900,7 +900,7 @@ const howToCareForSareesPost: BlogPost = {
   description:
     "Learn how to care for sarees safely, from airing and cleaning decisions to drying, folding, storage and protection from light and pests.",
   excerpt:
-    "A careful guide to airing, cleaning, drying and storing sarees—built around the textile rather than one universal washing rule.",
+    "A careful guide to airing, cleaning, drying and storing sarees, built around the textile rather than one universal washing rule.",
   publishedAt: "2026-08-08",
   updatedAt: "2026-08-08",
   readingTime: "10 minute read",
@@ -963,7 +963,7 @@ const howToCareForSareesPost: BlogPost = {
       principle: "Permission before method",
       outcome: "Controlled wet cleaning",
       paragraphs: [
-        "Home washing is appropriate only when the maker or reliable care information confirms that the complete saree—not just its main fibre—is washable. A cotton body does not make attached zari, embroidery, lining or unstable dye safe in water. When colourfastness is doubtful, do not use a hidden corner test as permission to wash the entire saree; consult a specialist.",
+        "Home washing is appropriate only when the maker or reliable care information confirms that the complete saree, not just its main fibre, is washable. A cotton body does not make attached zari, embroidery, lining or unstable dye safe in water. When colourfastness is doubtful, do not use a hidden corner test as permission to wash the entire saree; consult a specialist.",
         "If hand washing is explicitly allowed, use a clean basin, cool or appropriately specified water and a small amount of suitable mild detergent. Avoid scrubbing, twisting, long soaking and wringing. Wet textiles are heavier and more vulnerable to distortion, so lift the saree with both hands and support its full weight while moving it.",
       ],
       checklist: [
@@ -1028,7 +1028,7 @@ const howToCareForSareesPost: BlogPost = {
       ],
       checklist: [
         "Keep the storage area dark, dry, clean and ventilated.",
-        "Inspect folds, corners and adjacent shelves—not only visible surfaces.",
+        "Inspect folds, corners and adjacent shelves, not only visible surfaces.",
         "Isolate affected pieces and avoid improvised chemical treatments.",
       ],
     },
@@ -1062,15 +1062,15 @@ const howToCareForSareesPost: BlogPost = {
   ],
   sources: [
     {
-      title: "Tips on silk care — Central Silk Board, Government of India",
+      title: "Tips on silk care | Central Silk Board, Government of India",
       href: "https://csb.gov.in/index.php/silk-sericulture/silk/vanya-silk",
     },
     {
-      title: "Basic care of textiles — Canadian Conservation Institute",
+      title: "Basic care of textiles | Canadian Conservation Institute",
       href: "https://www.canada.ca/en/conservation-institute/services/care-objects/textiles-costumes/basic-care-textiles.html",
     },
     {
-      title: "Flat storage for textiles — Canadian Conservation Institute",
+      title: "Flat storage for textiles | Canadian Conservation Institute",
       href: "https://www.canada.ca/en/conservation-institute/services/conservation-preservation-publications/canadian-conservation-institute-notes/flat-storage-textiles.html",
     },
   ],
@@ -1091,9 +1091,9 @@ const sareeFabricsPost: BlogPost = {
   title: "Saree Fabrics Explained: Silk, Cotton and Blends",
   eyebrow: "The Saree Guide / 06",
   description:
-    "Understand saree fabrics including silk, cotton, linen, blends and man-made fibres—and learn why weave, finish and weight matter too.",
+    "Understand saree fabrics including silk, cotton, linen, blends and man-made fibres, and learn why weave, finish and weight matter too.",
   excerpt:
-    "A practical vocabulary for silk, cotton, linen, blends and man-made fibres—and the construction terms that are often mistaken for fibres.",
+    "A practical vocabulary for silk, cotton, linen, blends and man-made fibres, including the construction terms that are often mistaken for fibres.",
   publishedAt: "2026-08-12",
   updatedAt: "2026-08-12",
   readingTime: "10 minute read",
@@ -1134,7 +1134,7 @@ const sareeFabricsPost: BlogPost = {
     },
     {
       term: "Hand",
-      meaning: "The way a textile feels and behaves—soft, crisp, dry, smooth, springy, heavy or fluid.",
+      meaning: "The way a textile feels and behaves: soft, crisp, dry, smooth, springy, heavy or fluid.",
     },
   ],
   profiles: [
@@ -1263,19 +1263,19 @@ const sareeFabricsPost: BlogPost = {
   ],
   sources: [
     {
-      title: "Indian textiles — Victoria and Albert Museum",
+      title: "Indian textiles | Victoria and Albert Museum",
       href: "https://www.vam.ac.uk/articles/indian-textiles",
     },
     {
-      title: "Types of silk — Central Silk Board, Government of India",
+      title: "Types of silk | Central Silk Board, Government of India",
       href: "https://csb.gov.in/silk-sericulture/silk",
     },
     {
-      title: "Indian man-made fibre textile industry — Ministry of Textiles",
-      href: "https://texmin.nic.in/sites/default/files/Indian%20Manmade%20fibre%20textile%20industry_0.pdf",
+      title: "Indian man-made fibre textile industry | Ministry of Textiles",
+      href: "https://www.texmin.gov.in/static/uploads/2025/07/2f0f0b069867bf4e67a7b9461f062c77.pdf",
     },
     {
-      title: "Quality assurance basics for cotton — CottonWorks",
+      title: "Quality assurance basics for cotton | CottonWorks",
       href: "https://cottonworks.com/learning-hub/quality-assurance/quality-assurance-basics/",
     },
   ],
@@ -1299,7 +1299,7 @@ const howToChooseSareeBlousePost: BlogPost = {
   description:
     "Learn how to choose a saree blouse by checking fit, fabric, neckline, sleeves, closure and movement before the final fitting.",
   excerpt:
-    "A practical guide to blouse fit, fabric, neckline, sleeves and finishing—built around movement and the saree you plan to wear.",
+    "A practical guide to blouse fit, fabric, neckline, sleeves and finishing, built around movement and the saree you plan to wear.",
   publishedAt: "2026-08-16",
   updatedAt: "2026-08-16",
   readingTime: "10 minute read",
@@ -1362,7 +1362,7 @@ const howToChooseSareeBlousePost: BlogPost = {
       questions: [
         "How many hours must the blouse remain comfortable?",
         "Will the pallu be open, pleated, pinned or changed during the event?",
-        "Which movements—driving, dancing, lifting or sitting on the floor—must be tested?",
+        "Which movements, such as driving, dancing, lifting or sitting on the floor, must be tested?",
       ],
     },
     {
@@ -1453,15 +1453,15 @@ const howToChooseSareeBlousePost: BlogPost = {
   ],
   sources: [
     {
-      title: "Self Employed Tailor, Grade XII — PSSCIVE",
+      title: "Self Employed Tailor, Grade XII | PSSCIVE",
       href: "https://www.psscive.ac.in/storage/uploads/textbooks/pdf/english/self-employed-tailor-english-class-%2012.pdf",
     },
     {
-      title: "Vocational practical guidelines for cutting and tailoring — NIOS",
+      title: "Vocational practical guidelines for cutting and tailoring | NIOS",
       href: "https://cdn.nios.ac.in/cms/documents/2020/Oct/21/Vocational_Guideline_Practical_Final.pdf",
     },
     {
-      title: "Soft and secure garment seams — Coats",
+      title: "Soft and secure garment seams | Coats",
       href: "https://www.coats.com/en/info-hub/about-soft-and-secure-seams-for-activewear-and-intimates/",
     },
   ],
@@ -1469,7 +1469,7 @@ const howToChooseSareeBlousePost: BlogPost = {
     "This guide translates broad garment-construction principles into a blouse-fitting checklist. Pattern, support and alteration decisions must be made for the individual wearer, fabric and design by a qualified tailor or fitter.",
   cta: {
     eyebrow: "Begin with movement",
-    heading: "Let the blouse support the saree—and the life you wear it into.",
+    heading: "Let the blouse support the saree and the life you wear it into.",
     body: "Explore ANURRAKTI's ready-to-wear pieces, designed as complete expressions rather than an afterthought to the drape.",
     href: "/ready-to-wear",
     label: "Explore ready to wear",
@@ -1483,7 +1483,7 @@ const sareeColourCombinationsPost: BlogPost = {
   seoTitle: "Saree Colour Combinations: Styling Guide",
   eyebrow: "The Saree Guide / 08",
   description:
-    "Build saree colour combinations using contrast, proportion, blouse choices and lighting—without relying on rigid styling rules.",
+    "Build saree colour combinations using contrast, proportion, blouse choices and lighting without relying on rigid styling rules.",
   excerpt:
     "Six reliable ways to combine a saree, border, pallu and blouse using colour relationship, contrast and proportion.",
   publishedAt: "2026-08-20",
@@ -1506,7 +1506,7 @@ const sareeColourCombinationsPost: BlogPost = {
   colourTerms: [
     {
       term: "Hue",
-      meaning: "The colour family—red, yellow, green, blue and the transitions between them.",
+      meaning: "The colour family: red, yellow, green, blue and the transitions between them.",
     },
     {
       term: "Value",
@@ -1518,7 +1518,7 @@ const sareeColourCombinationsPost: BlogPost = {
     },
     {
       term: "Temperature",
-      meaning: "A useful relative description—one red may appear warmer or cooler when compared with another red.",
+      meaning: "A useful relative description: one red may appear warmer or cooler when compared with another red.",
     },
     {
       term: "Proportion",
@@ -1537,7 +1537,7 @@ const sareeColourCombinationsPost: BlogPost = {
       effect: "Depth without a sharp break",
       paragraphs: [
         "A tonal combination repeats one colour family in lighter, darker, clearer or more muted versions. Think rust with terracotta, rose with wine, or pale blue with ink. Because the hues are related, the value difference becomes especially important: without enough light-dark separation, the blouse and saree can merge unintentionally.",
-        "This approach is useful when the textile already carries detail and you want the silhouette to read as one continuous composition. Place the strongest variation where you want attention—the blouse, border or pallu—rather than making every element equally intense.",
+        "This approach is useful when the textile already carries detail and you want the silhouette to read as one continuous composition. Place the strongest variation in the blouse, border or pallu rather than making every element equally intense.",
       ],
       questions: [
         "Can you still distinguish the blouse and border from the saree body at a distance?",
@@ -1552,7 +1552,7 @@ const sareeColourCombinationsPost: BlogPost = {
       effect: "Movement with visual continuity",
       paragraphs: [
         "Neighbouring hues create a gentle transition: yellow into green, blue into violet, or red into orange. In a saree, this can connect a border to the body or allow a blouse to introduce a new colour without feeling detached from the textile.",
-        "The relationship becomes clearer when one hue leads and the others support it. If every colour has the same area and intensity, the result can feel busy. Repeat the secondary hue once—in the blouse, jewellery, piping or small motif—to make the decision look intentional.",
+        "The relationship becomes clearer when one hue leads and the others support it. If every colour has the same area and intensity, the result can feel busy. Repeat the secondary hue once in the blouse, jewellery, piping or small motif to make the decision look intentional.",
       ],
       questions: [
         "Which hue is dominant and which one supports it?",
@@ -1658,19 +1658,19 @@ const sareeColourCombinationsPost: BlogPost = {
   ],
   sources: [
     {
-      title: "The Munsell colour sphere: hue, value and chroma — Munsell",
+      title: "The Munsell colour sphere: hue, value and chroma | Munsell",
       href: "https://munsell.com/color-blog/the-munsell-book-of-color-1929-the-color-sphere/1000/",
     },
     {
-      title: "Interaction of Color by Josef Albers — Smithsonian Institution",
+      title: "Interaction of Color by Josef Albers | Smithsonian Institution",
       href: "https://www.si.edu/object/interaction-color-josef-albers%3Asiris_sil_1025770",
     },
     {
-      title: "Colorimetry and standard viewing conditions — CIE",
+      title: "Colorimetry and standard viewing conditions | CIE",
       href: "https://www.cie.co.at/publications/colorimetry-4th-edition",
     },
     {
-      title: "Indian textiles and dye traditions — Victoria and Albert Museum",
+      title: "Indian textiles and dye traditions | Victoria and Albert Museum",
       href: "https://www.vam.ac.uk/articles/indian-textiles",
     },
   ],

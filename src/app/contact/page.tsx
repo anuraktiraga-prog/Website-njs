@@ -81,7 +81,7 @@ export default function ContactPage() {
                 Tell us what speaks to you.
               </h1>
               <p className="type-lead mt-7 max-w-2xl text-stone-700">
-                A piece, a colour, an occasion or a feeling—we will help you find
+                A piece, a colour, an occasion or a feeling. We will help you find
                 the expression that feels right.
               </p>
             </div>
@@ -171,6 +171,18 @@ export default function ContactPage() {
                 confirmed as part of the conversation. You do not need to make a choice
                 before getting in touch; the purpose of the enquiry is to help you review
                 the available information at your own pace.
+              </p>
+              <p>
+                To make the reply more useful, include the collection name and piece
+                number, your preferred contact method, and the questions you would like
+                answered. A general enquiry is equally welcome if you are still comparing
+                EHSAAS and RAGA or have not chosen a particular saree.
+              </p>
+              <p>
+                Responses focus on information available for the referenced piece. If
+                you are considering several sarees, list them together so their recorded
+                palettes, product views and current availability can be compared within
+                one conversation.
               </p>
             </div>
             <EnquiryForm />

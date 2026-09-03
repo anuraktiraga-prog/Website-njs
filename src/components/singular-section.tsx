@@ -13,7 +13,7 @@ export function SingularSection() {
             Wear what speaks to your soul.
           </h2>
           <p className="type-body mt-6 max-w-lg text-stone-300">
-            The right piece should feel instinctive—an expression of who you
+            The right piece should feel instinctive: an expression of who you
             are, carried with confidence and remembered with emotion.
           </p>
         </div>

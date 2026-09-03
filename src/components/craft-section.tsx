@@ -23,7 +23,7 @@ export function CraftSection() {
             Crafted once. Remembered for a lifetime.
           </h1>
           <p className="type-body mt-7 max-w-xl text-[#4d443d]">
-            ANURRAKTI is a study in memory, craft and character—where Indian
+            ANURRAKTI is a study in memory, craft and character, where Indian
             textile heritage becomes a deeply personal expression.
           </p>
           <div className="mt-7 max-w-xl space-y-5 text-base leading-7 text-[#4d443d]">
@@ -46,6 +46,12 @@ export function CraftSection() {
               you, a composition that feels familiar, or a drape connected to a moment.
               Private enquiry creates space to ask about availability, material and
               details before making a decision.
+            </p>
+            <p>
+              The online House is organised in layers: first the collection mood, then
+              the complete product view, followed by closer studies and private enquiry.
+              This keeps expression and product information connected without treating
+              campaign atmosphere as evidence about a specific saree.
             </p>
           </div>
           <div className="mt-12 grid gap-0 border-t border-stone-900/15">

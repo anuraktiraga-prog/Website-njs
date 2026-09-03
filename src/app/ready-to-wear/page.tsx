@@ -61,6 +61,14 @@ export default function ReadyToWearPage() {
                 Future updates will be published on this page, keeping the collection
                 information, imagery and ways to enquire together in one place. That will
                 make it clear when the expression moves from preview to availability.
+                Until then, the page remains limited to confirmed information instead of
+                presenting unannounced products, materials, sizing or launch dates.
+              </p>
+              <p>
+                The existing saree collections remain separate from this preview. Their
+                product pages contain the currently available imagery, recorded palettes
+                and enquiry references, so visitors looking for an ANURRAKTI piece today
+                can continue without mistaking future ready-to-wear plans for available stock.
               </p>
             </div>
           </div>

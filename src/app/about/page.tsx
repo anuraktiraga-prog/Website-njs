@@ -108,6 +108,19 @@ export default function AboutPage() {
                 right, enquire privately to confirm material composition,
                 current availability and closer design information.
               </p>
+              <p className="type-body mt-5 max-w-2xl text-stone-700">
+                Campaign imagery establishes the atmosphere of the House, while
+                product photography and recorded details support comparison. Keeping
+                those roles distinct makes the enquiry more precise: the collection
+                name, piece number, availability, composition, care and further design
+                information can be discussed together for the exact saree you are viewing.
+              </p>
+              <p className="type-body mt-5 max-w-2xl text-stone-700">
+                You can browse from either direction: compare all six pieces when a
+                collection mood draws you in, or begin with an individual product page
+                when a particular palette has already caught your attention. Both paths
+                lead back to the same piece-specific enquiry process.
+              </p>
             </div>
           </div>
 

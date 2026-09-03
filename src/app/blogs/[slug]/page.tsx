@@ -464,7 +464,7 @@ function OccasionsArticle({ post }: { post: OccasionsBlogPost }) {
         <ol className="mt-7 grid gap-4 border-l border-[#7e271e]/40 pl-6 text-stone-700">
           <li><strong className="font-semibold text-stone-950">Does it suit the room?</strong> Check the invitation, venue, time and your role.</li>
           <li><strong className="font-semibold text-stone-950">Can you wear it for the full event?</strong> Sit, walk and raise your arms in the complete look.</li>
-          <li><strong className="font-semibold text-stone-950">Does it still feel like you?</strong> Keep one choice—colour, textile, blouse or jewellery—distinctly personal.</li>
+          <li><strong className="font-semibold text-stone-950">Does it still feel like you?</strong> Keep one choice, whether colour, textile, blouse or jewellery, distinctly personal.</li>
         </ol>
       </section>
 
@@ -544,7 +544,7 @@ function StylingArticle({ post }: { post: StylingBlogPost }) {
         <ol className="mt-7 grid gap-4 border-l border-[#7e271e]/40 pl-6 text-stone-700">
           <li><strong className="font-semibold text-stone-950">Look from a distance.</strong> Read the complete silhouette before examining details.</li>
           <li><strong className="font-semibold text-stone-950">Test movement.</strong> Walk, sit and use the stairs in the planned footwear.</li>
-          <li><strong className="font-semibold text-stone-950">Change one variable.</strong> Adjust the pallu, blouse contrast or pleats—not everything at once.</li>
+          <li><strong className="font-semibold text-stone-950">Change one variable.</strong> Adjust the pallu, blouse contrast or pleats, but not everything at once.</li>
           <li><strong className="font-semibold text-stone-950">Keep the version that feels like you.</strong> Confidence comes from recognition, not compliance.</li>
         </ol>
         <p className="mt-7 text-stone-700">

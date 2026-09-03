@@ -47,7 +47,7 @@ export default function CollectionPage() {
               Choose what speaks to you.
             </h1>
             <p className="type-body mt-6 max-w-2xl text-stone-700">
-              EHSAAS and RAGA carry different moods of the ANURRAKTI language—each
+              EHSAAS and RAGA carry different moods of the ANURRAKTI language, each
               shaped by emotion, artistry and the enduring presence of the drape.
             </p>
           </div>

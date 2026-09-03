@@ -12,7 +12,7 @@ export function ReadyToWearSection() {
           <p className="eyebrow">Ready to wear</p>
           <h2 className="section-title mt-5">A new expression, soon.</h2>
           <p className="mt-6 text-base leading-7 text-stone-700">
-            Dresses and kurtis are taking shape—everyday pieces crafted with
+            Dresses and kurtis are taking shape as everyday pieces crafted with
             the same passion, colour and feeling.
           </p>
           <Link className="btn-secondary mt-8" href="/ready-to-wear">Stay tuned</Link>

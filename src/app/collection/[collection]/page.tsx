@@ -131,6 +131,12 @@ export default async function ArchivePage({ params }: ArchivePageProps) {
                 private enquiry, so the information you receive can be specific to the
                 piece you are considering.
               </p>
+              <p>
+                Open more than one piece if you are comparing colour, proportion or
+                visual balance. Returning to this archive keeps all six drapes together,
+                while each individual page preserves the exact collection and piece
+                reference needed for a focused enquiry.
+              </p>
             </div>
           </div>
         </section>

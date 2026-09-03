@@ -72,7 +72,7 @@ const siteStructuredData = {
       name: "ANURRAKTI",
       url: "https://www.anurrakti.com",
       description:
-        "ANURRAKTI is an Indian fashion house of one-of-one sarees—crafted once, remembered for a lifetime.",
+        "ANURRAKTI is an Indian fashion house of one-of-one sarees, crafted once and remembered for a lifetime.",
       logo: {
         "@type": "ImageObject",
         url: "https://www.anurrakti.com/logos/anurrakti-stamp.png",
@@ -99,7 +99,7 @@ const siteStructuredData = {
       url: "https://www.anurrakti.com",
       name: "ANURRAKTI",
       description:
-        "An Indian fashion house of one-of-one sarees—crafted once, remembered for a lifetime.",
+        "An Indian fashion house of one-of-one sarees, crafted once and remembered for a lifetime.",
       inLanguage: "en-IN",
       publisher: { "@id": "https://www.anurrakti.com/#organization" },
     },

@@ -13,7 +13,7 @@ export function ViewingSection() {
         <p className="eyebrow">Private enquiry</p>
         <h2 className="type-section mt-5 max-w-3xl font-serif">Tell us what speaks to you.</h2>
         <p className="type-body mt-5 max-w-xl text-stone-700">
-          A piece, a colour, an occasion or simply a feeling—we will help you
+          A piece, a colour, an occasion or simply a feeling. We will help you
           find what feels right.
         </p>
       </div>

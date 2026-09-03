@@ -239,6 +239,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 brings together {colours.join(", ")}. As a one-of-one saree, current availability and confirmed material
                 or design details are shared directly through private enquiry.
               </p>
+              <p className="mt-4 text-sm leading-6 text-stone-700">
+                Use the complete product image to compare proportion and the relationship between {colours.join(", ")}.
+                The closer photographs are supporting views rather than substitutes for the full drape. Screen settings
+                and photographic light can affect how colour appears, so ask for any additional information you need
+                before deciding. Refer to {piece.collectionName} {piece.title} in your message so current availability,
+                material composition, care and relevant design details can be confirmed for this exact saree. You can
+                also return to the {collection.name} archive to compare it with the other five pieces before beginning
+                an enquiry.
+              </p>
             </div>
           </section>
         </article>
