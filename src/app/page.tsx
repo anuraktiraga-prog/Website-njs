@@ -49,9 +49,9 @@ export default function Home() {
         <HomeCollectionShowcase />
         <BrandPropositionSection />
         <SareeDiscoverySection />
+        <InstagramGallery />
         <SingularSection />
         <ViewingSection />
-        <InstagramGallery />
       </main>
     </>
   );
