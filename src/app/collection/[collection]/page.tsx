@@ -31,6 +31,12 @@ export async function generateMetadata({ params }: ArchivePageProps): Promise<Me
       url: collectionPath(collection),
       images: [{ url: collection.pieces[0].src, width: 1080, height: 1350, alt: collection.pieces[0].alt }],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: `${collection.name} Collection | ANURRAKTI`,
+      description: collection.description,
+      images: [collection.pieces[0].src],
+    },
   };
 }
 

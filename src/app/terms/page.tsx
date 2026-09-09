@@ -7,6 +7,18 @@ export const metadata: Metadata = {
   description: "Terms and conditions governing use of the ANURRAKTI website and its enquiry services.",
   alternates: { canonical: "/terms" },
   robots: { index: true, follow: true },
+  openGraph: {
+    title: "Terms and Conditions | ANURRAKTI",
+    description: "Terms and conditions governing use of the ANURRAKTI website and its enquiry services.",
+    url: "/terms",
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "ANURRAKTI logo" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms and Conditions | ANURRAKTI",
+    description: "Terms and conditions governing use of the ANURRAKTI website and its enquiry services.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function TermsPage() {

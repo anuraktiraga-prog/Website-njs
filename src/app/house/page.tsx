@@ -12,6 +12,13 @@ export const metadata: Metadata = {
     description:
       "The point of view behind ANURRAKTI and its unique, one-of-one Indian sarees.",
     url: "/house",
+    images: [{ url: "/images/campaign/house-textile-closeup.png", width: 2220, height: 1481, alt: "Close view of an ANURRAKTI textile" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "House of ANURRAKTI | Indian Saree House",
+    description: "The point of view behind ANURRAKTI and its unique, one-of-one Indian sarees.",
+    images: ["/images/campaign/house-textile-closeup.png"],
   },
 };
 

@@ -37,8 +37,13 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   const url = productPath(piece);
   const productImageUrl = `${url}/opengraph-image`;
   const [primaryColour, secondaryColour] = piece.palette.split(" / ");
-  const productTitle = `${piece.collectionName} ${piece.title} ${primaryColour} & ${secondaryColour} One-of-One Saree`;
-  const productDescription = `Explore ${piece.collectionName} ${piece.title}, a one-of-one saree in ${piece.palette.replaceAll(" / ", ", ")}. View the complete drape and details, then enquire privately.`;
+  const isIvoryCheckedPiece = piece.collectionId === "ehsaas" && piece.slug === "04";
+  const productTitle = isIvoryCheckedPiece
+    ? `${piece.collectionName} ${piece.title} Ivory Checked One-of-One Saree`
+    : `${piece.collectionName} ${piece.title} ${primaryColour} & ${secondaryColour} One-of-One Saree`;
+  const productDescription = isIvoryCheckedPiece
+    ? `Explore ${piece.collectionName} ${piece.title}, a one-of-one saree with an ivory checked composition. View the complete drape and details, then enquire privately.`
+    : `Explore ${piece.collectionName} ${piece.title}, a one-of-one saree in ${piece.palette.replaceAll(" / ", ", ")}. View the complete drape and details, then enquire privately.`;
 
   return {
     title: productTitle,

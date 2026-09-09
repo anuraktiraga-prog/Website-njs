@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { contactLinks } from "@/lib/collection";
+import { FooterEnquiryCta } from "@/components/footer-enquiry-cta";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-stone-900/10 bg-[#efe5d7]">
+      <FooterEnquiryCta />
       <div className="mx-auto grid max-w-[90rem] gap-7 px-5 py-9 sm:px-8 lg:grid-cols-[0.22fr_0.58fr_0.2fr] lg:items-center lg:px-12">
         <p className="font-serif text-sm uppercase tracking-[0.16em] text-stone-800">
           ANURRAKTI

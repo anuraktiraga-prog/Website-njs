@@ -13,7 +13,7 @@ const navItems = [
   { label: "The House", href: "/house" },
   { label: "Blog", href: "/blogs" },
   { label: "Ready to Wear", href: "/ready-to-wear" },
-  { label: "Enquire", href: "/#viewing" },
+  { label: "Private enquiry", href: "/#viewing" },
 ];
 
 const collectionItems = [
@@ -109,10 +109,19 @@ export function SiteHeader() {
       <div className={`overflow-hidden bg-[#7e271e] text-[#fff7ec] transition-[max-height,opacity,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
         isCompact ? "max-h-0 py-0 opacity-0" : "max-h-10 px-4 py-1.5 opacity-100"
       } text-center text-[10px] font-semibold uppercase tracking-[0.16em] sm:text-[11px]`}>
-        Discover the ANURRAKTI collections
-        <Link className="ml-3 underline underline-offset-4" href="/collection">
-          Explore
-        </Link>
+        Private enquiries
+        <a
+          className="ml-3 underline underline-offset-4"
+          href={contactLinks.whatsappPrimary}
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => {
+            trackEvent("whatsapp_click", { placement: "announcement" });
+            trackEvent("direct_contact_click", { channel: "whatsapp", placement: "announcement" });
+          }}
+        >
+          Speak with ANURRAKTI
+        </a>
       </div>
 
       <div className={`relative mx-auto flex max-w-[90rem] items-center justify-between px-4 transition-[height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-8 ${isCompact ? "h-14" : "h-16 lg:h-[4.5rem]"}`}>

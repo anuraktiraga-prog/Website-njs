@@ -8,6 +8,20 @@ export const metadata: Metadata = {
     "Learn what information ANURRAKTI collects through its website, why it is used, which services process it and the choices available to you.",
   alternates: { canonical: "/privacy" },
   robots: { index: true, follow: true },
+  openGraph: {
+    title: "Privacy Policy | ANURRAKTI",
+    description:
+      "Learn what information ANURRAKTI collects through its website, why it is used, which services process it and the choices available to you.",
+    url: "/privacy",
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "ANURRAKTI logo" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | ANURRAKTI",
+    description:
+      "Learn what information ANURRAKTI collects through its website and the choices available to you.",
+    images: ["/opengraph-image.png"],
+  },
 };
 
 export default function PrivacyPage() {

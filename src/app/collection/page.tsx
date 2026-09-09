@@ -17,18 +17,62 @@ export const metadata: Metadata = {
     url: "/collection",
     images: [{ url: "/images/campaign/red-grey-portrait.jpg", width: 1760, height: 2200, alt: "ANURRAKTI campaign portrait" }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Designer Sarees | Exclusive Collections | ANURRAKTI",
+    description:
+      "Explore twelve unique designer sarees across the exclusive EHSAAS and RAGA collections from the House of ANURRAKTI.",
+    images: ["/images/campaign/red-grey-portrait.jpg"],
+  },
 };
 
 export default function CollectionPage() {
+  const collectionUrl = "https://www.anurrakti.com/collection";
   const collectionStructuredData = {
     "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    name: "ANURRAKTI Designer Saree Collections",
-    hasPart: collections.map((collection) => ({
-      "@type": "Collection",
-      name: collection.name,
-      url: `https://www.anurrakti.com${collectionPath(collection)}`,
-    })),
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${collectionUrl}#webpage`,
+        url: collectionUrl,
+        name: "ANURRAKTI Designer Saree Collections",
+        description:
+          "Explore twelve unique designer sarees across the EHSAAS and RAGA collections from ANURRAKTI.",
+        inLanguage: "en-IN",
+        isPartOf: { "@id": "https://www.anurrakti.com/#website" },
+        mainEntity: { "@id": `${collectionUrl}#item-list` },
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${collectionUrl}#item-list`,
+        name: "ANURRAKTI saree collections",
+        numberOfItems: collections.length,
+        itemListElement: collections.map((collection, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: collection.name,
+          url: `https://www.anurrakti.com${collectionPath(collection)}`,
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${collectionUrl}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://www.anurrakti.com/",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Collections",
+            item: collectionUrl,
+          },
+        ],
+      },
+    ],
   };
 
   return (
@@ -36,7 +80,7 @@ export default function CollectionPage() {
       <SiteHeader />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionStructuredData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionStructuredData).replace(/</g, "\\u003c") }}
       />
       <main className="flex-1">
         <section className="section-shell border-b border-stone-900/10 py-14 sm:py-20 lg:py-24">

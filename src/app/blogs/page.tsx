@@ -23,6 +23,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Saree Guides & Stories | ANURRAKTI",
+    description: "Guides to sarees, regional textile traditions, styling, selection and care.",
+    images: ["/images/campaign/house-textile-closeup.png"],
+  },
 };
 
 export default function BlogsPage() {
@@ -42,6 +48,7 @@ export default function BlogsPage() {
       url: `https://www.anurrakti.com${blogPath(post)}`,
       datePublished: post.publishedAt,
       dateModified: post.updatedAt,
+      author: { "@id": "https://www.anurrakti.com/about#editorial" },
     })),
   };
 

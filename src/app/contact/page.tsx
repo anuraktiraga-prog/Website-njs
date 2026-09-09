@@ -16,6 +16,13 @@ export const metadata: Metadata = {
     description:
       "Tell us what speaks to you and begin a private conversation with ANURRAKTI.",
     url: "/contact",
+    images: [{ url: "/images/campaign/red-grey-portrait.jpg", width: 1760, height: 2200, alt: "ANURRAKTI red and grey saree campaign portrait" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact ANURRAKTI",
+    description: "Tell us what speaks to you and begin a private conversation with ANURRAKTI.",
+    images: ["/images/campaign/red-grey-portrait.jpg"],
   },
 };
 

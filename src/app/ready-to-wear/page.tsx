@@ -19,6 +19,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ready to Wear | ANURRAKTI",
+    description: "A forthcoming ready-to-wear expression from ANURRAKTI.",
+    images: ["/images/campaign/blue-check-portrait-anurrakti.png"],
+  },
 };
 
 export default function ReadyToWearPage() {

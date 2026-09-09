@@ -4,8 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { campaignImages } from "@/lib/collection";
+import { campaignImages, contactLinks } from "@/lib/collection";
 import { GyroDepth } from "@/components/experimental/gyro-depth";
+import { WhatsAppIcon } from "@/components/social-icons";
 import { trackEvent } from "@/lib/analytics";
 
 export function HeroSection() {
@@ -21,6 +22,7 @@ export function HeroSection() {
     offset: ["start start", "end start"],
   });
   const [heroImage] = campaignImages;
+  const isHeroContentVisible = isContentVisible || Boolean(prefersReducedMotion);
 
   const backdropY = useTransform(scrollYProgress, [0, 1], [0, -12]);
   const backdropScale = useTransform(scrollYProgress, [0, 1], [1.04, 1.07]);
@@ -38,6 +40,14 @@ export function HeroSection() {
     }, 500);
     return () => window.clearTimeout(revealTimer);
   }, [isImageReady]);
+
+  useEffect(() => {
+    const revealFallback = window.setTimeout(() => {
+      setIsContentVisible(true);
+    }, 1200);
+
+    return () => window.clearTimeout(revealFallback);
+  }, []);
 
   useEffect(() => {
     if (!isImageReady || prefersReducedMotion) return;
@@ -98,6 +108,7 @@ export function HeroSection() {
               sizes="100vw"
               quality={70}
               onLoad={() => setIsImageReady(true)}
+              onError={() => setIsImageReady(true)}
               className="h-full w-full object-cover object-[52%_28%]"
             />
             {shouldLoadVideo ? (
@@ -123,7 +134,7 @@ export function HeroSection() {
           <div className="max-w-2xl">
             <motion.p
               initial={{ opacity: 0, y: 16 }}
-              animate={isContentVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+              animate={isHeroContentVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               className="mb-5 text-xs uppercase tracking-[0.3em] text-stone-200"
             >
@@ -131,8 +142,8 @@ export function HeroSection() {
             </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 32, letterSpacing: "0.08em" }}
-              animate={isContentVisible ? { opacity: 1, y: 0, letterSpacing: "-0.035em" } : { opacity: 0, y: 32, letterSpacing: "0.08em" }}
-              transition={{ duration: 1.35, delay: isContentVisible ? 0.12 : 0, ease: [0.22, 1, 0.36, 1] }}
+              animate={isHeroContentVisible ? { opacity: 1, y: 0, letterSpacing: "-0.035em" } : { opacity: 0, y: 32, letterSpacing: "0.08em" }}
+              transition={{ duration: 1.35, delay: isHeroContentVisible ? 0.12 : 0, ease: [0.22, 1, 0.36, 1] }}
               className="type-page-title max-w-2xl font-serif text-[#fff5df]"
             >
               <span className="sr-only">ANURRAKTI one-of-one sarees: </span>
@@ -141,8 +152,8 @@ export function HeroSection() {
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
-              animate={isContentVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              transition={{ duration: 0.9, delay: isContentVisible ? 0.55 : 0, ease: [0.22, 1, 0.36, 1] }}
+              animate={isHeroContentVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+              transition={{ duration: 0.9, delay: isHeroContentVisible ? 0.55 : 0, ease: [0.22, 1, 0.36, 1] }}
               className="mt-5 max-w-lg type-body text-stone-100"
             >
               One-of-one Indian sarees, crafted with passion and chosen by the heart.
@@ -151,13 +162,25 @@ export function HeroSection() {
 
           <motion.div
             initial={{ opacity: 0, y: 14 }}
-            animate={isContentVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
-            transition={{ duration: 0.85, delay: isContentVisible ? 0.8 : 0, ease: [0.22, 1, 0.36, 1] }}
+            animate={isHeroContentVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+            transition={{ duration: 0.85, delay: isHeroContentVisible ? 0.8 : 0, ease: [0.22, 1, 0.36, 1] }}
             className="mt-6 border-t border-stone-50/25 pt-4 sm:mt-8 sm:pt-5"
           >
-            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3">
-              <Link className="btn-light min-w-0 px-2 text-center sm:px-5" href="/collection" onClick={() => trackEvent("hero_discover_click")}>Discover</Link>
-              <Link className="btn-ghost min-w-0 px-2 text-center sm:px-5" href="/#viewing">Contact Us</Link>
+            <div className="grid gap-2 sm:flex sm:flex-wrap sm:gap-3">
+              <a
+                className="btn-light min-w-0 gap-2 px-4 text-center sm:px-5"
+                href={contactLinks.whatsappPrimary}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => {
+                  trackEvent("whatsapp_click", { placement: "hero" });
+                  trackEvent("direct_contact_click", { channel: "whatsapp", placement: "hero" });
+                }}
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                Speak with ANURRAKTI
+              </a>
+              <Link className="btn-ghost min-w-0 px-4 text-center sm:px-5" href="/collection" onClick={() => trackEvent("hero_discover_click")}>Explore the sarees</Link>
             </div>
           </motion.div>
         </motion.div>

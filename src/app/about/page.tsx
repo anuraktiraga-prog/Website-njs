@@ -22,6 +22,13 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "About ANURRAKTI | Indian Fashion House",
+    description:
+      "Meet ANURRAKTI and explore twelve one-of-one sarees across the EHSAAS and RAGA collections through private enquiry.",
+    images: ["/images/campaign/anurrakti-staircase.png"],
+  },
 };
 
 const principles = [
@@ -132,6 +139,16 @@ export default function AboutPage() {
                 <p className="mt-4 text-sm leading-relaxed text-stone-700">{principle.body}</p>
               </article>
             ))}
+          </div>
+
+          <div id="editorial" className="mt-14 grid scroll-mt-36 gap-8 border-t border-stone-900/15 pt-10 lg:grid-cols-[0.34fr_0.66fr] lg:gap-16">
+            <p className="eyebrow lg:pt-2">ANURRAKTI Editorial</p>
+            <div className="max-w-2xl">
+              <h2 className="font-serif text-3xl leading-tight text-stone-950 sm:text-4xl">How the journal is prepared.</h2>
+              <p className="mt-5 text-base leading-7 text-stone-700">
+                ANURRAKTI Editorial prepares the House&apos;s saree guides using named public sources and clearly separates general textile education from claims about an individual ANURRAKTI piece. Product-specific composition, design information and availability are confirmed through private enquiry.
+              </p>
+            </div>
           </div>
         </section>
 

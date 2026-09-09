@@ -3,7 +3,7 @@ import { blogPath, blogPosts } from "@/lib/blog";
 import { collectionImages, collectionPath, collections, productPath } from "@/lib/collection";
 
 const siteUrl = "https://www.anurrakti.com";
-const siteContentUpdatedAt = "2026-08-29";
+const siteContentUpdatedAt = "2026-09-09";
 const catalogueUpdatedAt = "2026-08-29";
 
 export default function sitemap(): MetadataRoute.Sitemap {

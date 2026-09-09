@@ -79,6 +79,12 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
         },
       ],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: `${post.seoTitle ?? post.title} | ANURRAKTI`,
+      description: post.description,
+      images: [post.hero.src],
+    },
   };
 }
 
@@ -124,9 +130,10 @@ export default async function BlogArticlePage({ params }: BlogPageProps) {
         },
         author: {
           "@type": "Organization",
-          "@id": "https://www.anurrakti.com/#organization",
-          name: "ANURRAKTI",
+          "@id": "https://www.anurrakti.com/about#editorial",
+          name: "ANURRAKTI Editorial",
           url: "https://www.anurrakti.com/about",
+          parentOrganization: { "@id": "https://www.anurrakti.com/#organization" },
         },
         publisher: {
           "@type": "Organization",
