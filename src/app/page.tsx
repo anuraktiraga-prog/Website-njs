@@ -1,5 +1,4 @@
 import { BrandPropositionSection } from "@/components/brand-proposition-section";
-import { CollectionSection } from "@/components/collection-section";
 import { HeroSection } from "@/components/hero-section";
 import { HomeCollectionShowcase } from "@/components/home-collection-showcase";
 import { HomeSound } from "@/components/home-sound";
@@ -50,7 +49,6 @@ export default function Home() {
         <HomeCollectionShowcase />
         <BrandPropositionSection />
         <SareeDiscoverySection />
-        <CollectionSection featuredOnly />
         <SingularSection />
         <ViewingSection />
         <InstagramGallery />
