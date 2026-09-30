@@ -70,6 +70,7 @@ export function EnquiryForm() {
             <option>Private enquiry</option>
             <option>EHSAAS collection</option>
             <option>RAGA collection</option>
+            <option>NOOR collection</option>
             <option>Custom enquiry</option>
             <option>Other</option>
           </select>

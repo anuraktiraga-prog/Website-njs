@@ -1,4 +1,4 @@
-export type CollectionId = "ehsaas" | "raga";
+export type CollectionId = "ehsaas" | "raga" | "noor";
 
 export type BrandImage = {
   src: string;
@@ -151,6 +151,14 @@ const paletteByPiece: Record<CollectionId, string[]> = {
     "Graphite / Red",
     "Ivory / Black",
   ],
+  noor: [
+    "Ivory / Silver",
+    "Violet / Silver",
+    "Midnight / Teal / Ochre",
+    "Ivory / Emerald / Vermilion",
+    "Ivory / Silver",
+    "Black / Ivory",
+  ],
 };
 
 const notesByPiece: Record<CollectionId, string[]> = {
@@ -169,6 +177,14 @@ const notesByPiece: Record<CollectionId, string[]> = {
     "An ivory expression softened by gesture.",
     "A grounded drape with archival character.",
     "Line, shadow and textile in conversation.",
+  ],
+  noor: [
+    "Light traced through a field of floral linework.",
+    "Violet held in a quiet silver rhythm.",
+    "A nocturnal composition alive with story and ornament.",
+    "Ivory framed by emerald and vermilion ceremony.",
+    "Sculptural detail, softened by an ivory ground.",
+    "A graphic conversation in black and ivory.",
   ],
 };
 
@@ -225,17 +241,139 @@ const descriptionsByPiece: Record<CollectionId, [string, string][]> = {
       "The complete drape and closer studies keep its surface, border and graphic relationship visible.",
     ],
   ],
+  noor: [
+    [
+      "Ivory gives this one-of-one saree its luminous ground, with silver-toned floral lines moving across the composition.",
+      "Model, drape and detail views record the relationship between the open field, linework and finished border.",
+    ],
+    [
+      "Violet and silver shape this one-of-one saree through a saturated field and fine botanical linework.",
+      "The accompanying views move between the worn silhouette, arranged drape and closer studies of its surface.",
+    ],
+    [
+      "A midnight ground holds an illustrated composition of figures, animals and foliage in teal, ochre and softer accents.",
+      "Closer photographs isolate the narrative motifs, border and layered colour within the complete drape.",
+    ],
+    [
+      "Ivory establishes the field of this one-of-one saree, punctuated by small illustrated elephants and stronger emerald and vermilion panels.",
+      "The full silhouette and detail studies show how motif, open space and the contrasting edge meet.",
+    ],
+    [
+      "Ivory and silver create a pale, sculptural composition, with dimensional rosette-like details set against a striped pallu.",
+      "Model and close views follow the shifts between surface ornament, soft volume and the finished drape.",
+    ],
+    [
+      "Black and ivory define this one-of-one saree through a graphic illustrated field and a quieter dark pallu.",
+      "The gallery moves from the worn silhouette to closer studies of the monochrome surface and border.",
+    ],
+  ],
+};
+
+const collectionIdentity: Record<CollectionId, { name: string; number: string }> = {
+  ehsaas: { name: "EHSAAS", number: "01" },
+  raga: { name: "RAGA", number: "02" },
+  noor: { name: "NOOR", number: "03" },
+};
+
+const primaryAltByPiece: Record<CollectionId, string[]> = {
+  ehsaas: [
+    "Model wearing EHSAAS 01 in black, ivory and red with an architectural illustrated panel",
+    "Model wearing EHSAAS 02 in ivory with black illustration and a red-edged drape",
+    "Model wearing EHSAAS 03 in graphite with a black, red and gold-toned border",
+    "Model wearing EHSAAS 04 in ivory with fine red and black linework",
+    "Model wearing EHSAAS 05 in black with rust-coloured illustrated fish",
+    "Model wearing EHSAAS 06 in moss with pale motifs and a rust-coloured edge",
+  ],
+  raga: [
+    "Model wearing RAGA 01 in blue and ivory checks with floral illustration",
+    "Model wearing RAGA 02 in ivory with a multicolour checked panel",
+    "Model wearing RAGA 03 in vermilion with a multicolour illustrated motif",
+    "Model wearing RAGA 04 in ivory with dark illustration and a striped panel",
+    "Model wearing RAGA 05 in black with gold-toned dots and a red architectural panel",
+    "Model wearing RAGA 06 in graphite with orange, magenta and black panels",
+  ],
+  noor: [
+    "Model wearing NOOR 01 in ivory with silver-toned floral linework",
+    "Model wearing NOOR 02 in violet with silver-toned botanical linework",
+    "Model wearing NOOR 03 in midnight tones with figures, animals and foliage",
+    "Model wearing NOOR 04 in ivory with elephant motifs and emerald and vermilion panels",
+    "Model wearing NOOR 05 in ivory and silver with sculptural rosette-like details",
+    "Model wearing NOOR 06 in black and ivory with a graphic illustrated surface",
+  ],
+};
+
+const noorGalleryFiles: Record<string, { file: string; label: string; imageViewType: ProductImage["imageViewType"] }[]> = {
+  "01": [
+    { file: "editorial-1.jpg", label: "seated model view", imageViewType: "product" },
+    { file: "editorial-2.jpg", label: "arranged drape view", imageViewType: "product" },
+    { file: "detail-1.jpg", label: "complete drape detail", imageViewType: "detail" },
+    { file: "detail-2.jpg", label: "floral linework detail", imageViewType: "detail" },
+    { file: "detail-3.jpg", label: "border detail", imageViewType: "detail" },
+  ],
+  "02": [
+    { file: "editorial-1.jpg", label: "model portrait", imageViewType: "product" },
+    { file: "editorial-2.jpg", label: "arranged drape view", imageViewType: "product" },
+    { file: "detail-1.jpg", label: "complete drape detail", imageViewType: "detail" },
+    { file: "detail-2.jpg", label: "botanical linework detail", imageViewType: "detail" },
+    { file: "detail-3.jpg", label: "border detail", imageViewType: "detail" },
+  ],
+  "03": [
+    { file: "detail-1.jpg", label: "illustrated figure detail", imageViewType: "detail" },
+    { file: "detail-2.jpg", label: "animal and foliage detail", imageViewType: "detail" },
+    { file: "detail-3.jpg", label: "border and motif detail", imageViewType: "detail" },
+  ],
+  "04": [
+    { file: "detail-1.jpg", label: "complete drape detail", imageViewType: "detail" },
+    { file: "detail-2.jpg", label: "elephant motif detail", imageViewType: "detail" },
+    { file: "detail-3.jpg", label: "contrasting panel detail", imageViewType: "detail" },
+  ],
+  "05": [
+    { file: "editorial-1.jpg", label: "seated model view", imageViewType: "product" },
+    { file: "detail-1.jpg", label: "complete drape detail", imageViewType: "detail" },
+    { file: "detail-2.jpg", label: "sculptural surface detail", imageViewType: "detail" },
+    { file: "detail-3.jpg", label: "striped pallu detail", imageViewType: "detail" },
+  ],
+  "06": [
+    { file: "editorial-1.jpg", label: "seated model view", imageViewType: "product" },
+    { file: "detail-1.jpg", label: "complete drape detail", imageViewType: "detail" },
+    { file: "detail-2.jpg", label: "illustrated surface detail", imageViewType: "detail" },
+    { file: "detail-3.jpg", label: "black pallu detail", imageViewType: "detail" },
+  ],
 };
 
 function makePiece(collectionId: CollectionId, index: number): CollectionPiece {
   const number = String(index).padStart(2, "0");
-  const collectionName = collectionId === "ehsaas" ? "EHSAAS" : "RAGA";
-  const collectionNumber = collectionId === "ehsaas" ? "01" : "02";
+  const { name: collectionName, number: collectionNumber } = collectionIdentity[collectionId];
   const basePath = `/images/collection/${collectionId}/${number}`;
+  const detailImageMetadata: ProductImage[] = collectionId === "noor"
+    ? (noorGalleryFiles[number] ?? []).map((image) => ({
+        src: `${basePath}/${image.file}`,
+        alt: `${collectionName} ${number} ${image.label}`,
+        imageViewType: image.imageViewType,
+      }))
+    : [
+        {
+          src: `${basePath}/main.png`,
+          alt: `${collectionName} ${number} shown as a complete product drape`,
+          imageViewType: "product" as const,
+        },
+        ...(collectionId === "ehsaas" && number === "05"
+          ? [{
+              src: `${basePath}/editorial-1.jpg`,
+              alt: `${collectionName} ${number} seated model view`,
+              imageViewType: "product" as const,
+            }]
+          : []),
+        ...[1, 2, 3].map((detailIndex) => ({
+          src: `${basePath}/detail-${detailIndex}.png`,
+          alt: `${collectionName} ${number} detail ${detailIndex} showing the textile surface and drape`,
+          imageViewType: "detail" as const,
+        })),
+      ];
 
   return {
-    src: `${basePath}/main.png`,
-    alt: `${collectionName} ${number} saree shown as a complete product image`,
+    src: `${basePath}/model.jpg`,
+    alt: primaryAltByPiece[collectionId][index - 1],
     title: number,
     note: notesByPiece[collectionId][index - 1],
     description: descriptionsByPiece[collectionId][index - 1],
@@ -249,11 +387,7 @@ function makePiece(collectionId: CollectionId, index: number): CollectionPiece {
     garmentType: "Saree",
     status: "available",
     imageViewType: "product",
-    detailImageMetadata: [1, 2, 3].map((detailIndex) => ({
-      src: `${basePath}/detail-${detailIndex}.png`,
-      alt: `${collectionName} ${number} detail ${detailIndex} showing the textile surface and drape`,
-      imageViewType: "detail" as const,
-    })),
+    detailImageMetadata,
     productDetails: {
       oneOfOne: true,
       material: "Available on enquiry",
@@ -273,19 +407,21 @@ export const ragaCollection: CollectionPiece[] = [1, 2, 3, 4, 5, 6].map((index) 
   makePiece("raga", index),
 );
 
+export const noorCollection: CollectionPiece[] = [1, 2, 3, 4, 5, 6].map((index) =>
+  makePiece("noor", index),
+);
+
 function makeHeroImages(pieces: CollectionPiece[]): BrandImage[] {
-  return pieces.flatMap((piece) =>
-    (piece.detailImageMetadata ?? []).map((image, index) => ({
-      src: image.src,
-      alt: image.alt,
-      title: `${piece.collectionName} ${piece.title} Detail ${index + 1}`,
-      note: piece.note,
-      palette: piece.palette,
-      width: productSize.width,
-      height: productSize.height,
-      imageViewType: "detail" as const,
-    })),
-  );
+  return pieces.map((piece) => ({
+    src: piece.src,
+    alt: piece.alt,
+    title: `${piece.collectionName} ${piece.title}`,
+    note: piece.note,
+    palette: piece.palette,
+    width: piece.width,
+    height: piece.height,
+    imageViewType: "campaign" as const,
+  }));
 }
 
 export const collections: CollectionArchive[] = [
@@ -312,6 +448,18 @@ export const collections: CollectionArchive[] = [
       "RAGA extends the ANURRAKTI language through six considered drapes, each composed around movement and memory.",
     heroImages: makeHeroImages(ragaCollection),
     pieces: ragaCollection,
+  },
+  {
+    id: "noor",
+    slug: "noor",
+    name: "NOOR",
+    number: "03",
+    title: "NOOR",
+    note: "A luminous study of line, ornament and singular presence.",
+    description:
+      "NOOR is ANURRAKTI's most elevated expression, bringing together six one-of-one sarees shaped by light, illustration and considered detail.",
+    heroImages: makeHeroImages(noorCollection),
+    pieces: noorCollection,
   },
 ];
 

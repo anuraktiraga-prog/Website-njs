@@ -9,7 +9,7 @@ export function SareeDiscoverySection() {
             Unique Indian sarees by ANURRAKTI
           </p>
           <h2 id="indian-sarees" className="mt-4 max-w-xl font-serif text-[clamp(2.1rem,3.5vw,3.8rem)] leading-[0.98] tracking-[-0.035em]">
-            Twelve sarees.<br />Twelve individual expressions.
+            Eighteen sarees.<br />Eighteen individual expressions.
           </h2>
         </header>
 
@@ -22,7 +22,7 @@ export function SareeDiscoverySection() {
           <div className="mt-6 grid gap-5 border-t border-white/15 pt-5 text-[0.82rem] leading-6 text-[#d8c8b6] sm:grid-cols-2 sm:gap-7">
             <div className="space-y-4">
               <p>
-                The EHSAAS and RAGA collections each contain six one-of-one sarees,
+                The EHSAAS, RAGA and NOOR collections each contain six one-of-one sarees,
                 allowing every piece to retain an identity of its own rather than
                 becoming one of many identical editions.
               </p>

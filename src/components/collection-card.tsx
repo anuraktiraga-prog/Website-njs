@@ -1,6 +1,7 @@
 "use client";
 
 import { type PointerEvent, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ImageFrame } from "@/components/image-frame";
 import { productPath, type CollectionPiece } from "@/lib/collection";
@@ -27,6 +28,17 @@ export function CollectionCard({
   const display = getDisplayName(image.title);
   const href = productPath(image);
   const isFeaturedCard = variant === "featured";
+  const defaultImageMetadata = image.detailImageMetadata?.find(
+    (candidate) => candidate.imageViewType === "product" && candidate.alt.toLowerCase().includes("complete"),
+  ) ?? image.detailImageMetadata?.find((candidate) => candidate.imageViewType === "detail");
+  const defaultImage = defaultImageMetadata
+    ? {
+        ...image,
+        src: defaultImageMetadata.src,
+        alt: defaultImageMetadata.alt,
+        imageViewType: defaultImageMetadata.imageViewType,
+      }
+    : image;
 
   const updateTilt = (event: PointerEvent<HTMLElement>) => {
     if (!isFeatured || event.pointerType === "touch") return;
@@ -79,17 +91,25 @@ export function CollectionCard({
             ? "max-sm:-translate-y-1 max-sm:bg-[#fbf6ef] max-sm:opacity-100 max-sm:shadow-[0_16px_34px_rgba(61,45,33,0.14)]"
             : "max-sm:opacity-72 max-sm:shadow-none"
         } ${isFeaturedCard ? "rounded-none border-stone-900/15 bg-[#f3eadf] p-2 shadow-[0_8px_24px_rgba(61,45,33,0.05)] group-hover:bg-[#fbf6ef] group-hover:shadow-[0_16px_34px_rgba(61,45,33,0.12)] sm:p-2.5" : "rounded-[0.55rem] border-stone-900/10 bg-[#e7dccd] p-2.5 shadow-[0_5px_18px_rgba(61,45,33,0.06)] group-hover:bg-[#f7f0e6] group-hover:shadow-[0_14px_30px_rgba(61,45,33,0.12)] sm:p-3"}`}>
-          <div className={isFeaturedCard ? "overflow-hidden" : "overflow-hidden rounded-[0.35rem]"}>
+          <div className={`relative ${isFeaturedCard ? "overflow-hidden" : "overflow-hidden rounded-[0.35rem]"}`}>
             <ImageFrame
-              image={image}
+              image={defaultImage}
               className={isFeaturedCard ? "aspect-[3/4]" : "aspect-[4/5]"}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              imageClassName={`object-contain transition-[filter] duration-700 group-hover:brightness-105 group-hover:saturate-110 ${
+              imageClassName={`object-contain transition-[filter,opacity] duration-700 group-hover:opacity-0 motion-reduce:transition-none ${
                 isMobileInView
-                  ? "max-sm:brightness-105 max-sm:saturate-110"
+                  ? "max-sm:brightness-105"
                   : "max-sm:brightness-[0.74] max-sm:saturate-[0.64]"
-              } sm:brightness-[0.88] sm:saturate-[0.82]`}
+              } sm:brightness-[0.94] sm:saturate-[0.9]`}
               noBleed
+            />
+            <Image
+              src={image.src}
+              alt=""
+              fill
+              aria-hidden="true"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="pointer-events-none object-cover opacity-0 brightness-[0.94] saturate-[0.9] transition-[opacity,filter,transform] duration-700 ease-out group-hover:scale-[1.025] group-hover:opacity-100 group-hover:brightness-105 group-hover:saturate-110 motion-reduce:transition-none"
             />
           </div>
 

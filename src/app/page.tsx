@@ -16,7 +16,7 @@ const homeStructuredData = {
   url: "https://www.anurrakti.com/",
   name: "Unique Indian Sarees | One-of-One Designs | ANURRAKTI",
   description:
-    "Discover twelve one-of-one Indian sarees across the EHSAAS and RAGA collections from ANURRAKTI.",
+    "Discover eighteen one-of-one Indian sarees across the EHSAAS, RAGA and NOOR collections from ANURRAKTI.",
   inLanguage: "en-IN",
   isPartOf: { "@id": "https://www.anurrakti.com/#website" },
   about: { "@id": "https://www.anurrakti.com/#organization" },

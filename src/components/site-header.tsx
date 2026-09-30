@@ -19,6 +19,7 @@ const navItems = [
 const collectionItems = [
   { label: "EHSAAS", description: "The inaugural saree collection", href: "/collection/ehsaas" },
   { label: "RAGA", description: "The second expression", href: "/collection/raga" },
+  { label: "NOOR", description: "The most elevated expression", href: "/collection/noor" },
 ];
 
 export function SiteHeader() {

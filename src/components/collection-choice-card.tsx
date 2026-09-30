@@ -16,13 +16,7 @@ export function CollectionChoiceCard({
   const reduceMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const slides = useMemo(
-    () =>
-      collection.pieces.flatMap((piece) =>
-        (piece.detailImageMetadata ?? []).map((image) => ({
-          src: image.src,
-          alt: image.alt,
-        })),
-      ),
+    () => collection.pieces.map((piece) => ({ src: piece.src, alt: piece.alt })),
     [collection.pieces],
   );
   const visibleSlides = slides.length ? slides : [{ src: collection.pieces[0].src, alt: collection.pieces[0].alt }];
@@ -75,7 +69,7 @@ export function CollectionChoiceCard({
         <p className="text-[0.72rem] font-medium uppercase tracking-[0.24em] text-[#f4dfc7]">
           Collection {collection.number}
         </p>
-        <h2 className="mt-3 font-serif text-[clamp(3.45rem,18vw,4.85rem)] leading-[0.86] tracking-[-0.055em] text-[#fff7ec] sm:mt-4 sm:text-[clamp(4.2rem,8.5vw,8rem)]">
+        <h2 className="mt-3 font-serif text-[clamp(3.45rem,18vw,4.85rem)] leading-[0.86] tracking-[-0.055em] text-[#fff7ec] sm:mt-4 sm:text-[clamp(4.2rem,8.5vw,8rem)] lg:text-[clamp(3.1rem,5vw,5.25rem)]">
           {collection.name}
         </h2>
         <p className="mt-4 max-w-[18rem] text-[0.98rem] leading-7 text-stone-100 sm:mt-5 sm:max-w-md sm:text-lg">

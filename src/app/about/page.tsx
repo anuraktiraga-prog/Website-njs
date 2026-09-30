@@ -6,12 +6,12 @@ import { SiteHeader } from "@/components/site-header";
 export const metadata: Metadata = {
   title: { absolute: "About ANURRAKTI | Indian Fashion House" },
   description:
-    "Learn about ANURRAKTI, an Indian fashion house presenting twelve one-of-one sarees across the EHSAAS and RAGA collections through private enquiry.",
+    "Learn about ANURRAKTI, an Indian fashion house presenting eighteen one-of-one sarees across the EHSAAS, RAGA and NOOR collections through private enquiry.",
   alternates: { canonical: "/about" },
   openGraph: {
     title: "About ANURRAKTI | Indian Fashion House",
     description:
-      "Meet ANURRAKTI and explore twelve one-of-one sarees across the EHSAAS and RAGA collections through private enquiry.",
+      "Meet ANURRAKTI and explore eighteen one-of-one sarees across the EHSAAS, RAGA and NOOR collections through private enquiry.",
     url: "/about",
     images: [
       {
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "About ANURRAKTI | Indian Fashion House",
     description:
-      "Meet ANURRAKTI and explore twelve one-of-one sarees across the EHSAAS and RAGA collections through private enquiry.",
+      "Meet ANURRAKTI and explore eighteen one-of-one sarees across the EHSAAS, RAGA and NOOR collections through private enquiry.",
     images: ["/images/campaign/anurrakti-staircase.png"],
   },
 };
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
 const principles = [
   {
     number: "01",
-    title: "Two collections",
-    body: "EHSAAS and RAGA each bring together six one-of-one sarees, offering two distinct ways to enter the current ANURRAKTI collection.",
+    title: "Three collections",
+    body: "EHSAAS, RAGA and NOOR each bring together six one-of-one sarees, offering three distinct ways to enter the current ANURRAKTI collection.",
   },
   {
     number: "02",
@@ -57,7 +57,7 @@ export default function AboutPage() {
     url: "https://www.anurrakti.com/about",
     name: "About ANURRAKTI",
     description:
-      "Learn about ANURRAKTI, an Indian fashion house presenting twelve one-of-one sarees across the EHSAAS and RAGA collections through private enquiry.",
+      "Learn about ANURRAKTI, an Indian fashion house presenting eighteen one-of-one sarees across the EHSAAS, RAGA and NOOR collections through private enquiry.",
     inLanguage: "en-IN",
     isPartOf: { "@id": "https://www.anurrakti.com/#website" },
     about: { "@id": "https://www.anurrakti.com/#organization" },
@@ -81,8 +81,8 @@ export default function AboutPage() {
                 About ANURRAKTI.
               </h1>
               <p className="type-lead mt-7 text-stone-700">
-                ANURRAKTI presents twelve individual sarees across the EHSAAS
-                and RAGA collections. Each piece is shown through its complete
+                ANURRAKTI presents eighteen individual sarees across the EHSAAS,
+                RAGA and NOOR collections. Each piece is shown through its complete
                 drape, details and recorded palette before private enquiry.
               </p>
             </div>
@@ -169,7 +169,7 @@ export default function AboutPage() {
                 Begin with the textile. Follow the feeling.
               </h2>
               <p className="mt-6 leading-relaxed text-stone-300">
-                Explore EHSAAS and RAGA, compare all twelve one-of-one sarees,
+                Explore EHSAAS, RAGA and NOOR, compare all eighteen one-of-one sarees,
                 or begin a private conversation about a specific piece.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">

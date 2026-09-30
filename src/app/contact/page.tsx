@@ -183,7 +183,7 @@ export default function ContactPage() {
                 To make the reply more useful, include the collection name and piece
                 number, your preferred contact method, and the questions you would like
                 answered. A general enquiry is equally welcome if you are still comparing
-                EHSAAS and RAGA or have not chosen a particular saree.
+                EHSAAS, RAGA and NOOR or have not chosen a particular saree.
               </p>
               <p>
                 Responses focus on information available for the referenced piece. If

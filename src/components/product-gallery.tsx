@@ -102,13 +102,13 @@ export function ProductGallery({
             <span className="pointer-events-none absolute inset-x-4 bottom-4 translate-y-2 bg-stone-950/75 px-3 py-2 text-center text-[0.65rem] uppercase tracking-[0.18em] text-[#fff5df] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none">Open full image</span>
           </button>
         ))}
-        <div className="flex h-full flex-col gap-6">
-          {views.slice(1, 4).map((view, index) => (
+        <div className="flex h-full flex-col gap-3 overflow-y-auto pr-1 [scrollbar-width:thin]">
+          {views.slice(1).map((view, index) => (
             <button
               key={view.label}
               type="button"
               onClick={() => openLightbox(index + 1)}
-              className="group relative aspect-[4/5] h-[calc((100%-3rem)/3)] cursor-zoom-in overflow-hidden bg-transparent text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+              className="group relative aspect-[4/5] w-full shrink-0 cursor-zoom-in overflow-hidden bg-transparent text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
               aria-label={`Open ${view.label} in full screen`}
             >
               <Image src={view.src} alt={view.alt} fill sizes="(max-width: 1023px) 28vw, 14vw" className={`${view.fit === "contain" ? "object-contain" : "object-cover group-hover:scale-[1.035]"} transition-transform duration-700 ease-out motion-reduce:transition-none`} style={{ objectPosition: view.position }} />

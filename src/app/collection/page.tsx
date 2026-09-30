@@ -8,12 +8,12 @@ import { collectionPath, collections } from "@/lib/collection";
 export const metadata: Metadata = {
   title: "Designer Sarees | Exclusive Collections",
   description:
-    "Explore twelve unique designer sarees across the exclusive EHSAAS and RAGA collections from the House of ANURRAKTI, available by private enquiry.",
+    "Explore eighteen unique designer sarees across the EHSAAS, RAGA and NOOR collections from the House of ANURRAKTI, available by private enquiry.",
   alternates: { canonical: "/collection" },
   openGraph: {
     title: "Designer Sarees | Exclusive Collections | ANURRAKTI",
     description:
-      "Explore twelve unique designer sarees across the exclusive EHSAAS and RAGA collections from the House of ANURRAKTI.",
+      "Explore eighteen unique designer sarees across the EHSAAS, RAGA and NOOR collections from the House of ANURRAKTI.",
     url: "/collection",
     images: [{ url: "/images/campaign/red-grey-portrait.jpg", width: 1760, height: 2200, alt: "ANURRAKTI campaign portrait" }],
   },
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Designer Sarees | Exclusive Collections | ANURRAKTI",
     description:
-      "Explore twelve unique designer sarees across the exclusive EHSAAS and RAGA collections from the House of ANURRAKTI.",
+      "Explore eighteen unique designer sarees across the EHSAAS, RAGA and NOOR collections from the House of ANURRAKTI.",
     images: ["/images/campaign/red-grey-portrait.jpg"],
   },
 };
@@ -37,7 +37,7 @@ export default function CollectionPage() {
         url: collectionUrl,
         name: "ANURRAKTI Designer Saree Collections",
         description:
-          "Explore twelve unique designer sarees across the EHSAAS and RAGA collections from ANURRAKTI.",
+          "Explore eighteen unique designer sarees across the EHSAAS, RAGA and NOOR collections from ANURRAKTI.",
         inLanguage: "en-IN",
         isPartOf: { "@id": "https://www.anurrakti.com/#website" },
         mainEntity: { "@id": `${collectionUrl}#item-list` },
@@ -91,12 +91,12 @@ export default function CollectionPage() {
               Choose what speaks to you.
             </h1>
             <p className="type-body mt-6 max-w-2xl text-stone-700">
-              EHSAAS and RAGA carry different moods of the ANURRAKTI language, each
-              shaped by emotion, artistry and the enduring presence of the drape.
+              EHSAAS, RAGA and NOOR carry distinct moods of the ANURRAKTI language,
+              each shaped by emotion, artistry and the enduring presence of the drape.
             </p>
           </div>
 
-          <div className="mt-12 grid auto-rows-fr gap-6 lg:grid-cols-2">
+          <div className="mt-12 grid auto-rows-fr gap-6 lg:grid-cols-3">
             {collections.map((collection, index) => (
               <CollectionChoiceCard key={collection.id} collection={collection} index={index} />
             ))}
@@ -104,7 +104,7 @@ export default function CollectionPage() {
 
           <div className="mt-14 grid gap-8 border-t border-stone-900/10 pt-10 lg:grid-cols-2 lg:gap-16">
             <h2 className="type-subheading max-w-lg font-serif text-stone-950">
-              Two collections, twelve individual expressions.
+              Three collections, eighteen individual expressions.
             </h2>
             <div className="max-w-2xl space-y-5 text-base leading-7 text-stone-700">
               <p>
@@ -132,11 +132,12 @@ export default function CollectionPage() {
             </div>
             <div className="max-w-2xl space-y-5 text-base leading-7 text-stone-700">
               <p>
-                This collection hub brings all twelve ANURRAKTI sarees into one
+                This collection hub brings all eighteen ANURRAKTI sarees into one
                 considered journey. EHSAAS begins with colour, illustration and
                 expressive drape; RAGA moves through a quieter language of textile,
-                shadow and ceremonial colour. Each collection offers a different
-                atmosphere while every saree remains a one-of-one piece.
+                shadow and ceremonial colour; NOOR introduces a more elevated study
+                of light, ornament and singular presence. Each collection offers a
+                different atmosphere while every saree remains a one-of-one piece.
               </p>
               <p>
                 Explore the current ANURRAKTI collections online, then continue to

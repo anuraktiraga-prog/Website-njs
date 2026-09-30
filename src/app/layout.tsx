@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s | ANURRAKTI",
   },
   description:
-    "Discover unique, one-of-one Indian sarees from ANURRAKTI. Explore twelve individual pieces across the EHSAAS and RAGA collections, available on enquiry.",
+    "Discover unique, one-of-one Indian sarees from ANURRAKTI. Explore eighteen individual pieces across the EHSAAS, RAGA and NOOR collections, available on enquiry.",
   authors: [{ name: "ANURRAKTI", url: "https://www.anurrakti.com/about" }],
   creator: "ANURRAKTI",
   publisher: "ANURRAKTI",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     siteName: "ANURRAKTI",
     title: "Unique Indian Sarees | One-of-One Designs | ANURRAKTI",
     description:
-      "Discover unique, one-of-one Indian sarees across the EHSAAS and RAGA collections, available on enquiry.",
+      "Discover unique, one-of-one Indian sarees across the EHSAAS, RAGA and NOOR collections, available on enquiry.",
     images: [
       {
         url: "/opengraph-image.png",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Unique Indian Sarees | One-of-One Designs | ANURRAKTI",
     description:
-      "Discover unique, one-of-one Indian sarees across the EHSAAS and RAGA collections, available on enquiry.",
+      "Discover unique, one-of-one Indian sarees across the EHSAAS, RAGA and NOOR collections, available on enquiry.",
     images: ["/opengraph-image.png"],
   },
 };

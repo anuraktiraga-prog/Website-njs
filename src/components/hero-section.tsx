@@ -12,7 +12,6 @@ import { trackEvent } from "@/lib/analytics";
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isImageReady, setIsImageReady] = useState(false);
-  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const [isContentVisible, setIsContentVisible] = useState(false);
   const prefersReducedMotion = useReducedMotion();
   const pointerX = useMotionValue(0);
@@ -49,35 +48,6 @@ export function HeroSection() {
     return () => window.clearTimeout(revealFallback);
   }, []);
 
-  useEffect(() => {
-    if (!isImageReady || prefersReducedMotion) return;
-
-    const connection = (navigator as Navigator & {
-      connection?: { effectiveType?: string; saveData?: boolean };
-    }).connection;
-    const isDesktopViewport = window.matchMedia("(min-width: 1024px)").matches;
-    const isConstrainedConnection =
-      connection?.saveData ||
-      connection?.effectiveType === "slow-2g" ||
-      connection?.effectiveType === "2g" ||
-      connection?.effectiveType === "3g";
-
-    if (!isDesktopViewport || isConstrainedConnection) return;
-
-    const loadVideoAfterInteraction = () => {
-      setShouldLoadVideo(true);
-      window.removeEventListener("pointermove", loadVideoAfterInteraction);
-      window.removeEventListener("keydown", loadVideoAfterInteraction);
-    };
-
-    window.addEventListener("pointermove", loadVideoAfterInteraction, { passive: true, once: true });
-    window.addEventListener("keydown", loadVideoAfterInteraction, { once: true });
-    return () => {
-      window.removeEventListener("pointermove", loadVideoAfterInteraction);
-      window.removeEventListener("keydown", loadVideoAfterInteraction);
-    };
-  }, [isImageReady, prefersReducedMotion]);
-
   if (!heroImage) return null;
 
   function handlePointerMove(event: React.PointerEvent<HTMLElement>) {
@@ -111,20 +81,6 @@ export function HeroSection() {
               onError={() => setIsImageReady(true)}
               className="h-full w-full object-cover object-[52%_28%]"
             />
-            {shouldLoadVideo ? (
-              <video
-                className="pointer-events-none absolute inset-0 h-full w-full object-cover object-[52%_28%] opacity-[0.28] mix-blend-screen"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster={heroImage.src}
-                aria-hidden="true"
-              >
-                <source src="/videos/house-drape-study.mp4" type="video/mp4" />
-              </video>
-            ) : null}
           </motion.div>
           <div className="absolute inset-0 bg-stone-950/35" />
           <div className="absolute inset-0 bg-gradient-to-r from-stone-950/45 via-stone-950/25 to-transparent" />

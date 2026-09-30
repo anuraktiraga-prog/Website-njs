@@ -44,7 +44,6 @@ function CollectionTriptych({ collection }: { collection: CollectionArchive }) {
                     src={piece.src}
                     alt={piece.alt}
                     fill
-                    loading="eager"
                     sizes="(max-width: 1023px) 31vw, 15vw"
                     className="object-cover transition duration-700 ease-out group-hover:scale-[1.025] group-hover:brightness-105"
                   />
@@ -63,7 +62,7 @@ function CollectionTriptych({ collection }: { collection: CollectionArchive }) {
 }
 
 export function HomeCollectionShowcase() {
-  const orderedCollections = [collections[1], collections[0]].filter(
+  const orderedCollections = [collections[2], collections[1], collections[0]].filter(
     (collection): collection is CollectionArchive => Boolean(collection),
   );
 
@@ -76,11 +75,11 @@ export function HomeCollectionShowcase() {
         <header className="mb-10 text-center sm:mb-14">
           <p className="eyebrow">The collections</p>
           <h2 id="home-collections-title" className="type-section mt-4 font-serif text-stone-950">
-            Two moods. Twelve singular sarees.
+            Three moods. Eighteen singular sarees.
           </h2>
         </header>
 
-        <div className="grid gap-14 lg:grid-cols-2 lg:gap-5">
+        <div className="grid gap-14 lg:grid-cols-3 lg:gap-5">
           {orderedCollections.map((collection) => (
             <CollectionTriptych key={collection.id} collection={collection} />
           ))}

@@ -88,17 +88,29 @@ export default async function ProductPage({ params }: ProductPageProps) {
       alt: piece.alt,
       position: "center",
       fit: "contain",
-      label: "Full drape",
+      label: "On the model",
       imageViewType: "product",
     },
-    ...detailImages.map((image, index) => ({
-      src: image.src,
-      alt: image.alt,
-      position: "center",
-      fit: "contain" as const,
-      label: ["Textile detail", "Border detail", "Texture study"][index] ?? `Detail ${index + 1}`,
-      imageViewType: image.imageViewType === "material" ? "detail" : image.imageViewType,
-    })),
+    ...detailImages.map((image, index) => {
+      const productLabel = image.alt.toLowerCase().includes("complete")
+        ? "Complete drape"
+        : image.alt.toLowerCase().includes("arranged")
+          ? "Drape study"
+          : image.alt.toLowerCase().includes("model") || image.alt.toLowerCase().includes("portrait")
+            ? "Editorial view"
+            : `Product view ${index + 1}`;
+
+      return {
+        src: image.src,
+        alt: image.alt,
+        position: "center",
+        fit: "contain" as const,
+        label: image.imageViewType === "product"
+          ? productLabel
+          : ["Textile detail", "Border detail", "Texture study"][index] ?? `Detail ${index + 1}`,
+        imageViewType: image.imageViewType === "material" ? "detail" : image.imageViewType,
+      };
+    }),
   ];
 
   const productFacts = [
@@ -233,19 +245,20 @@ export default async function ProductPage({ params }: ProductPageProps) {
               Enquire about this piece
             </AnalyticsLink>
             <p className="mt-3 text-center text-xs leading-5 text-stone-500">
-              For availability, material composition and handwork details.
+              For availability, material composition and design details.
             </p>
 
             <div className="mt-7 border-t border-stone-300 pt-6">
               <h2 className="font-serif text-2xl text-stone-950">Viewing this piece</h2>
               <p className="mt-3 text-sm leading-6 text-stone-700">
-                Begin with the full drape to see the complete composition of {piece.collectionName} {piece.title},
-                then move through the closer views to examine its surface, border and movement. Its recorded palette
+                Begin with the model view to see {piece.collectionName} {piece.title} worn, then move through the
+                complete drape and closer views to examine its surface, border and movement. Its recorded palette
                 brings together {colours.join(", ")}. As a one-of-one saree, current availability and confirmed material
                 or design details are shared directly through private enquiry.
               </p>
               <p className="mt-4 text-sm leading-6 text-stone-700">
-                Use the complete product image to compare proportion and the relationship between {colours.join(", ")}.
+                Use the model photograph to understand the worn silhouette and the complete product image to compare
+                proportion and the relationship between {colours.join(", ")}.
                 The closer photographs are supporting views rather than substitutes for the full drape. Screen settings
                 and photographic light can affect how colour appears, so ask for any additional information you need
                 before deciding. Refer to {piece.collectionName} {piece.title} in your message so current availability,
@@ -291,7 +304,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <AnalyticsLink href={productPath(related)} eventName="related_product_open" eventProperties={{ product: `${related.collectionName} ${related.title}` }} className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]">
                 <figure>
                   <div className="relative aspect-[4/5] overflow-hidden bg-stone-200">
-                    <Image src={related.src} alt={related.alt} fill sizes="(max-width: 639px) 100vw, 33vw" className="object-contain transition-transform duration-700 group-hover:scale-[1.02] motion-reduce:transition-none" />
+                    <Image src={related.src} alt={related.alt} fill sizes="(max-width: 639px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.02] motion-reduce:transition-none" />
                   </div>
                   <figcaption className="mt-3 type-label text-stone-600">{related.collectionName} {related.title}</figcaption>
                 </figure>
