@@ -2,145 +2,38 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
-import { useEffect, useRef, useState } from "react";
 import { campaignImages, contactLinks } from "@/lib/collection";
-import { GyroDepth } from "@/components/experimental/gyro-depth";
-import { WhatsAppIcon } from "@/components/social-icons";
 import { trackEvent } from "@/lib/analytics";
 
 export function HeroSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isImageReady, setIsImageReady] = useState(false);
-  const [isContentVisible, setIsContentVisible] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
-  const pointerX = useMotionValue(0);
-  const pointerY = useMotionValue(0);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
   const [heroImage] = campaignImages;
-  const isHeroContentVisible = isContentVisible || Boolean(prefersReducedMotion);
-
-  const backdropY = useTransform(scrollYProgress, [0, 1], [0, -12]);
-  const backdropScale = useTransform(scrollYProgress, [0, 1], [1.04, 1.07]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.72, 1], [1, 1, 0]);
-  const imageX = useSpring(useTransform(pointerX, [-1, 1], [-8, 8]), { stiffness: 42, damping: 20, mass: 0.7 });
-  const imagePointerY = useSpring(useTransform(pointerY, [-1, 1], [-6, 6]), { stiffness: 42, damping: 20, mass: 0.7 });
-  const imageY = useTransform([backdropY, imagePointerY], ([scrollOffset, pointerOffset]) => Number(scrollOffset) + Number(pointerOffset));
-  const contentX = useSpring(useTransform(pointerX, [-1, 1], [5, -5]), { stiffness: 50, damping: 20, mass: 0.6 });
-  const contentY = useSpring(useTransform(pointerY, [-1, 1], [4, -4]), { stiffness: 50, damping: 20, mass: 0.6 });
-
-  useEffect(() => {
-    if (!isImageReady) return;
-    const revealTimer = window.setTimeout(() => {
-      setIsContentVisible(true);
-    }, 500);
-    return () => window.clearTimeout(revealTimer);
-  }, [isImageReady]);
-
-  useEffect(() => {
-    const revealFallback = window.setTimeout(() => {
-      setIsContentVisible(true);
-    }, 1200);
-
-    return () => window.clearTimeout(revealFallback);
-  }, []);
-
   if (!heroImage) return null;
 
-  function handlePointerMove(event: React.PointerEvent<HTMLElement>) {
-    if (prefersReducedMotion || event.pointerType === "touch") return;
-    const bounds = event.currentTarget.getBoundingClientRect();
-    pointerX.set(((event.clientX - bounds.left) / bounds.width - 0.5) * 2);
-    pointerY.set(((event.clientY - bounds.top) / bounds.height - 0.5) * 2);
-  }
-
-  function resetPointer() {
-    if (prefersReducedMotion) return;
-    pointerX.set(0);
-    pointerY.set(0);
-  }
-
   return (
-    <section ref={sectionRef} id="top" className="relative -mt-px min-h-svh overflow-hidden bg-stone-950 text-stone-50" onPointerMove={handlePointerMove} onPointerLeave={resetPointer}>
-      <GyroDepth className="sticky top-0 min-h-svh overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-          <motion.div className="absolute -inset-12" style={{ x: imageX, y: imageY, scale: backdropScale }}>
-            <Image
-              src={heroImage.src}
-              alt=""
-              width={heroImage.width}
-              height={heroImage.height}
-              preload
-              loading="eager"
-              sizes="100vw"
-              quality={70}
-              onLoad={() => setIsImageReady(true)}
-              onError={() => setIsImageReady(true)}
-              className="h-full w-full object-cover object-[52%_28%]"
-            />
-          </motion.div>
-          <div className="absolute inset-0 bg-stone-950/35" />
-          <div className="absolute inset-0 bg-gradient-to-r from-stone-950/45 via-stone-950/25 to-transparent" />
+    <section id="top" className="home-hero relative -mt-px overflow-hidden bg-[#1d1915] text-[#fff5df]">
+      <div className="absolute inset-0" aria-hidden="true">
+        <Image src={heroImage.src} alt="" fill preload sizes="100vw" quality={70} className="object-cover object-[58%_28%]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1d1915]/90 via-[#1d1915]/20 to-[#1d1915]/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1d1915]/45 via-transparent to-transparent" />
+      </div>
+      <div className="home-hero-content page-width relative z-10 flex flex-col justify-end">
+        <p className="type-label mb-6 text-[#fff5df]">A new expression of the drape</p>
+        <h1 className="type-display max-w-[16ch] font-serif">
+          <span className="sr-only">ANURRAKTI one-of-one sarees: </span>
+          <span className="block">Crafted once.</span>
+          <span className="block">Remembered for a lifetime.</span>
+        </h1>
+        <p className="type-body mt-6 max-w-md text-[#fff5df]">One-of-one Indian sarees, crafted with passion and chosen by the heart.</p>
+        <div className="mt-8 flex flex-wrap items-center gap-4 sm:gap-7">
+          <Link className="btn-light" href="/collection" onClick={() => trackEvent("hero_discover_click")}>
+            Explore the sarees <span className="ml-5" aria-hidden="true">→</span>
+          </Link>
+          <a className="editorial-link text-[#fff5df] hover:!text-white" href={contactLinks.whatsappPrimary} target="_blank" rel="noreferrer" onClick={() => {
+            trackEvent("whatsapp_click", { placement: "hero" });
+            trackEvent("direct_contact_click", { channel: "whatsapp", placement: "hero" });
+          }}>Private enquiry <span aria-hidden="true">↗</span></a>
         </div>
-
-        <motion.div className="relative z-10 mx-auto flex min-h-svh max-w-7xl flex-col justify-end px-5 pb-[calc(3rem+env(safe-area-inset-bottom))] pt-40 sm:px-8 sm:pb-[calc(2.25rem+env(safe-area-inset-bottom))] lg:pb-8 lg:pt-44" style={{ opacity: contentOpacity, x: contentX, y: contentY }}>
-          <div className="max-w-2xl">
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={isHeroContentVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-              className="mb-5 text-xs uppercase tracking-[0.3em] text-stone-200"
-            >
-              A new expression of the drape
-            </motion.p>
-            <motion.h1
-              initial={{ opacity: 0, y: 32, letterSpacing: "0.08em" }}
-              animate={isHeroContentVisible ? { opacity: 1, y: 0, letterSpacing: "-0.035em" } : { opacity: 0, y: 32, letterSpacing: "0.08em" }}
-              transition={{ duration: 1.35, delay: isHeroContentVisible ? 0.12 : 0, ease: [0.22, 1, 0.36, 1] }}
-              className="type-page-title max-w-2xl font-serif text-[#fff5df]"
-            >
-              <span className="sr-only">ANURRAKTI one-of-one sarees: </span>
-              <span className="block">Crafted once.</span>
-              <span className="block">Remembered for a lifetime.</span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={isHeroContentVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              transition={{ duration: 0.9, delay: isHeroContentVisible ? 0.55 : 0, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-5 max-w-lg type-body text-stone-100"
-            >
-              One-of-one Indian sarees, crafted with passion and chosen by the heart.
-            </motion.p>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={isHeroContentVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
-            transition={{ duration: 0.85, delay: isHeroContentVisible ? 0.8 : 0, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 border-t border-stone-50/25 pt-4 sm:mt-8 sm:pt-5"
-          >
-            <div className="grid gap-2 sm:flex sm:flex-wrap sm:gap-3">
-              <a
-                className="btn-light min-w-0 gap-2 px-4 text-center sm:px-5"
-                href={contactLinks.whatsappPrimary}
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => {
-                  trackEvent("whatsapp_click", { placement: "hero" });
-                  trackEvent("direct_contact_click", { channel: "whatsapp", placement: "hero" });
-                }}
-              >
-                <WhatsAppIcon className="h-4 w-4" />
-                Speak with ANURRAKTI
-              </a>
-              <Link className="btn-ghost min-w-0 px-4 text-center sm:px-5" href="/collection" onClick={() => trackEvent("hero_discover_click")}>Explore the sarees</Link>
-            </div>
-          </motion.div>
-        </motion.div>
-      </GyroDepth>
+      </div>
     </section>
   );
 }

@@ -3,11 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import "./globals.css";
-import { Geist } from "next/font/google";
-import { cn } from "@/lib/utils";
 import { SiteFooter } from "@/components/site-footer";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.anurrakti.com"),
@@ -108,7 +104,7 @@ const siteStructuredData = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={cn("h-full antialiased", "font-sans", geist.variable)}>
+    <html lang="en" data-scroll-behavior="smooth" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"

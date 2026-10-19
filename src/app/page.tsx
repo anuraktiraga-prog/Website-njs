@@ -1,11 +1,9 @@
-import { BrandPropositionSection } from "@/components/brand-proposition-section";
 import { HeroSection } from "@/components/hero-section";
 import { HomeCollectionShowcase } from "@/components/home-collection-showcase";
 import { HomeSound } from "@/components/home-sound";
 import { InstagramGallery } from "@/components/instagram-gallery";
 import { SareeDiscoverySection } from "@/components/saree-discovery-section";
 import { SiteHeader } from "@/components/site-header";
-import { SingularSection } from "@/components/singular-section";
 import { ViewingSection } from "@/components/viewing-section";
 import { collectionPath, collections } from "@/lib/collection";
 
@@ -47,10 +45,8 @@ export default function Home() {
         <HomeSound />
         <HeroSection />
         <HomeCollectionShowcase />
-        <BrandPropositionSection />
         <SareeDiscoverySection />
         <InstagramGallery />
-        <SingularSection />
         <ViewingSection />
       </main>
     </>

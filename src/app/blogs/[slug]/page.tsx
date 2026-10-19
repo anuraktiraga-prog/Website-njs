@@ -208,7 +208,7 @@ export default async function BlogArticlePage({ params }: BlogPageProps) {
           </header>
 
           <figure className="mx-auto w-full max-w-[90rem] px-0 sm:px-8">
-            <div className="relative aspect-[3/2] overflow-hidden bg-[#e8ded1]">
+            <div className="media-frame media-landscape">
               <Image
                 src={post.hero.src}
                 alt={post.hero.alt}

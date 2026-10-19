@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react";
 import type { BrandImage } from "@/lib/collection";
+import { cn } from "@/lib/utils";
 
 type ImageFrameProps = {
   image: BrandImage;
@@ -46,7 +47,7 @@ export function ImageFrame({
 
   return (
     <figure
-      className={`relative overflow-hidden bg-stone-200 ${className}`}
+      className={`media-frame ${className}`}
       onPointerMove={handlePointerMove}
       onPointerLeave={resetPointer}
     >
@@ -59,7 +60,7 @@ export function ImageFrame({
           preload={priority}
           loading={priority ? "eager" : "lazy"}
           sizes={sizes}
-          className={`h-full w-full object-cover ${imageClassName}`}
+          className={cn("h-full w-full object-cover", imageClassName)}
         />
       </motion.div>
       {caption ? (

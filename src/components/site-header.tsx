@@ -30,6 +30,7 @@ export function SiteHeader() {
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [isCompactMode, setIsCompactMode] = useState(false);
+  const [hasHeaderFocus, setHasHeaderFocus] = useState(false);
   const lastScrollY = useRef(0);
   const directionStartY = useRef(0);
   const scrollDirection = useRef<"up" | "down" | null>(null);
@@ -80,10 +81,10 @@ export function SiteHeader() {
   }, []);
 
   const isHome = pathname === "/";
-  const isInteracting = isHeaderHovered || isMenuOpen || isCollectionOpen;
+  const isInteracting = isHeaderHovered || isMenuOpen || isCollectionOpen || hasHeaderFocus;
   const isTransparent = isHome && !hasScrolled && !isInteracting;
-  const isCompact = isHome && isCompactMode && !isMenuOpen;
-  const headerVisible = isHeaderVisible || isMenuOpen || isCollectionOpen;
+  const isCompact = isHome && isCompactMode && !isMenuOpen && !hasHeaderFocus;
+  const headerVisible = isHeaderVisible || isInteracting;
   const borderColor = isTransparent ? "border-stone-100/25" : "border-stone-900/10";
   const interactiveHoverColor = isTransparent ? "hover:text-[#f4dfc7]" : "hover:text-[#7e271e]";
 
@@ -96,12 +97,21 @@ export function SiteHeader() {
       }`}
       style={{
         transform: headerVisible ? "translate3d(0, 0, 0)" : "translate3d(0, -100%, 0)",
-        transitionDuration: "360ms, 160ms, 160ms, 180ms",
+        transitionDuration: hasHeaderFocus ? "0ms" : "360ms, 160ms, 160ms, 180ms",
+      }}
+      onFocusCapture={() => setHasHeaderFocus(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setHasHeaderFocus(false);
       }}
       onMouseEnter={() => setIsHeaderHovered(true)}
       onMouseLeave={() => setIsHeaderHovered(false)}
       onKeyDown={(event) => {
         if (event.key === "Escape") {
+          if (isCollectionOpen) {
+            event.currentTarget.querySelector<HTMLAnchorElement>('a[aria-controls="collection-navigation"]')?.focus();
+          } else if (isMenuOpen) {
+            event.currentTarget.querySelector<HTMLButtonElement>('button[aria-controls="mobile-navigation"]')?.focus();
+          }
           setIsCollectionOpen(false);
           setIsMenuOpen(false);
         }
@@ -125,14 +135,14 @@ export function SiteHeader() {
         </a>
       </div>
 
-      <div className={`relative mx-auto flex max-w-[90rem] items-center justify-between px-4 transition-[height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:px-8 ${isCompact ? "h-14" : "h-16 lg:h-[4.5rem]"}`}>
+      <div className={`page-width relative flex items-center justify-between transition-[height] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isCompact ? "h-14" : "h-16 lg:h-[4.5rem]"}`}>
         <p className={`hidden text-[10px] uppercase tracking-[0.2em] lg:block ${isTransparent ? "text-stone-100/80" : "text-stone-500"}`}>
           Crafted in India
         </p>
 
         <Link
           href="/"
-          className="absolute left-1/2 flex -translate-x-1/2 items-center"
+          className="flex items-center sm:absolute sm:left-1/2 sm:-translate-x-1/2"
           aria-label="Anurrakti home"
         >
           <Image
@@ -188,7 +198,7 @@ export function SiteHeader() {
       </div>
 
       <nav
-        className={`hidden overflow-hidden border-t transition-[max-height,opacity,border-color] ease-[cubic-bezier(0.22,1,0.36,1)] lg:block ${borderColor} ${isCompact ? "max-h-0 opacity-0" : "max-h-12 opacity-100"}`}
+        className={`hidden border-t transition-[max-height,opacity,border-color] ease-[cubic-bezier(0.22,1,0.36,1)] lg:block ${borderColor} ${isCompact ? "max-h-0 overflow-hidden opacity-0" : "max-h-12 overflow-visible opacity-100"}`}
         style={{ transitionDuration: "500ms, 500ms, 160ms" }}
         aria-label="Primary navigation"
       >
@@ -200,21 +210,24 @@ export function SiteHeader() {
             className="relative h-full"
             onMouseEnter={() => setIsCollectionOpen(true)}
             onMouseLeave={() => setIsCollectionOpen(false)}
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) setIsCollectionOpen(false);
+            }}
           >
             <Link
               href="/collection"
               className={`flex h-full items-center gap-1.5 transition-colors ${interactiveHoverColor}`}
-              aria-haspopup="menu"
               aria-expanded={isCollectionOpen}
+              aria-controls="collection-navigation"
               onFocus={() => setIsCollectionOpen(true)}
             >
               Collections
               <svg aria-hidden="true" viewBox="0 0 16 16" className={`h-3 w-3 transition-transform ${isCollectionOpen ? "rotate-180" : ""}`}><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" strokeWidth="1.3" /></svg>
             </Link>
             {isCollectionOpen ? (
-              <div className="absolute left-1/2 top-full w-72 -translate-x-1/2 border border-stone-900/10 bg-[#fffaf2] p-3 shadow-[0_18px_40px_rgba(29,25,21,0.14)]" role="menu">
+              <div id="collection-navigation" className="absolute left-1/2 top-full w-72 -translate-x-1/2 border border-stone-900/10 bg-[#fffaf2] p-3 shadow-[0_18px_40px_rgba(29,25,21,0.14)]">
                 {collectionItems.map((item) => (
-                  <Link key={item.label} href={item.href} role="menuitem" className="group block px-4 py-3 transition-colors hover:bg-[#f2e7d8]" onBlur={() => setIsCollectionOpen(false)}>
+                  <Link key={item.label} href={item.href} className="group block px-4 py-3 transition-colors hover:bg-[#f2e7d8]">
                     <span className="block font-serif text-lg tracking-[0.08em] group-hover:text-[#7e271e]">{item.label}</span>
                     <span className="mt-1 block text-[10px] uppercase tracking-[0.13em] text-stone-500">{item.description}</span>
                   </Link>
@@ -231,7 +244,7 @@ export function SiteHeader() {
       </nav>
 
       {isMenuOpen ? (
-        <nav id="mobile-navigation" className="border-t border-stone-900/10 bg-[#fffaf2] px-5 py-5 lg:hidden" aria-label="Mobile navigation">
+        <nav id="mobile-navigation" className="max-h-[calc(100dvh-6rem)] overflow-y-auto border-t border-stone-900/10 bg-[#fffaf2] px-5 py-5 lg:hidden" aria-label="Mobile navigation">
           <ul className="mx-auto grid max-w-7xl gap-0.5">
             <li><Link href="/collection" className="block border-b border-stone-900/10 py-3.5 font-serif text-[clamp(1.2rem,5vw,1.5rem)] leading-tight" onClick={() => setIsMenuOpen(false)}>Collections</Link></li>
             {navItems.map((item) => (

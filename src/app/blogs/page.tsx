@@ -86,7 +86,7 @@ export default function BlogsPage() {
               <article key={post.slug} className="grid items-center gap-7 border-b border-stone-900/10 pb-10 last:border-b-0 last:pb-0 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
                 <Link
                   href={blogPath(post)}
-                  className="group relative block aspect-[3/2] overflow-hidden bg-[#e8ded1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+                  className="media-frame media-landscape group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
                   aria-label={`Read ${post.title}`}
                 >
                   <Image

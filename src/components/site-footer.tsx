@@ -2,27 +2,34 @@ import Link from "next/link";
 import { contactLinks } from "@/lib/collection";
 import { FooterEnquiryCta } from "@/components/footer-enquiry-cta";
 
+const footerLinks = [
+  { href: "/about", label: "About us" },
+  { href: "/contact", label: "Contact us" },
+  { href: "/blogs", label: "Journal" },
+  { href: "/privacy", label: "Privacy policy" },
+  { href: "/terms", label: "Terms & conditions" },
+];
+
 export function SiteFooter() {
   return (
-    <footer className="border-t border-stone-900/10 bg-[#efe5d7]">
+    <footer className="border-t border-[var(--border-soft)] bg-[var(--background)]">
       <FooterEnquiryCta />
-      <div className="mx-auto grid max-w-[90rem] gap-7 px-5 py-9 sm:px-8 lg:grid-cols-[0.22fr_0.58fr_0.2fr] lg:items-center lg:px-12">
-        <p className="font-serif text-sm uppercase tracking-[0.16em] text-stone-800">
-          ANURRAKTI
-        </p>
-        <nav aria-label="Footer navigation">
-          <ul className="flex flex-wrap gap-x-6 gap-y-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-stone-600">
-            <li><Link href="/about" className="transition-colors hover:text-[#7e271e]">About us</Link></li>
-            <li><Link href="/contact" className="transition-colors hover:text-[#7e271e]">Contact us</Link></li>
-            <li><Link href="/blogs" className="transition-colors hover:text-[#7e271e]">Blog</Link></li>
-            <li><Link href="/privacy" className="transition-colors hover:text-[#7e271e]">Privacy policy</Link></li>
-            <li><Link href="/terms" className="transition-colors hover:text-[#7e271e]">Terms &amp; conditions</Link></li>
-            <li><a href={contactLinks.instagram} target="_blank" rel="noreferrer" className="transition-colors hover:text-[#7e271e]">Instagram</a></li>
-          </ul>
-        </nav>
-        <p className="text-[10px] uppercase tracking-[0.14em] text-stone-600 lg:text-right">
-          © {new Date().getFullYear()} ANURRAKTI
-        </p>
+      <div className="page-width py-10 sm:py-14">
+        <div className="flex flex-wrap items-end justify-between gap-6 border-b border-[var(--border-soft)] pb-8">
+          <Link href="/" aria-label="ANURRAKTI home" className="font-serif text-[clamp(2.5rem,7.5vw,7rem)] leading-none tracking-[-0.04em]">ANURRAKTI</Link>
+          <p className="type-caption max-w-xs text-[var(--ink-soft)]">Crafted once.<br />Remembered for a lifetime.</p>
+        </div>
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-x-8 gap-y-5">
+          <nav aria-label="Footer navigation">
+            <ul className="flex flex-wrap gap-x-6 gap-y-1">
+              {footerLinks.map((link) => (
+                <li key={link.href}><Link href={link.href} className="editorial-link">{link.label}</Link></li>
+              ))}
+              <li><a href={contactLinks.instagram} target="_blank" rel="noreferrer" className="editorial-link">Instagram <span aria-hidden="true">↗</span></a></li>
+            </ul>
+          </nav>
+          <p className="type-caption text-[var(--muted)]">© {new Date().getFullYear()} ANURRAKTI</p>
+        </div>
       </div>
     </footer>
   );

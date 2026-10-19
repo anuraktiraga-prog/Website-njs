@@ -1,11 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { WhatsAppIcon } from "@/components/social-icons";
 import { trackEvent } from "@/lib/analytics";
 import { contactLinks } from "@/lib/collection";
 
 export function FooterEnquiryCta() {
+  const pathname = usePathname();
+  const hasEnquirySection = pathname === "/" || pathname === "/contact" || /^\/collection(?:\/|$)/.test(pathname);
+  if (hasEnquirySection) return null;
+
   return (
     <section className="bg-[#421712] px-5 py-14 text-[#fff7ec] sm:px-8 sm:py-16 lg:px-12" aria-labelledby="footer-enquiry-heading">
       <div className="mx-auto grid max-w-[90rem] gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">

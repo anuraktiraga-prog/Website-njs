@@ -283,7 +283,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
           {campaignImages.slice(0, 2).map((image) => (
-            <figure key={image.src} className="relative aspect-[4/5] overflow-hidden bg-stone-200">
+            <figure key={image.src} className="media-frame media-portrait">
               <Image src={image.src} alt={image.alt} fill sizes="(max-width: 639px) 100vw, 50vw" className="object-cover" />
               <figcaption className="sr-only">{image.title}: {image.note}</figcaption>
             </figure>
@@ -303,7 +303,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <li key={related.slug}>
               <AnalyticsLink href={productPath(related)} eventName="related_product_open" eventProperties={{ product: `${related.collectionName} ${related.title}` }} className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]">
                 <figure>
-                  <div className="relative aspect-[4/5] overflow-hidden bg-stone-200">
+                  <div className="media-frame media-portrait">
                     <Image src={related.src} alt={related.alt} fill sizes="(max-width: 639px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.02] motion-reduce:transition-none" />
                   </div>
                   <figcaption className="mt-3 type-label text-stone-600">{related.collectionName} {related.title}</figcaption>

@@ -24,23 +24,23 @@ export function ProductGallery({
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [isZoomed, setIsZoomed] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const isLightboxOpen = lightboxIndex !== null;
 
   useEffect(() => {
-    if (lightboxIndex === null) return;
-
+    if (!isLightboxOpen) return;
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    closeButtonRef.current?.focus();
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setLightboxIndex(null);
-    };
-    window.addEventListener("keydown", closeOnEscape);
+    dialog.showModal();
     return () => {
+      dialog.close();
       document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", closeOnEscape);
+      opener?.focus({ preventScroll: true });
     };
-  }, [lightboxIndex]);
+  }, [isLightboxOpen]);
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index);
@@ -55,10 +55,12 @@ export function ProductGallery({
   };
 
   const previous = () => {
+    setIsZoomed(false);
     setLightboxIndex((current) => current === null ? null : (current - 1 + views.length) % views.length);
   };
 
   const next = () => {
+    setIsZoomed(false);
     setLightboxIndex((current) => current === null ? null : (current + 1) % views.length);
   };
 
@@ -74,7 +76,7 @@ export function ProductGallery({
             key={view.label}
             type="button"
             onClick={() => openLightbox(index)}
-            className="group relative aspect-[4/5] w-full shrink-0 snap-center cursor-zoom-in overflow-hidden bg-transparent text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+            className="media-frame media-portrait group w-full shrink-0 snap-center cursor-zoom-in text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
             aria-label={`Open ${view.label} in full screen`}
           >
             <Image src={view.src} alt={view.alt} fill sizes="(max-width: 639px) calc(100vw - 2.5rem), 1px" preload={index === 0} className={`${view.fit === "contain" ? "object-contain" : "object-cover group-hover:scale-[1.025]"} transition-transform duration-700 ease-out motion-reduce:transition-none`} style={{ objectPosition: view.position }} />
@@ -95,7 +97,7 @@ export function ProductGallery({
             key={view.label}
             type="button"
             onClick={() => openLightbox(index)}
-            className="group relative h-full w-full cursor-zoom-in overflow-hidden bg-transparent text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+            className="media-frame group h-full w-full cursor-zoom-in text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
             aria-label={`Open ${view.label} in full screen`}
           >
             <Image src={view.src} alt={view.alt} fill sizes="(max-width: 1023px) 50vw, 40vw" preload={index === 0} className={`${view.fit === "contain" ? "object-contain" : "object-cover group-hover:scale-[1.035]"} transition-transform duration-700 ease-out motion-reduce:transition-none`} style={{ objectPosition: view.position }} />
@@ -108,7 +110,7 @@ export function ProductGallery({
               key={view.label}
               type="button"
               onClick={() => openLightbox(index + 1)}
-              className="group relative aspect-[4/5] w-full shrink-0 cursor-zoom-in overflow-hidden bg-transparent text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
+              className="media-frame media-portrait group w-full shrink-0 cursor-zoom-in text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#7e271e]"
               aria-label={`Open ${view.label} in full screen`}
             >
               <Image src={view.src} alt={view.alt} fill sizes="(max-width: 1023px) 28vw, 14vw" className={`${view.fit === "contain" ? "object-contain" : "object-cover group-hover:scale-[1.035]"} transition-transform duration-700 ease-out motion-reduce:transition-none`} style={{ objectPosition: view.position }} />
@@ -119,8 +121,13 @@ export function ProductGallery({
       </div>
 
       {lightboxIndex !== null ? (
-        <div className="fixed inset-0 z-[100] flex min-h-[100svh] items-center justify-center bg-stone-950/95 p-4 sm:p-8" role="dialog" aria-modal="true" aria-label="Full screen product image">
-          <button ref={closeButtonRef} type="button" onClick={() => setLightboxIndex(null)} className="absolute right-5 top-5 z-10 min-h-11 px-3 py-2 text-xs uppercase tracking-[0.18em] text-[#fff5df] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#fff5df] sm:right-8 sm:top-8" aria-label="Close full screen image">
+        <dialog
+          ref={dialogRef}
+          className="fixed inset-0 z-[100] m-0 h-svh max-h-none w-screen max-w-none items-center justify-center border-0 bg-stone-950/95 p-4 open:flex sm:p-8"
+          aria-label="Full screen product image"
+          onCancel={(event) => { event.preventDefault(); setLightboxIndex(null); }}
+        >
+          <button type="button" onClick={() => setLightboxIndex(null)} className="absolute right-5 top-5 z-10 min-h-11 px-3 py-2 text-xs uppercase tracking-[0.18em] text-[#fff5df] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#fff5df] sm:right-8 sm:top-8" aria-label="Close full screen image">
             Close <span aria-hidden="true" className="ml-1 text-lg leading-none">×</span>
           </button>
           <button type="button" onClick={previous} className="absolute left-3 top-1/2 z-10 -translate-y-1/2 px-3 py-4 text-3xl text-[#fff5df] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#fff5df] sm:left-8" aria-label="Previous image">‹</button>
@@ -130,7 +137,7 @@ export function ProductGallery({
             </button>
           </figure>
           <button type="button" onClick={next} className="absolute right-3 top-1/2 z-10 -translate-y-1/2 px-3 py-4 text-3xl text-[#fff5df] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#fff5df] sm:right-8" aria-label="Next image">›</button>
-        </div>
+        </dialog>
       ) : null}
     </section>
   );

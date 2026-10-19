@@ -71,7 +71,7 @@ export function CraftSection() {
 
         <div className="lg:pt-8">
           <div className="relative grid grid-cols-[1.12fr_0.88fr] items-start gap-3 sm:gap-5">
-            <figure className="group relative aspect-[4/5] overflow-hidden bg-stone-900 shadow-[0_18px_50px_rgba(61,45,33,0.14)]">
+            <figure className="media-frame media-portrait group">
               <Image
                 src={housePortrait.src}
                 alt={housePortrait.alt}
@@ -84,7 +84,7 @@ export function CraftSection() {
                 The House / in motion
               </figcaption>
             </figure>
-            <figure className="group relative mt-12 aspect-[4/5] overflow-hidden bg-stone-900 shadow-[0_14px_38px_rgba(61,45,33,0.1)] sm:mt-20">
+            <figure className="media-frame media-portrait group mt-12 sm:mt-20">
               <Image
                 src="/images/campaign/house-textile-closeup.png"
                 alt="Close-up of ANURRAKTI textile folds and illustrated fabric"

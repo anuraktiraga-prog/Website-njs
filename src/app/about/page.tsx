@@ -86,7 +86,7 @@ export default function AboutPage() {
                 drape, details and recorded palette before private enquiry.
               </p>
             </div>
-            <figure className="relative aspect-[4/5] overflow-hidden bg-stone-900">
+            <figure className="media-frame media-portrait">
               <Image
                 src="/images/campaign/anurrakti-staircase.png"
                 alt="Woman wearing a black and grey ANURRAKTI saree against a red staircase"
@@ -154,7 +154,7 @@ export default function AboutPage() {
 
         <section className="bg-[#211d19] text-[#f6f0e7]">
           <div className="mx-auto grid max-w-[90rem] gap-12 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-20 lg:px-12 lg:py-24">
-            <figure className="relative aspect-[3/2] overflow-hidden bg-stone-900">
+            <figure className="media-frame media-landscape">
               <Image
                 src="/images/campaign/house-textile-closeup.png"
                 alt="Close view of illustrated ANURRAKTI textile folds"
